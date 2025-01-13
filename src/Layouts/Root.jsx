@@ -1,5 +1,6 @@
 import React from 'react';
 import Navber from '../Shared/Navber';
+import { Outlet } from 'react-router-dom';
 
 const Root = () => {
     return (
@@ -8,7 +9,8 @@ const Root = () => {
                 <Navber/>
 
             </header>
-            <main>
+            <main className='pt-20'>
+                <Outlet/>
 
             </main>
             <footer>

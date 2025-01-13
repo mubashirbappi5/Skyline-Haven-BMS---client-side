@@ -34,7 +34,7 @@ const Navber = () => {
             {/* Login Button (visible on all screens) */}
            
               <div className='flex items-center gap-4'>
-              <button className="btn bg-secondary text-white px-4 py-2 rounded hover:bg-green-600">
+              <button className="btn bg-primary text-white px-4 py-2 rounded hover:bg-green-600">
                 Login
               </button>
            
