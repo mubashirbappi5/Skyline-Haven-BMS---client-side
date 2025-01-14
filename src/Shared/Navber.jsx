@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { HiBars3CenterLeft } from 'react-icons/hi2';
 import { ImCancelCircle } from 'react-icons/im';
 import logo from '../assets/image/logo.png'
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 const Navber = () => {
     const [isOpen, setIsOpen] = useState(false);
     const links = <>
@@ -34,9 +34,11 @@ const Navber = () => {
             {/* Login Button (visible on all screens) */}
            
               <div className='flex items-center gap-4'>
+              <Link to={'/login'}>
               <button className="btn bg-primary text-white px-4 py-2 rounded hover:bg-green-600">
                 Login
               </button>
+              </Link>
            
 
             {/* Hamburger Menu for Mobile */}
