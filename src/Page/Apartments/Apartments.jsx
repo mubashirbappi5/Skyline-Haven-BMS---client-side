@@ -5,6 +5,12 @@ const Apartments = () => {
     const [aparts,setaparts] =useState([]) 
     const [currentItems, setCurrentItems] = useState([]);
   const [pageCount, setPageCount] = useState(0);
+  const [minRent, setMinRent] = useState('');
+  const [maxRent, setMaxRent] = useState('');
+  const [floor, setFloor] = useState('');
+  const [block, setBlock] = useState('');
+  const[searchitem,setsearchitem]=useState([])
+  const [filteredAparts, setFilteredAparts] = useState([]);
 
   const itemsPerPage = 6;
     useEffect(()=>{
@@ -13,6 +19,7 @@ const Apartments = () => {
       .then(data=>{
         console.log(data)
         setaparts(data)
+        setFilteredAparts(data);
         setPageCount(Math.ceil(data.length / itemsPerPage));
         setCurrentItems(data.slice(0, itemsPerPage));
       })
@@ -21,6 +28,36 @@ const Apartments = () => {
         const newOffset = (e.selected * itemsPerPage) % aparts.length;
         
         setCurrentItems(aparts.slice(newOffset, newOffset + itemsPerPage));
+      };
+      const handleSearch = () => {
+        if (minRent !== '' && maxRent !== '') {
+          const filteredAparts = aparts.filter(
+            (apart) => apart.rent >= Number(minRent) && apart.rent <= Number(maxRent)
+          );
+          setsearchitem(filteredAparts)
+          setPageCount(Math.ceil(searchitem.length / itemsPerPage));
+          setCurrentItems(searchitem.slice(0, itemsPerPage));
+        }
+      };
+
+
+      const filterByFloor = (e) => {
+        console.log(e)
+        
+        setFloor(e);
+        const result = aparts.filter(apart => apart.floorNo === parseInt(e));
+        console.log(result)
+        setFilteredAparts(result);
+        setPageCount(Math.ceil(result.length / itemsPerPage));
+        setCurrentItems(result.slice(0, itemsPerPage));
+      };
+    
+      const filterByBlock = (selectedBlock) => {
+        setBlock(selectedBlock);
+        const result = aparts.filter(apart => apart.blockName === selectedBlock);
+        setFilteredAparts(result);
+        setPageCount(Math.ceil(result.length / itemsPerPage));
+        setCurrentItems(result.slice(0, itemsPerPage));
       };
     return (
         <div className='min-h-screen'>
@@ -33,19 +70,19 @@ const Apartments = () => {
         <input
           type="number"
           placeholder="Min"
-        
+          onChange={(e) => setMinRent(e.target.value)}
           className="border border-gray-300 rounded-md p-2 w-20 focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
         <span className="text-gray-500">to</span>
         <input
           type="number"
           placeholder="Max"
-        
+          onChange={(e) => setMaxRent(e.target.value)}
           
           className="border border-gray-300 rounded-md p-2 w-20 focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
         <button
-      
+      onClick={handleSearch}
       className="bg-blue-500 text-white px-6 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400"
     >
       Search
@@ -56,7 +93,8 @@ const Apartments = () => {
      < div className='flex gap-4'>
      <div>
         <select
-         
+         value={floor} 
+            onChange={(e) => filterByFloor(e.target.value)}
           className="border border-gray-300 rounded-md p-2 w-40 focus:outline-none focus:ring-2 focus:ring-blue-500"
         >
           <option value="" disabled>
@@ -73,7 +111,8 @@ const Apartments = () => {
       
       <div>
         <select
-         
+        value={block}
+           onChange={(e) => filterByBlock(e.target.value)}
           className="border border-gray-300 rounded-md p-2 w-40 focus:outline-none focus:ring-2 focus:ring-blue-500"
         >
           <option value="" disabled>
@@ -98,14 +137,46 @@ const Apartments = () => {
     </section>
     <ReactPaginate
         breakLabel="..."
-        nextLabel="next >"
+        nextLabel={<button
+            className="flex items-center justify-center px-4 py-2 mx-1 text-gray-700 transition-colors duration-300 transform bg-white rounded-md rtl:-scale-x-100 dark:bg-gray-800 dark:text-gray-200 hover:bg-accent  hover:text-white dark:hover:text-gray-200"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="w-5 h-5"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+            >
+              <path
+                fillRule="evenodd"
+                d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                clipRule="evenodd"
+              />
+            </svg>
+          </button>}
         onPageChange={handlePageClick}
         pageRangeDisplayed={5}
         pageCount={pageCount}
-        previousLabel="< previous"
+        previousLabel={<button
+            className="flex items-center justify-center px-4 py-2 mx-1 text-gray-700 transition-colors duration-300 transform bg-white rounded-md rtl:-scale-x-100 dark:bg-gray-800 dark:text-gray-200 hover:bg-accent  hover:text-white dark:hover:text-gray-200"
+          
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="w-5 h-5"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+            >
+              <path
+                fillRule="evenodd"
+                d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
+                clipRule="evenodd"
+              />
+            </svg>
+          </button>
+          }
         containerClassName="flex justify-center gap-2 my-4"
         pageClassName="px-4 py-2 border rounded cursor-pointer hover:bg-gray-200"
-        activeClassName="bg-blue-500 text-white"
+        activeClassName="bg-secondary  text-white"
       />
             
         </div>
