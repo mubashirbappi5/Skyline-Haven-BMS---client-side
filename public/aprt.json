@@ -1,0 +1,213 @@
+[
+    {
+      "apartmentNo": 1,
+      "floorNo": 1,
+      "blockName": "A",
+      "imageUrl": "https://example.com/images/apartment1.jpg",
+      "rent": 888
+    },
+    {
+      "apartmentNo": 2,
+      "floorNo": 1,
+      "blockName": "A",
+      "imageUrl": "https://example.com/images/apartment2.jpg",
+      "rent": 382
+    },
+    {
+      "apartmentNo": 3,
+      "floorNo": 1,
+      "blockName": "B",
+      "imageUrl": "https://example.com/images/apartment3.jpg",
+      "rent": 461
+    },
+    {
+      "apartmentNo": 4,
+      "floorNo": 1,
+      "blockName": "B",
+      "imageUrl": "https://example.com/images/apartment4.jpg",
+      "rent": 988
+    },
+    {
+      "apartmentNo": 5,
+      "floorNo": 1,
+      "blockName": "C",
+      "imageUrl": "https://example.com/images/apartment5.jpg",
+      "rent": 380
+    },
+    {
+      "apartmentNo": 6,
+      "floorNo": 1,
+      "blockName": "C",
+      "imageUrl": "https://example.com/images/apartment6.jpg",
+      "rent": 690
+    },
+    {
+      "apartmentNo": 7,
+      "floorNo": 2,
+      "blockName": "A",
+      "imageUrl": "https://example.com/images/apartment7.jpg",
+      "rent": 781
+    },
+    {
+      "apartmentNo": 8,
+      "floorNo": 2,
+      "blockName": "A",
+      "imageUrl": "https://example.com/images/apartment8.jpg",
+      "rent": 611
+    },
+    {
+      "apartmentNo": 9,
+      "floorNo": 2,
+      "blockName": "B",
+      "imageUrl": "https://example.com/images/apartment9.jpg",
+      "rent": 488
+    },
+    {
+      "apartmentNo": 10,
+      "floorNo": 2,
+      "blockName": "B",
+      "imageUrl": "https://example.com/images/apartment10.jpg",
+      "rent": 661
+    },
+    {
+      "apartmentNo": 11,
+      "floorNo": 2,
+      "blockName": "C",
+      "imageUrl": "https://example.com/images/apartment11.jpg",
+      "rent": 871
+    },
+    {
+      "apartmentNo": 12,
+      "floorNo": 2,
+      "blockName": "C",
+      "imageUrl": "https://example.com/images/apartment12.jpg",
+      "rent": 812
+    },
+    {
+      "apartmentNo": 13,
+      "floorNo": 3,
+      "blockName": "A",
+      "imageUrl": "https://example.com/images/apartment13.jpg",
+      "rent": 464
+    },
+    {
+      "apartmentNo": 14,
+      "floorNo": 3,
+      "blockName": "A",
+      "imageUrl": "https://example.com/images/apartment14.jpg",
+      "rent": 875
+    },
+    {
+      "apartmentNo": 15,
+      "floorNo": 3,
+      "blockName": "B",
+      "imageUrl": "https://example.com/images/apartment15.jpg",
+      "rent": 740
+    },
+    {
+      "apartmentNo": 16,
+      "floorNo": 3,
+      "blockName": "B",
+      "imageUrl": "https://example.com/images/apartment16.jpg",
+      "rent": 507
+    },
+    {
+      "apartmentNo": 17,
+      "floorNo": 3,
+      "blockName": "C",
+      "imageUrl": "https://example.com/images/apartment17.jpg",
+      "rent": 850
+    },
+    {
+      "apartmentNo": 18,
+      "floorNo": 3,
+      "blockName": "C",
+      "imageUrl": "https://example.com/images/apartment18.jpg",
+      "rent": 306
+    },
+    {
+      "apartmentNo": 19,
+      "floorNo": 4,
+      "blockName": "A",
+      "imageUrl": "https://example.com/images/apartment19.jpg",
+      "rent": 695
+    },
+    {
+      "apartmentNo": 20,
+      "floorNo": 4,
+      "blockName": "A",
+      "imageUrl": "https://example.com/images/apartment20.jpg",
+      "rent": 463
+    },
+    {
+      "apartmentNo": 21,
+      "floorNo": 4,
+      "blockName": "B",
+      "imageUrl": "https://example.com/images/apartment21.jpg",
+      "rent": 320
+    },
+    {
+      "apartmentNo": 22,
+      "floorNo": 4,
+      "blockName": "B",
+      "imageUrl": "https://example.com/images/apartment22.jpg",
+      "rent": 759
+    },
+    {
+      "apartmentNo": 23,
+      "floorNo": 4,
+      "blockName": "C",
+      "imageUrl": "https://example.com/images/apartment23.jpg",
+      "rent": 959
+    },
+    {
+      "apartmentNo": 24,
+      "floorNo": 4,
+      "blockName": "C",
+      "imageUrl": "https://example.com/images/apartment24.jpg",
+      "rent": 862
+    },
+    {
+      "apartmentNo": 25,
+      "floorNo": 5,
+      "blockName": "A",
+      "imageUrl": "https://example.com/images/apartment25.jpg",
+      "rent": 783
+    },
+    {
+      "apartmentNo": 26,
+      "floorNo": 5,
+      "blockName": "A",
+      "imageUrl": "https://example.com/images/apartment26.jpg",
+      "rent": 619
+    },
+    {
+      "apartmentNo": 27,
+      "floorNo": 5,
+      "blockName": "B",
+      "imageUrl": "https://example.com/images/apartment27.jpg",
+      "rent": 427
+    },
+    {
+      "apartmentNo": 28,
+      "floorNo": 5,
+      "blockName": "B",
+      "imageUrl": "https://example.com/images/apartment28.jpg",
+      "rent": 300
+    },
+    {
+      "apartmentNo": 29,
+      "floorNo": 5,
+      "blockName": "C",
+      "imageUrl": "https://example.com/images/apartment29.jpg",
+      "rent": 727
+    },
+    {
+      "apartmentNo": 30,
+      "floorNo": 5,
+      "blockName": "C",
+      "imageUrl": "https://example.com/images/apartment30.jpg",
+      "rent": 758
+    }
+  ]
+  

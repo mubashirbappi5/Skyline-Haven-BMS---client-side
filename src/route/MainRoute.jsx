@@ -6,6 +6,7 @@ import {
 import Root from '../Layouts/Root';
 import Home from '../Page/Home/Home';
 import Login from '../Page/Auth/Login/Login';
+import Apartments from '../Page/Apartments/Apartments';
 const MainRoute =  createBrowserRouter([
     {
       path: "/",
@@ -18,6 +19,10 @@ const MainRoute =  createBrowserRouter([
         {
         path:'/login',
         element:<Login/>
+      },
+        {
+        path:'/apartments',
+        element:<Apartments/>
       },
     
     

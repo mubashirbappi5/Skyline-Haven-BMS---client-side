@@ -6,10 +6,10 @@ import { Link, NavLink } from 'react-router-dom';
 const Navber = () => {
     const [isOpen, setIsOpen] = useState(false);
     const links = <>
-    <NavLink className='md:hover:text-secondary md:focus:bg-green-100 md:focus:btn md:focus:btn-sm hover:text-white'>
+    <NavLink to={'/'} className='md:hover:text-secondary md:focus:bg-green-100 md:focus:btn md:focus:btn-sm hover:text-white'>
               Home
             </NavLink>
-    <NavLink className='md:hover:text-secondary md:focus:bg-green-100 md:focus:btn md:focus:btn-sm hover:text-white'>
+    <NavLink to={'/apartments'} className='md:hover:text-secondary md:focus:bg-green-100 md:focus:btn md:focus:btn-sm hover:text-white'>
     Apartment
             </NavLink>
   
