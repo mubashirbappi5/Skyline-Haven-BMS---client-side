@@ -2,9 +2,30 @@ import React from 'react';
 
 import { FaBuilding } from 'react-icons/fa';
 import { RiCommunityFill } from 'react-icons/ri';
+import useAuth from './../Hooks/useAuth';
+import { useNavigate } from 'react-router-dom';
 const Card = ({apart}) => {
-    const {apartmentNo,blockName,floorNo,rent,imageUrl} = apart
-    
+    const {apartmentNo,blockName,floorNo,rent,imageUrl,_id} = apart
+    const {user}=useAuth()
+    const navigate = useNavigate()
+    const handleagreement = (id)=>{
+           if(!user){
+            return navigate('/login')
+            
+           }
+          const agreementData = {
+            userName:user?.displayName,
+            userEmail:user?.email,
+            floorNo:floorNo,
+            apartmentNo:apartmentNo,
+            blockName:blockName,
+            rent:rent,
+            apartment_id:_id
+          }
+          console.log(agreementData)
+
+           alert('testing')
+    }
     return (
         <div>
             <div className="flex flex-col max-w-md overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800">
@@ -30,7 +51,7 @@ const Card = ({apart}) => {
       </h1>
       
     
-    <button className="px-2 py-1 text-xs font-bold text-white uppercase transition-colors duration-300 transform bg-gray-800 rounded dark:bg-gray-700 hover:bg-gray-700 dark:hover:bg-gray-600 focus:outline-none focus:bg-gray-700 dark:focus:bg-gray-600">
+    <button onClick={()=>handleagreement(_id)} className="px-2 py-1 text-xs font-bold text-white uppercase transition-colors duration-300 transform bg-gray-800 rounded dark:bg-gray-700 hover:bg-gray-700 dark:hover:bg-gray-600 focus:outline-none focus:bg-gray-700 dark:focus:bg-gray-600">
     Agreement
       </button>
   </div>

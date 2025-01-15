@@ -5,12 +5,12 @@ const About = () => {
     return (
         <div className='my-20'>
             <CommonHeader title={'Discover Skyline Haven'} subtitle={'About'}/>
-            <section className='grid grid-cols-12 gap-6'>
+            <section className='md:grid grid-cols-12 gap-6'>
                 <div className='col-span-4 border rounded-lg p-2 border-accent'>
                     <img className='h-96 rounded-lg object-cover'  src={about} alt="" />
                
                 </div>
-                <div className='col-span-8 '>
+                <div className='col-span-8 px-4 md:px-0'>
                  <h2 className='text-lg font-semibold my-2'>Welcome to our premium residential building, where modern design meets timeless comfort.</h2>
                    <p>Nestled in a prime location, our building offers state-of-the-art amenities, spacious apartments, and a vibrant community atmosphere. Designed to cater to your every need, it provides the perfect blend of style and functionality.</p>  
 

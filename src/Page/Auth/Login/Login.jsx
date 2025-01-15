@@ -6,10 +6,14 @@ import bg1 from "../../../assets/image/circle-scatter-haikei.png";
 import bg2 from "../../../assets/image/bg2.png";
 import { Authcontext } from "../../../Provider/AuthProvider/AuthProvider";
 import Swal from "sweetalert2";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [isSignUp, setIsSignUp] = useState(false);
   const { signinUser, loading } = useContext(Authcontext);
+  const navigate = useNavigate()
+  const location = useLocation()
+const froms = location.state?.from?.pathname || '/';
   const handlelogin = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -25,6 +29,7 @@ const Login = () => {
           text: "Your login successful!.",
           icon: "success",
         });
+        navigate(froms, { replace: true });
       })
       .catch((error) => {
         console.log(error);

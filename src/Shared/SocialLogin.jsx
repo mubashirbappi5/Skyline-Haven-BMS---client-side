@@ -1,23 +1,36 @@
 import React from 'react';
-import { useContext } from 'react';
-import { Authcontext } from '../Provider/AuthProvider/AuthProvider';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import useAuth from './../Hooks/useAuth';
+import useAxiosPublic from '../Hooks/useAxiosPublic';
 
 const SocialLogin = () => {
-  const {googlelogin} = useContext(Authcontext)
+  const {googlelogin} = useAuth()
+  const axiosPublic = useAxiosPublic();
+
   const navigate = useNavigate()
+  const location = useLocation()
+const froms = location.state?.from?.pathname || '/';
   const handlegoogle = (e)=>{
     e.preventDefault()
       googlelogin()
       .then(res=>{
         console.log(res.user)
+        const userinfo = {
+          userName:res.user.displayName,
+          userEmail:res.user.email
+        }
+        axiosPublic.post('/users',userinfo)
+        .then(res=>{
+          console.log(res.data)
+          
+      })
         Swal.fire({
           title: "Login",
           text: "Your login successful!.",
           icon: "success"
         });
-        navigate('/')
+        navigate(froms, { replace: true });
       })
       .catch(error=>{
         console.log(error)

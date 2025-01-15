@@ -7,8 +7,8 @@ const Coupons = () => {
             <CommonHeader title={'Exclusive Offers Just for You!'} subtitle={'coupons'}></CommonHeader>
             <section>
           
-            <div className="grid grid-cols-3 gap-6 p-5 bg-gradient-to-br from-green-100 via-gray-50 to-green-50">
-  <div className="relative bg-white shadow-2xl rounded-lg   overflow-hidden border border-gray-200 hover:scale-105 transition-transform duration-300 ease-in-out">
+            <div className="grid grid-cols-1  md:grid-cols-2 lg:grid-cols-3 gap-6 p-5 bg-gradient-to-br from-green-100 via-gray-50 to-green-50">
+  <div className="relative bg-white shadow-2xl rounded-lg mx-auto   max-w-sm  overflow-hidden border border-gray-200 hover:scale-105 transition-transform duration-300 ease-in-out">
    
     <div className="absolute top-10 -left-4 bg-gradient-to-r from-primary to-green-500 text-white px-6 py-1 text-sm font-bold rotate-[-45deg] -translate-y-6 translate-x-6 shadow-md">
       15% OFF
@@ -30,7 +30,7 @@ const Coupons = () => {
       * Valid until 31st December. Terms & conditions apply.
     </div>
   </div>
-  <div className="relative bg-white shadow-2xl rounded-lg max-w-sm w-full overflow-hidden border border-gray-200 hover:scale-105 transition-transform duration-300 ease-in-out">
+  <div className="relative bg-white shadow-2xl rounded-lg max-w-sm mx-auto  w-full overflow-hidden border border-gray-200 hover:scale-105 transition-transform duration-300 ease-in-out">
    
     <div className="absolute top-10 -left-4 bg-gradient-to-r from-primary to-green-500 text-white px-6 py-1 text-sm font-bold rotate-[-45deg] -translate-y-6 translate-x-6 shadow-md">
       50% OFF
@@ -51,7 +51,7 @@ const Coupons = () => {
       * Valid until 31st December. Terms & conditions apply.
     </div>
   </div>
-  <div className="relative bg-white shadow-2xl rounded-lg max-w-sm w-full overflow-hidden border border-gray-200 hover:scale-105 transition-transform duration-300 ease-in-out">
+  <div className="relative bg-white shadow-2xl rounded-lg max-w-sm mx-auto  w-full overflow-hidden border border-gray-200 hover:scale-105 transition-transform duration-300 ease-in-out">
    
     <div className="absolute top-10 -left-4 bg-gradient-to-r from-primary to-green-500 text-white px-6 py-1 text-sm font-bold rotate-[-45deg] -translate-y-6 translate-x-6 shadow-md">
       50% OFF

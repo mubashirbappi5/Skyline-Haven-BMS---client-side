@@ -46,6 +46,11 @@ const Register = () => {
   console.log(user);
 
   reset();
+  Swal.fire({
+            title: "Signup",
+            text: "Welcome our world!.",
+            icon: "success",
+          });
   navigate('/')
    
     
