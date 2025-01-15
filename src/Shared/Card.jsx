@@ -1,9 +1,9 @@
 import React from 'react';
-import chak from './../assets/image/kitchen-416027_1920.jpg'
+
 import { FaBuilding } from 'react-icons/fa';
 import { RiCommunityFill } from 'react-icons/ri';
 const Card = ({apart}) => {
-    const {apartmentNo,blockName,floorNo,rent} = apart
+    const {apartmentNo,blockName,floorNo,rent,imageUrl} = apart
     
     return (
         <div>
@@ -12,7 +12,7 @@ const Card = ({apart}) => {
     className=""
     
   >
-    <img src={chak} alt="" />
+    <img className='h-60' src={imageUrl} alt="" />
   </div>
 
   <div className="w-2/3 p-4 md:p-4 space-y-2">

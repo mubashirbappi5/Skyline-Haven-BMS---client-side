@@ -11,7 +11,7 @@ const Login = () => {
         <div>
             <section className="bg-white min-h-screen dark:bg-gray-900">
       <div className="container  flex  justify-center  px-6  mx-auto">
-        <form className="w-full my-4 lg:my-0 max-w-md">
+        <div className="w-full my-4 lg:my-0 max-w-md">
           <div className="flex justify-center mx-auto">
             <img
               className="w-auto h-10 sm:h-8"
@@ -92,6 +92,7 @@ const Login = () => {
                 </span>
                 <input
                   type="password"
+                 autoComplete="current-password"
                   className="block w-full px-10 py-3 text-gray-700 bg-white border rounded-lg dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
                   placeholder="Password"
                 />
@@ -104,11 +105,12 @@ const Login = () => {
               </div>
               <SocialLogin/>
             </div>
+         
           ) : (
             // Sign Up Form
             <Register/>
           )}
-        </form>
+        </div>
       </div>
       <div className={` w-96 hidden lg:flex absolute ${isSignUp?'lg:-bottom-44  left-0':' -bottom-20 left-0'}`}>
       <img src={bg1} alt="" />
