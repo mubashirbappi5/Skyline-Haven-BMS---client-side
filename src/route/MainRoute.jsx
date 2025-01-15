@@ -14,6 +14,12 @@ import AdminProfile from '../Page/Dashboard/Admin/Adminprofile/AdminProfile';
 import MakeAnnouncement from '../Page/Dashboard/Admin/Make Anoucment/MakeAnnouncement';
 import AgreementReq from '../Page/Dashboard/Admin/AgreeRequest/AgreementReq';
 import Managecoupon from '../Page/Dashboard/Admin/CouponsMake/Managecoupon';
+import MemberProfile from '../Page/Dashboard/member/member Profile/MemberProfile';
+import MakePay from '../Page/Dashboard/member/make Payment/MakePay';
+import PayHistory from '../Page/Dashboard/member/Pay History/PayHistory';
+import MamberAnnounce from '../Page/Dashboard/member/Annnouncement/MamberAnnounce';
+import UserProfile from '../Page/Dashboard/user/UserProfile';
+import UserAnnouncemet from '../Page/Dashboard/user/UserAnnouncemet';
 const MainRoute =  createBrowserRouter([
     {
       path: "/",
@@ -40,7 +46,7 @@ const MainRoute =  createBrowserRouter([
       element:<PrivateRoute><Dashboard/></PrivateRoute>,
       children:[
         {
-          index:true,
+         path:'adminprofile',
           element:<AdminProfile/>
 
         },
@@ -59,6 +65,30 @@ const MainRoute =  createBrowserRouter([
         {
           path:'manageCoupon',
           element:<Managecoupon/>
+        },
+        {
+          path:'memberprofile',
+          element:<MemberProfile/>
+        },
+        {
+          path:'makepay',
+          element:<MakePay/>
+        },
+        {
+          path:'payhistory',
+          element:<PayHistory/>
+        },
+        {
+          path:'mamberAnnounce',
+          element:<MamberAnnounce/>
+        },
+        {
+          path:'userprofile',
+          element:<UserProfile/>
+        },
+        {
+          path:'userannounce',
+          element:<UserAnnouncemet/>
         }
       ]
       
