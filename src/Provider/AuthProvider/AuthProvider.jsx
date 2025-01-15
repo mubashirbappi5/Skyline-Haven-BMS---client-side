@@ -12,6 +12,7 @@ const AuthProvider = ({children}) => {
         return signInWithPopup(auth,provider)
       }
       const signupUser = ( email, password)=>{
+        setloading(true)
         return createUserWithEmailAndPassword(auth, email, password)
       }
       const updateuser = (profile)=>{
@@ -19,6 +20,7 @@ const AuthProvider = ({children}) => {
     
       }
       const signinUser = ( email, password)=>{
+        setloading(true)
         return signInWithEmailAndPassword(auth, email, password)
       }
 
@@ -49,6 +51,7 @@ const AuthProvider = ({children}) => {
         updateuser,
         signinUser,
         signoutUser,
+        loading,
         user
     }
     return (

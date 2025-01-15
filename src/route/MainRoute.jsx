@@ -7,6 +7,8 @@ import Root from '../Layouts/Root';
 import Home from '../Page/Home/Home';
 import Login from '../Page/Auth/Login/Login';
 import Apartments from '../Page/Apartments/Apartments';
+import Dashboard from '../Page/Dashboard/Dashboard';
+import PrivateRoute from './PrivateRoute';
 const MainRoute =  createBrowserRouter([
     {
       path: "/",
@@ -28,6 +30,10 @@ const MainRoute =  createBrowserRouter([
     
     ]
     },
+    {
+      path:'dashboard',
+      element:<PrivateRoute><Dashboard/></PrivateRoute>
+    }
   ]);
 
 

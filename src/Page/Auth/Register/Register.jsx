@@ -8,7 +8,7 @@ const hosting_api = "https://api.imgbb.com/1/upload?expiration=600&key=36b71bb78
 const Register = () => {
   const axiosPublic = useAxiosPublic()
   const navigate = useNavigate()
-  const {signupUser,updateuser } = useContext(Authcontext)
+  const {signupUser,updateuser, } = useContext(Authcontext)
   const {
     register,
     handleSubmit,

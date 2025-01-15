@@ -78,7 +78,7 @@ const Navber = () => {
                           {user.displayName}
                         </h1>
                         <Link
-                        to={'/'}
+                        to={'dashboard'}
                         
                           className="block px-4 py-3 text-sm text-gray-600 capitalize transition-colors duration-300 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white"
                         >

@@ -136,7 +136,21 @@ const Apartments = () => {
     </div>
 
    {
-    loading?<h1>loading</h1>:<section>
+    loading?<section className="bg-white dark:bg-gray-900">
+    <div className="container px-6 pb-10 mx-auto animate-pulse">
+      
+
+      <div className="grid grid-cols-1 gap-8 mt-8 xl:mt-12 xl:gap-12 sm:grid-cols-2 xl:grid-cols-4 lg:grid-cols-3">
+        {Array.from({ length: 3 }).map((_, index) => (
+          <div key={index} className="w-full">
+            <div className="w-full h-64 bg-gray-300 rounded-lg dark:bg-gray-600"></div>
+            <h1 className="w-56 h-2 mt-4 bg-gray-200 rounded-lg dark:bg-gray-700"></h1>
+            <p className="w-24 h-2 mt-4 bg-gray-200 rounded-lg dark:bg-gray-700"></p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>:<section>
     <section className='grid  grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-11/12 mx-auto my-5 gap-4'>
      {
          currentItems.map(apart=><Card apart={apart}></Card>)
@@ -145,8 +159,8 @@ const Apartments = () => {
      <ReactPaginate
          breakLabel="..."
          nextLabel={<button
-             className="flex items-center justify-center px-4 py-2 mx-1 text-gray-700 transition-colors duration-300 transform bg-white rounded-md rtl:-scale-x-100 dark:bg-gray-800 dark:text-gray-200 hover:bg-accent  hover:text-white dark:hover:text-gray-200"
-           >
+             className={`${loading&& 'hidden'}   flex items-center justify-center px-4 py-2 mx-1 text-gray-700 transition-colors duration-300 transform bg-white rounded-md rtl:-scale-x-100 dark:bg-gray-800 dark:text-gray-200 hover:bg-accent  hover:text-white dark:hover:text-gray-200"
+             `}>
              <svg
                xmlns="http://www.w3.org/2000/svg"
                className="w-5 h-5"
@@ -164,9 +178,9 @@ const Apartments = () => {
          pageRangeDisplayed={5}
          pageCount={pageCount}
          previousLabel={<button
-             className="flex items-center justify-center px-4 py-2 mx-1 text-gray-700 transition-colors duration-300 transform bg-white rounded-md rtl:-scale-x-100 dark:bg-gray-800 dark:text-gray-200 hover:bg-accent  hover:text-white dark:hover:text-gray-200"
+             className={`flex items-center justify-center px-4 py-2 mx-1 text-gray-700 transition-colors duration-300 transform bg-white rounded-md rtl:-scale-x-100 dark:bg-gray-800 dark:text-gray-200 hover:bg-accent  hover:text-white dark:hover:text-gray-200"
            
-           >
+             ${loading&& 'hidden'}`}>
              <svg
                xmlns="http://www.w3.org/2000/svg"
                className="w-5 h-5"
