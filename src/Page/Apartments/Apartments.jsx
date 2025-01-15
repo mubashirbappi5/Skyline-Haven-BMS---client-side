@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import Card from '../../Shared/Card';
 import ReactPaginate from "react-paginate";
+import useApartment from '../../Hooks/useApartment';
 const Apartments = () => {
+  const [apartment]=useApartment()
     const [aparts,setaparts] =useState([]) 
     const [currentItems, setCurrentItems] = useState([]);
   const [pageCount, setPageCount] = useState(0);
@@ -11,19 +13,22 @@ const Apartments = () => {
   const [block, setBlock] = useState('');
   const[searchitem,setsearchitem]=useState([])
   const [filteredAparts, setFilteredAparts] = useState([]);
+  const [loading,setloading]=useState(true)
 
   const itemsPerPage = 6;
-    useEffect(()=>{
-      fetch('/public/aprt.json')
-      .then(res=>res.json())
-      .then(data=>{
-        console.log(data)
-        setaparts(data)
-        setFilteredAparts(data);
-        setPageCount(Math.ceil(data.length / itemsPerPage));
-        setCurrentItems(data.slice(0, itemsPerPage));
-      })
-    },[])
+    
+      
+      
+  useEffect(() => {
+       
+       if(apartment){
+        setaparts(apartment)
+        setFilteredAparts(apartment);
+        setPageCount(Math.ceil(apartment.length / itemsPerPage));
+        setCurrentItems(apartment.slice(0, itemsPerPage));
+        setloading(false)
+       }
+      }, [apartment]);
     const handlePageClick = (e) => {
         const newOffset = (e.selected * itemsPerPage) % aparts.length;
         
@@ -130,54 +135,58 @@ const Apartments = () => {
       
     </div>
 
+   {
+    loading?<h1>loading</h1>:<section>
     <section className='grid  grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-11/12 mx-auto my-5 gap-4'>
-    {
-        currentItems.map(apart=><Card apart={apart}></Card>)
-    }
+     {
+         currentItems.map(apart=><Card apart={apart}></Card>)
+     }
+     </section>
+     <ReactPaginate
+         breakLabel="..."
+         nextLabel={<button
+             className="flex items-center justify-center px-4 py-2 mx-1 text-gray-700 transition-colors duration-300 transform bg-white rounded-md rtl:-scale-x-100 dark:bg-gray-800 dark:text-gray-200 hover:bg-accent  hover:text-white dark:hover:text-gray-200"
+           >
+             <svg
+               xmlns="http://www.w3.org/2000/svg"
+               className="w-5 h-5"
+               viewBox="0 0 20 20"
+               fill="currentColor"
+             >
+               <path
+                 fillRule="evenodd"
+                 d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                 clipRule="evenodd"
+               />
+             </svg>
+           </button>}
+         onPageChange={handlePageClick}
+         pageRangeDisplayed={5}
+         pageCount={pageCount}
+         previousLabel={<button
+             className="flex items-center justify-center px-4 py-2 mx-1 text-gray-700 transition-colors duration-300 transform bg-white rounded-md rtl:-scale-x-100 dark:bg-gray-800 dark:text-gray-200 hover:bg-accent  hover:text-white dark:hover:text-gray-200"
+           
+           >
+             <svg
+               xmlns="http://www.w3.org/2000/svg"
+               className="w-5 h-5"
+               viewBox="0 0 20 20"
+               fill="currentColor"
+             >
+               <path
+                 fillRule="evenodd"
+                 d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
+                 clipRule="evenodd"
+               />
+             </svg>
+           </button>
+           }
+         containerClassName="flex justify-center gap-2 my-4"
+         pageClassName="px-4 py-2 border rounded cursor-pointer hover:bg-gray-200"
+         activeClassName="bg-secondary  text-white"
+       />
     </section>
-    <ReactPaginate
-        breakLabel="..."
-        nextLabel={<button
-            className="flex items-center justify-center px-4 py-2 mx-1 text-gray-700 transition-colors duration-300 transform bg-white rounded-md rtl:-scale-x-100 dark:bg-gray-800 dark:text-gray-200 hover:bg-accent  hover:text-white dark:hover:text-gray-200"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="w-5 h-5"
-              viewBox="0 0 20 20"
-              fill="currentColor"
-            >
-              <path
-                fillRule="evenodd"
-                d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                clipRule="evenodd"
-              />
-            </svg>
-          </button>}
-        onPageChange={handlePageClick}
-        pageRangeDisplayed={5}
-        pageCount={pageCount}
-        previousLabel={<button
-            className="flex items-center justify-center px-4 py-2 mx-1 text-gray-700 transition-colors duration-300 transform bg-white rounded-md rtl:-scale-x-100 dark:bg-gray-800 dark:text-gray-200 hover:bg-accent  hover:text-white dark:hover:text-gray-200"
-          
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="w-5 h-5"
-              viewBox="0 0 20 20"
-              fill="currentColor"
-            >
-              <path
-                fillRule="evenodd"
-                d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
-                clipRule="evenodd"
-              />
-            </svg>
-          </button>
-          }
-        containerClassName="flex justify-center gap-2 my-4"
-        pageClassName="px-4 py-2 border rounded cursor-pointer hover:bg-gray-200"
-        activeClassName="bg-secondary  text-white"
-      />
+   }
             
         </div>
     );

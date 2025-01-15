@@ -1,8 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import SocialLogin from '../../../Shared/SocialLogin';
 import { useForm } from 'react-hook-form';
-const hosting_api = `https://api.imgbb.com/1/upload?key=36b71bb785bb540bd73f7987317c5207`
+import { Authcontext } from '../../../Provider/AuthProvider/AuthProvider';
+import useAxiosPublic from '../../../Hooks/useAxiosPublic';
+const hosting_api = "https://api.imgbb.com/1/upload?expiration=600&key=36b71bb785bb540bd73f7987317c5207"
 const Register = () => {
+  const axiosPublic = useAxiosPublic()
+  const {signupUser,updateuser } = useContext(Authcontext)
   const {
     register,
     handleSubmit,
@@ -10,10 +14,44 @@ const Register = () => {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
-    console.log("Form Data:", data);
-    reset(); 
+  const onSubmit =async(data) => {
+    try{
+    const imageFile = { image: data.image[0] }
+    console.log(imageFile)
+  const res = await axiosPublic.post(hosting_api,imageFile,{
+        
+      headers: {
+           'content-type': 'multipart/form-data'
+      }}
+  )
+  if (!res.data.success) {
+    throw new Error('Image upload failed. Please try again.');
+  }
+  const imageUrl = res.data.data.display_url;
+
+
+  const userReg = await signupUser(data.email, data.password);
+  const user =  userReg.user;
+
+ 
+  const profile = {
+    displayName: data.name,
+    photoURL: imageUrl,
   };
+
+  await updateuser(profile);
+
+  console.log(user);
+
+  reset();
+   
+    
+  }
+  catch (error) {
+    console.error(error.message);
+  }
+}
+  ;
 
   return (
     <div>

@@ -12,7 +12,7 @@ const Card = ({apart}) => {
     className=""
     
   >
-    <img className='h-60' src={imageUrl} alt="" />
+    <img className='h-60 w-full' src={imageUrl} alt="" />
   </div>
 
   <div className="w-2/3 p-4 md:p-4 space-y-2">
