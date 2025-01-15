@@ -2,6 +2,10 @@ import React, { useState } from 'react';
 import useAuth from './../../Hooks/useAuth';
 import { Link, Outlet } from 'react-router-dom';
 import logo from '../.././assets/image/logo.png'
+import { FaUserAlt } from 'react-icons/fa';
+import { GrAnnounce } from 'react-icons/gr';
+import { RiNewspaperLine } from 'react-icons/ri';
+import { BiSolidCoupon } from 'react-icons/bi';
 const Dashboard = () => {
     const {user} = useAuth()
    
@@ -13,8 +17,8 @@ const Dashboard = () => {
     
   
     return (
-        <div>
-        <section>
+        <div className='md:grid grid-cols-12'>
+        <section className='col-span-2'>
         <div className="sm:hidden bg-secondary dark:bg-gray-900 p-4 flex items-center justify-between">
         <button
           onClick={toggleDrawer}
@@ -48,11 +52,7 @@ const Dashboard = () => {
         } sm:relative sm:translate-x-0 sm:w-64`}
       >
         <div className="flex items-center sm:flex-col sm:mt-6 -mx-2">
-        <Link to={'/'} className='w-full'>
-        <h1 className="text-lg hidden md:flex font-bold text-gray-800 mb-6 w-full bg-white dark:text-gray-200">
-        <img className='w-28' src={logo} alt="" />
-        </h1>
-        </Link>
+        
         
           <img
             className="object-cover w-10 h-10 sm:w-24 sm:h-24 mx-2 rounded-full"
@@ -69,12 +69,13 @@ const Dashboard = () => {
             </p>
           </div>
         </div>
+        <div className="divider"></div>
       {
         (admin? 
         <nav className="mt-6 flex flex-col space-y-3">
             <Link
-              to={"/"}
-              className="flex items-center px-4 py-2 text-gray-700 bg-gray-100 rounded-lg dark:bg-gray-800 dark:text-gray-200"
+              to={""}
+              className="flex items-center px-4 py-2 text-gray-700 focus-within:bg-slate-50 hover:bg-gray-100 rounded-lg dark:bg-gray-800 dark:text-gray-200"
             >
               <svg
                 className="w-5 h-5"
@@ -94,31 +95,34 @@ const Dashboard = () => {
             </Link>
   
             <Link
-              to={"/login"}
+              to={"managemember"}
+              className="flex items-center focus:bg-slate-50 px-4 py-2 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-gray-700"
+            >
+             <FaUserAlt /> 
+              <span className="ml-4  font-medium"> Manage Members</span>
+            </Link>
+            <Link
+              to={"makeannounce"}
               className="flex items-center px-4 py-2 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-gray-700"
             >
-              <svg
-                className="w-5 h-5"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="none"
-              >
-                <path
-                  d="M16 7C16 9.20914 14.2091 11 12 11C9.79086 11 8 9.20914 8 7C8 4.79086 9.79086 3 12 3C14.2091 3 16 4.79086 16 7Z"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-                <path
-                  d="M12 14C8.13401 14 5 17.134 5 21H19C19 17.134 15.866 14 12 14Z"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-              <span className="ml-4  font-medium">Accounts</span>
+             <GrAnnounce />
+              <span className="ml-4  font-medium">Make Announcement
+              </span>
+            </Link>
+            <Link
+              to={"agreeRequest"}
+              className="flex items-center px-4 py-2 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-gray-700"
+            >
+             <RiNewspaperLine />
+              <span className="ml-4  font-medium">Agreement Requests
+              </span>
+            </Link>
+            <Link
+              to={"manageCoupon"}
+              className="flex items-center px-4 py-2 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-gray-700"
+            >
+             <BiSolidCoupon />
+              <span className="ml-4  font-medium">Manage Coupons</span>
             </Link>
 
          
@@ -237,15 +241,15 @@ const Dashboard = () => {
         ></div>
       )}
          
-
-         <section>
+         </section>
+         <section className='col-span-10'>
                <Outlet/>
          
 
 
          </section>
 
-        </section>
+      
       </div>
       
     );

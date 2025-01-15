@@ -9,6 +9,11 @@ import Login from '../Page/Auth/Login/Login';
 import Apartments from '../Page/Apartments/Apartments';
 import Dashboard from '../Page/Dashboard/Dashboard';
 import PrivateRoute from './PrivateRoute';
+import Managemember from '../Page/Dashboard/Admin/Manage/Managemember';
+import AdminProfile from '../Page/Dashboard/Admin/Adminprofile/AdminProfile';
+import MakeAnnouncement from '../Page/Dashboard/Admin/Make Anoucment/MakeAnnouncement';
+import AgreementReq from '../Page/Dashboard/Admin/AgreeRequest/AgreementReq';
+import Managecoupon from '../Page/Dashboard/Admin/CouponsMake/Managecoupon';
 const MainRoute =  createBrowserRouter([
     {
       path: "/",
@@ -32,7 +37,31 @@ const MainRoute =  createBrowserRouter([
     },
     {
       path:'dashboard',
-      element:<PrivateRoute><Dashboard/></PrivateRoute>
+      element:<PrivateRoute><Dashboard/></PrivateRoute>,
+      children:[
+        {
+          index:true,
+          element:<AdminProfile/>
+
+        },
+        {
+          path:'managemember',
+          element:<Managemember/>
+        },
+        {
+          path:'makeannounce',
+          element:<MakeAnnouncement/>
+        },
+        {
+          path:'agreeRequest',
+          element:<AgreementReq/>
+        },
+        {
+          path:'manageCoupon',
+          element:<Managecoupon/>
+        }
+      ]
+      
     }
   ]);
 
