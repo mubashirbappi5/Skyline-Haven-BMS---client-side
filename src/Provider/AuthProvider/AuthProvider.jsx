@@ -1,4 +1,4 @@
-import { createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged, signInWithPopup, updateProfile } from 'firebase/auth';
+import { createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from 'firebase/auth';
 import React, { useEffect, useState } from 'react';
 import { createContext } from 'react';
 import { auth } from '../../Firebace/Firebace.init';
@@ -18,6 +18,9 @@ const AuthProvider = ({children}) => {
         return updateProfile(auth.currentUser,profile)
     
       }
+      const signinUser = ( email, password)=>{
+        return signInWithEmailAndPassword(auth, email, password)
+      }
 
       useEffect(()=>{
         const unsubscribe = onAuthStateChanged(auth,currentUser=>{
@@ -29,12 +32,23 @@ const AuthProvider = ({children}) => {
           unsubscribe()
       }
       },[])
+      
+      const signoutUser = ()=>{
+    
+        signOut(auth)
+        .then(()=>{
+           
+        })
+        .catch(error=> console.log(error))
+    }
 
     const authinfo = {
         name:'bappi',
         googlelogin,
         signupUser ,
         updateuser,
+        signinUser,
+        signoutUser,
         user
     }
     return (
