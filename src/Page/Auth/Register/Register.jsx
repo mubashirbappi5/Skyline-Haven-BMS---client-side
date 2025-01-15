@@ -3,9 +3,11 @@ import SocialLogin from '../../../Shared/SocialLogin';
 import { useForm } from 'react-hook-form';
 import { Authcontext } from '../../../Provider/AuthProvider/AuthProvider';
 import useAxiosPublic from '../../../Hooks/useAxiosPublic';
+import { useNavigate } from 'react-router-dom';
 const hosting_api = "https://api.imgbb.com/1/upload?expiration=600&key=36b71bb785bb540bd73f7987317c5207"
 const Register = () => {
   const axiosPublic = useAxiosPublic()
+  const navigate = useNavigate()
   const {signupUser,updateuser } = useContext(Authcontext)
   const {
     register,
@@ -44,6 +46,7 @@ const Register = () => {
   console.log(user);
 
   reset();
+  navigate('/')
    
     
   }

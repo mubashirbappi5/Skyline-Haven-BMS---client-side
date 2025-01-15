@@ -1,14 +1,23 @@
 import React from 'react';
 import { useContext } from 'react';
 import { Authcontext } from '../Provider/AuthProvider/AuthProvider';
+import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 const SocialLogin = () => {
   const {googlelogin} = useContext(Authcontext)
+  const navigate = useNavigate()
   const handlegoogle = (e)=>{
     e.preventDefault()
       googlelogin()
       .then(res=>{
         console.log(res.user)
+        Swal.fire({
+          title: "Login",
+          text: "Your login successful!.",
+          icon: "success"
+        });
+        navigate('/')
       })
       .catch(error=>{
         console.log(error)
