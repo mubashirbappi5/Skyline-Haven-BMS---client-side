@@ -12,6 +12,9 @@ const AgreementReq = () => {
       return res.data;
     },
   });
+
+
+
   const handleacceptreq = (request)=>{
         console.log(request._id)
         const acceptedagreement = {
@@ -42,6 +45,33 @@ const AgreementReq = () => {
        }
        })
   }
+
+const handleReject = (request)=>{
+  const rejectedagreement = {
+    rent:request.rent,
+    userName:request.userName,
+    userEmail:request.userEmail,
+    floorNo:request.floorNo,
+    apartmentNo:request.apartmentNo,
+    blockName:request.blockName,
+   
+    Status:'checked',
+    apartment_id:request.apartment_id
+
+}
+
+axiosSecure.post('/accept',rejectedagreement)
+.then(res=>{
+  if(res.data.insertedId){
+   axiosSecure.delete(`/request/${request._id}`)
+   .then(res=>{
+    refetch()
+   })
+ }
+ })
+}
+
+
   return (
     <div>  
       <section className="flex justify-center items-center">
@@ -130,7 +160,7 @@ const AgreementReq = () => {
                             <button onClick={()=>handleacceptreq(request)} className="px-2 py-1 text-gray-500 transition-colors duration-200 rounded-lg dark:text-gray-300 hover:bg-gray-100">
                               accept
                             </button>
-                            <button className="px-2 py-1 text-gray-500 transition-colors duration-200 rounded-lg dark:text-gray-300 hover:bg-gray-100">
+                            <button onClick={()=>handleReject(request)} className="px-2 py-1 text-gray-500 transition-colors duration-200 rounded-lg dark:text-gray-300 hover:bg-gray-100">
                               Reject
                             </button>
                           </td>

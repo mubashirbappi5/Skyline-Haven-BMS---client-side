@@ -10,7 +10,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [isSignUp, setIsSignUp] = useState(false);
-  const { signinUser, loading } = useContext(Authcontext);
+  const { signinUser, loading,setloading } = useContext(Authcontext);
   const navigate = useNavigate()
   const location = useLocation()
 const froms = location.state?.from?.pathname || '/';
@@ -33,6 +33,7 @@ const froms = location.state?.from?.pathname || '/';
       })
       .catch((error) => {
         console.log(error);
+        setloading(false)
       });
   };
   return (

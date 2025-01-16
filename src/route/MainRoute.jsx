@@ -45,17 +45,7 @@ const MainRoute =  createBrowserRouter([
       path:'dashboard',
       element:<PrivateRoute><Dashboard/></PrivateRoute>,
       children:[
-        // {
-        //   index: true, // Default route
-        //   element:
-        //     userRole === "admin" ? (
-        //       <Navigate to="adminprofile" replace />
-        //     ) : userRole === "member" ? (
-        //       <Navigate to="memberprofile" replace />
-        //     ) : (
-        //       <Navigate to="userprofile" replace />
-        //     ),
-        // },
+       
         {
          path:'adminprofile',
           element:<AdminProfile/>

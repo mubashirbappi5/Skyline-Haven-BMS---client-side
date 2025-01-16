@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form';
 import { Authcontext } from '../../../Provider/AuthProvider/AuthProvider';
 import useAxiosPublic from '../../../Hooks/useAxiosPublic';
 import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 const hosting_api = "https://api.imgbb.com/1/upload?expiration=600&key=36b71bb785bb540bd73f7987317c5207"
 const Register = () => {
   const axiosPublic = useAxiosPublic()
@@ -44,6 +45,7 @@ const Register = () => {
   await updateuser(profile);
 
   console.log(user);
+  navigate('/')
 const userinfo = {
   userName:data.name,
   userEmail:data.email
@@ -57,7 +59,7 @@ console.log(result.data)
             text: "Welcome our world!.",
             icon: "success",
           });
-  navigate('/')
+    
    
     
   }
