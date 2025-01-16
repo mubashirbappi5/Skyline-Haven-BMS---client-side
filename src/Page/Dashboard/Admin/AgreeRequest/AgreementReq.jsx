@@ -32,6 +32,11 @@ const AgreementReq = () => {
         axiosSecure.delete(`/request/${request._id}`)
         .then(res=>{
             console.log('done')
+
+            axiosSecure.patch(`/users/${request.userEmail}`)
+            .then(res=>{
+                console.log(res.data)
+            })
         })
        }
        })
