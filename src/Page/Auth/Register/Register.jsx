@@ -44,8 +44,14 @@ const Register = () => {
   await updateuser(profile);
 
   console.log(user);
-
+const userinfo = {
+  userName:data.name,
+  userEmail:data.email
+}
   reset();
+const result = await axiosPublic.post('/users',userinfo)
+console.log(result.data)
+
   Swal.fire({
             title: "Signup",
             text: "Welcome our world!.",
