@@ -18,7 +18,7 @@ const Dashboard = () => {
     const member = false
   
     return (
-        <div className='md:grid grid-cols-12'>
+        <div className='md:grid grid-cols-12 '>
         <section className='col-span-2'>
         <div className="sm:hidden bg-secondary dark:bg-gray-900 p-4 flex items-center justify-between">
         <button
@@ -48,13 +48,15 @@ const Dashboard = () => {
 
       {/* Sidebar / Drawer */}
       <aside
-        className={`fixed top-0 left-0 z-50  h-screen w-64 bg-secondary dark:bg-gray-900 p-4 transition-transform transform ${
+        className={`fixed top-0 left-0 z-50  h-full  bg-secondary dark:bg-gray-900 p-4 transition-transform transform ${
           isOpen ? "translate-x-0" : "-translate-x-full"
-        } sm:relative sm:translate-x-0 sm:w-64`}
+        } sm:relative sm:translate-x-0 `}
       >
+     
+     
         <div className="flex items-center sm:flex-col sm:mt-6 -mx-2">
         
-        
+       
           <img
             className="object-cover w-10 h-10 sm:w-24 sm:h-24 mx-2 rounded-full"
             src={user.photoURL}
@@ -193,9 +195,10 @@ const Dashboard = () => {
          
          </section>
          <section className='col-span-10'>
+         
                <Outlet/>
          
-
+ 
 
          </section>
 
