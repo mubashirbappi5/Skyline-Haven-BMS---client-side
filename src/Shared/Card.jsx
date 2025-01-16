@@ -4,10 +4,12 @@ import { FaBuilding } from 'react-icons/fa';
 import { RiCommunityFill } from 'react-icons/ri';
 import useAuth from './../Hooks/useAuth';
 import { useNavigate } from 'react-router-dom';
+import useAxiosSecure from '../Hooks/useAxiosSecure';
 const Card = ({apart}) => {
     const {apartmentNo,blockName,floorNo,rent,imageUrl,_id} = apart
     const {user}=useAuth()
     const navigate = useNavigate()
+    const axiossecure = useAxiosSecure()
     const handleagreement = (id)=>{
            if(!user){
             return navigate('/login')
@@ -20,11 +22,19 @@ const Card = ({apart}) => {
             apartmentNo:apartmentNo,
             blockName:blockName,
             rent:rent,
-            apartment_id:_id
+            apartment_id:_id,
+            Agreement_req_date:new Date()
           }
           console.log(agreementData)
-
-           alert('testing')
+          axiossecure.post('/request',agreementData)
+          .then(res=>{
+            console.log(res.data)
+            if(res.data.insertedId){
+              alert('your request sent')
+            }
+            
+          })
+          
     }
     return (
         <div>
