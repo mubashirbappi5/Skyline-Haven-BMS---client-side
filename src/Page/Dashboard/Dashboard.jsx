@@ -8,14 +8,15 @@ import { RiHistoryFill, RiNewspaperLine } from 'react-icons/ri';
 import { BiSolidCoupon } from 'react-icons/bi';
 import { MdPayment } from 'react-icons/md';
 import { HiSpeakerphone } from 'react-icons/hi';
+import useAdmin from '../../Hooks/useAdmin';
 const Dashboard = () => {
     const {user} = useAuth()
    
         const [isOpen, setIsOpen] = useState(false);
       
         const toggleDrawer = () => setIsOpen(!isOpen);
-       const admin = false
-    const member = false
+        const [isAdmin] =useAdmin();
+        const member = false
   
     return (
         <div className='md:grid grid-cols-12 '>
@@ -74,7 +75,7 @@ const Dashboard = () => {
         </div>
         <div className="divider"></div>
       {
-        (admin? 
+        (isAdmin? 
         <nav className="mt-6 flex flex-col space-y-3">
             <Link
               to={"adminprofile"}

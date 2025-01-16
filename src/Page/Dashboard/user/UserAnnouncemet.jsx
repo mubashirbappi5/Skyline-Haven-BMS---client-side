@@ -2,7 +2,7 @@ import React from 'react';
 
 const UserAnnouncemet = () => {
     return (
-        <div>
+        <div className='h-screen'>
              <h1>this is announcement</h1>
         </div>
     );
