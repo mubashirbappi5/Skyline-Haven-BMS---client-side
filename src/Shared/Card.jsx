@@ -23,7 +23,8 @@ const Card = ({apart}) => {
             blockName:blockName,
             rent:rent,
             apartment_id:_id,
-            Agreement_req_date:new Date()
+            Agreement_req_date:new Date(),
+            Status:'pending'
           }
           console.log(agreementData)
           axiossecure.post('/request',agreementData)

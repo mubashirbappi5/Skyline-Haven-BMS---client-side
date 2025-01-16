@@ -12,8 +12,32 @@ const AgreementReq = () => {
       return res.data;
     },
   });
+  const handleacceptreq = (request)=>{
+        console.log(request._id)
+        const acceptedagreement = {
+            rent:request.rent,
+            userName:request.userName,
+            userEmail:request.userEmail,
+            floorNo:request.floorNo,
+            apartmentNo:request.apartmentNo,
+            blockName:request.blockName,
+            role:'member',
+            Status:'checked',
+            apartment_id:request.apartment_id
+
+        }
+       axiosSecure.post('/accept',acceptedagreement)
+       .then(res=>{
+       if(res.data.insertedId){
+        axiosSecure.delete(`/request/${request._id}`)
+        .then(res=>{
+            console.log('done')
+        })
+       }
+       })
+  }
   return (
-    <div>
+    <div>  
       <section className="flex justify-center items-center">
         <h1 className="text-2xl font-bold">Agreement Request</h1>
       </section>
@@ -97,11 +121,11 @@ const AgreementReq = () => {
                             ${request.rent}
                           </td>
                           <td className="px-6 py-4 text-sm whitespace-nowrap">
-                            <button className="px-2 py-1 text-gray-500 transition-colors duration-200 rounded-lg dark:text-gray-300 hover:bg-gray-100">
+                            <button onClick={()=>handleacceptreq(request)} className="px-2 py-1 text-gray-500 transition-colors duration-200 rounded-lg dark:text-gray-300 hover:bg-gray-100">
                               accept
                             </button>
                             <button className="px-2 py-1 text-gray-500 transition-colors duration-200 rounded-lg dark:text-gray-300 hover:bg-gray-100">
-                              accept
+                              Reject
                             </button>
                           </td>
                         </tr>
