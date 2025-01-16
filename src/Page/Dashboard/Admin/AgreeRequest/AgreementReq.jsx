@@ -5,7 +5,7 @@ import moment from "moment";
 
 const AgreementReq = () => {
   const axiosSecure = useAxiosSecure();
-  const { data: agreementreq = [] } = useQuery({
+  const { data: agreementreq = [],refetch } = useQuery({
     queryKey: ["agreementreq"],
     queryFn: async () => {
       const res = await axiosSecure.get("/request");
@@ -21,7 +21,7 @@ const AgreementReq = () => {
             floorNo:request.floorNo,
             apartmentNo:request.apartmentNo,
             blockName:request.blockName,
-            role:'member',
+           
             Status:'checked',
             apartment_id:request.apartment_id
 
@@ -32,10 +32,11 @@ const AgreementReq = () => {
         axiosSecure.delete(`/request/${request._id}`)
         .then(res=>{
             console.log('done')
-
+         
             axiosSecure.patch(`/users/${request.userEmail}`)
             .then(res=>{
                 console.log(res.data)
+                refetch()
             })
         })
        }

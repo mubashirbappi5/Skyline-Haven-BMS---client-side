@@ -9,6 +9,7 @@ import { BiSolidCoupon } from 'react-icons/bi';
 import { MdPayment } from 'react-icons/md';
 import { HiSpeakerphone } from 'react-icons/hi';
 import useAdmin from '../../Hooks/useAdmin';
+import useMember from '../../Hooks/useMember';
 const Dashboard = () => {
     const {user} = useAuth()
    
@@ -16,7 +17,7 @@ const Dashboard = () => {
       
         const toggleDrawer = () => setIsOpen(!isOpen);
         const [isAdmin] =useAdmin();
-        const member = false
+        const [isMember] = useMember()
   
     return (
         <div className='md:grid grid-cols-12 '>
@@ -132,7 +133,7 @@ const Dashboard = () => {
          
         
 
-          </nav>:member?
+          </nav>:isMember?
            <nav className="mt-6 flex flex-col space-y-3">
           <Link
             to={"memberprofile"}
