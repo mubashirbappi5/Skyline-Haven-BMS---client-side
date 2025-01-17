@@ -24,7 +24,7 @@ const AgreementReq = () => {
             floorNo:request.floorNo,
             apartmentNo:request.apartmentNo,
             blockName:request.blockName,
-           
+            accept_date:new Date(),
             Status:'checked',
             apartment_id:request.apartment_id
 
@@ -54,7 +54,7 @@ const handleReject = (request)=>{
     floorNo:request.floorNo,
     apartmentNo:request.apartmentNo,
     blockName:request.blockName,
-   
+    accept_date:new Date(),
     Status:'checked',
     apartment_id:request.apartment_id
 
