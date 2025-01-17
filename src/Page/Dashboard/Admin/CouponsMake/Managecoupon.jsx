@@ -1,8 +1,10 @@
 import React from 'react';
 import useAxiosPublic from '../../../../Hooks/useAxiosPublic';
+import useCoupon from '../../../../Hooks/useCoupon';
 
 const Managecoupon = () => {
   const axiospublic = useAxiosPublic()
+  const [coupons] = useCoupon()
     const handlecoupon = (e)=>{
         e.preventDefault()
         const form = e.target
@@ -32,7 +34,7 @@ const Managecoupon = () => {
            <h1 className='text-center'>Manage coupons</h1>
             <section>
    <div className='flex justify-between items-center'>
-    <h1>Total Coupons:</h1>
+    <h1>Total Coupons:{coupons.length}</h1>
     <button onClick={()=>document.getElementById('my_modal_5').showModal()} className='btn'>Add Coupon</button>
    </div>
             <div className="overflow-x-auto">
@@ -48,12 +50,16 @@ const Managecoupon = () => {
     </thead>
     <tbody>
       {/* row 1 */}
-      <tr>
-        <th>1</th>
-        <td>Cy Ganderton</td>
-        <td>Quality Control Specialist</td>
-        <td>Blue</td>
-      </tr>
+
+      {
+        coupons.map((coupon,idx,)=><tr>
+            <th>{idx+1}</th>
+            <td>{coupon.coupon_code}</td>
+            <td>{coupon.discountPercentage}</td>
+            <td></td>
+          </tr>)
+      }
+      
      
     </tbody>
   </table>
