@@ -55,6 +55,7 @@ const PayForm = () => {
     const blockName = form.block.value
     const email = form.email.value
     const totalPay= Rent - (Rent*parseInt(discoutprice)/100)
+    const agreementconfim_id=id
     const payinfo = {
         apartmentNo,
         floorNo,
@@ -63,7 +64,8 @@ const PayForm = () => {
         discoutprice,
         blockName,
         email,
-       totalPay
+       totalPay,
+       agreementconfim_id
 
     }
     console.log(payinfo)

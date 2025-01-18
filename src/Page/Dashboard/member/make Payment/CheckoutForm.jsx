@@ -14,67 +14,81 @@ const CheckoutForm = ({paydata}) => {
 
 
   useEffect(()=>{
+    if (paydata?.totalPay) {
     axiosscure.post('create-payment-intent',{price:paydata.totalPay
     })
     .then(res=>{
         console.log(res.data.clientSecret)
         setclientSecret(res.data.clientSecret)
     })
-
-    },[paydata])
+    }
+    },[ axiosscure,paydata])
   const handleSubmit = async(e)=>{
     e.preventDefault();
 
     if(!stripe || !elements){
+        seterror("Stripe is not loaded yet. Please try again.");
         return
     }
     const card = elements.getElement(CardElement)
 
     if(card === null){
+        seterror("Payment card details are required.");
         return
     }
-    const {error, paymentMethod} = await stripe.createPaymentMethod({
+    const {error: paymentError, paymentMethod} = await stripe.createPaymentMethod({
         type: 'card',
         card,
       });
   
-      if (error) {
-        console.log('[error]', error);
-        seterror(error.message)
-      } else {
+      if (paymentError) {
+        console.error("Payment method error:", paymentError);
+        seterror(paymentError.message);
+        return;
+      }
+       
+      else {
         console.log('[PaymentMethod]', paymentMethod);
         seterror(null)
       }
     //   confim pay
     const {paymentIntent,error:confimerror} = await stripe.confirmCardPayment(clientSecret,{
-        payment_method:{
-            card:card,
-            billing_details:{
-                name:user?.displayName || 'anonymous',
-                email:user?.email || 'anonymous',
-            }
+        payment_method: {
+            card: card,
+            billing_details: {
+              name: user?.displayName || "Anonymous User",
+              email: user?.email || "no-email@example.com",
+            },
         }
     })
     if(confimerror){
         console.log('confim error:',confimerror)
+        seterror(confimerror.message);
     }
     else{
         console.log(paymentIntent)
-        // if(paymentIntent.status==='succeeded'){
+        if(paymentIntent.status==='succeeded'){
            
+            console.log('transaction id', paymentIntent.id);
+    
 
+            // save payment
+            const payment = {
+                email:user.email,
+                transactionId:paymentIntent.id,
+                date:new Date(),
+                price:paydata.totalPay,
+                confim_id: paydata.agreementconfim_id
 
-        //     // save payment
-        //     const payment = {
-              
-
-        //     }
-        //     const res = await axiosscure.post('/payments', payment)
-        //     refetch();
-        //     if (res.data?.paymentResult?.insertedId) {
-        //       alert('payment succesful!')
-        //     }
-        // }
+            }
+            console.log(payment)
+            const res = await axiosscure.post('/payments', payment)
+         
+            if (res.data?.paymentResult?.insertedId) {
+              alert('payment succesful!')
+            }
+        }
+    
     }
    
   
