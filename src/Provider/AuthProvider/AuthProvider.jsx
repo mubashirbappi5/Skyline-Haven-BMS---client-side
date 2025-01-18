@@ -2,11 +2,13 @@ import { createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged,
 import React, { useEffect, useState } from 'react';
 import { createContext } from 'react';
 import { auth } from '../../Firebace/Firebace.init';
+import useAxiosPublic from './../../Hooks/useAxiosPublic';
 
 export const Authcontext = createContext()
 const AuthProvider = ({children}) => {
     const [user,setuser]=useState()
   const[loading,setloading] =useState(true)
+  const  axiosPublic = useAxiosPublic()
     const provider = new GoogleAuthProvider();
     const googlelogin = ()=>{
         return signInWithPopup(auth,provider)
@@ -28,6 +30,23 @@ const AuthProvider = ({children}) => {
         const unsubscribe = onAuthStateChanged(auth,currentUser=>{
                
         setuser(currentUser)
+        if (currentUser) {
+          
+          const userInfo = { email: currentUser.email };
+          axiosPublic.post('/jwt', userInfo)
+          .then(res => {
+            if (res.data.token) {
+                localStorage.setItem('access-token', res.data.token);
+                console.log(localStorage.getItem('access-token'))
+            }
+        })
+  }
+  else {
+    // TODO: remove token (if token stored in the client side: Local storage, caching, in memory)
+    localStorage.removeItem('access-token');
+  }
+    
+  
         setloading(false)
       })
       return ()=>{
