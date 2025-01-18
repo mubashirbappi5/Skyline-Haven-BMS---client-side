@@ -21,6 +21,7 @@ import MamberAnnounce from '../Page/Dashboard/member/Annnouncement/MamberAnnounc
 import UserProfile from '../Page/Dashboard/user/UserProfile';
 import UserAnnouncemet from '../Page/Dashboard/user/UserAnnouncemet';
 import PayForm from '../Page/Dashboard/member/make Payment/PayForm';
+import Confimpay from '../Page/Dashboard/member/make Payment/Confimpay';
 const MainRoute =  createBrowserRouter([
     {
       path: "/",
@@ -83,6 +84,10 @@ const MainRoute =  createBrowserRouter([
            element:<PayForm></PayForm>,
            
 
+       },
+       {
+        path:'makepay/payform/:id/confimpay',
+        element:<Confimpay/>
        },
         {
           path:'payhistory',
