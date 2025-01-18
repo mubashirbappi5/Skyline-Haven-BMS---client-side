@@ -22,6 +22,8 @@ import UserProfile from '../Page/Dashboard/user/UserProfile';
 import UserAnnouncemet from '../Page/Dashboard/user/UserAnnouncemet';
 import PayForm from '../Page/Dashboard/member/make Payment/PayForm';
 import Confimpay from '../Page/Dashboard/member/make Payment/Confimpay';
+import AdminRoute from './AdminRoute';
+import MemberRoute from './MemberRoute';
 const MainRoute =  createBrowserRouter([
     {
       path: "/",
@@ -50,60 +52,59 @@ const MainRoute =  createBrowserRouter([
        
         {
          path:'adminprofile',
-          element:<AdminProfile/>
-
+          element:<AdminRoute><PrivateRoute><AdminProfile/></PrivateRoute></AdminRoute>
         },
         {
           path:'managemember',
-          element:<Managemember/>
+          element:<AdminRoute><PrivateRoute><Managemember/></PrivateRoute></AdminRoute>
         },
         {
           path:'makeannounce',
-          element:<MakeAnnouncement/>
+          element:<AdminRoute><PrivateRoute><MakeAnnouncement/></PrivateRoute></AdminRoute>
         },
         {
           path:'agreeRequest',
-          element:<AgreementReq/>
+          element:<AdminRoute><PrivateRoute><AgreementReq/></PrivateRoute></AdminRoute>
         },
         {
           path:'manageCoupon',
-          element:<Managecoupon/>
+          element:<AdminRoute><PrivateRoute><Managecoupon/></PrivateRoute></AdminRoute>
         },
         {
           path:'memberprofile',
-          element:<MemberProfile/>
+          element:<MemberRoute><PrivateRoute><MemberProfile/></PrivateRoute></MemberRoute>
         },
         {
           path:'makepay',
-          element:<MakePay/>,
+          element:<MemberRoute><PrivateRoute><MakePay/></PrivateRoute></MemberRoute>
       
         },
         {
          
           path:'makepay/payform/:id',
-           element:<PayForm></PayForm>,
+           element:<MemberRoute><PrivateRoute><PayForm></PayForm></PrivateRoute></MemberRoute>,
            
 
        },
        {
         path:'makepay/payform/:id/confimpay',
-        element:<Confimpay/>
+        element:<MemberRoute><PrivateRoute><Confimpay/></PrivateRoute></MemberRoute>
        },
         {
           path:'payhistory',
-          element:<PayHistory/>
+          element:<MemberRoute><PrivateRoute><PayHistory/></PrivateRoute></MemberRoute>
         },
         {
           path:'mamberAnnounce',
-          element:<MamberAnnounce/>
+          element:<MemberRoute><PrivateRoute><MamberAnnounce/></PrivateRoute></MemberRoute>
         },
         {
           path:'userprofile',
-          element:<UserProfile/>
+          element:<PrivateRoute><UserProfile/></PrivateRoute>
         },
         {
           path:'userannounce',
-          element:<UserAnnouncemet/>
+          element:<PrivateRoute><UserAnnouncemet/></PrivateRoute>
         }
       ]
       

@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import useAdmin from '../Hooks/useAdmin';
 import { Navigate, useLocation } from 'react-router-dom';
+import useAuth from '../Hooks/useAuth';
 
 const AdminRoute = ({children}) => {
-  const{user,  loading}=useState()
+  const{user, loading}=useAuth()
   const location = useLocation();
   const[isAdmin,isPending ]=useAdmin()
  
