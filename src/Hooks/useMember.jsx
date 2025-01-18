@@ -4,17 +4,18 @@ import useAxiosSecure from './useAxiosSecure';
 import { useQuery } from '@tanstack/react-query';
 
 const useMember = () => {
-    const {user}=useAuth()
+    const {user,loading}=useAuth()
     const axiossecure = useAxiosSecure()
-    const{data:isMember} = useQuery({
+    const{data:isMember,isPending} = useQuery({
         queryKey:[user?.email,'isMember'],
+        enabled: !loading,
         queryFn :async()=>{
              const res = await axiossecure.get(`/users/member/${user.email}`)
              console.log(res.data);
              return res.data?.member;
         }
     })
-    return[isMember]
+    return[isMember,isPending]
 };
 
 export default useMember;
