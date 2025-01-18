@@ -20,6 +20,7 @@ import PayHistory from '../Page/Dashboard/member/Pay History/PayHistory';
 import MamberAnnounce from '../Page/Dashboard/member/Annnouncement/MamberAnnounce';
 import UserProfile from '../Page/Dashboard/user/UserProfile';
 import UserAnnouncemet from '../Page/Dashboard/user/UserAnnouncemet';
+import PayForm from '../Page/Dashboard/member/make Payment/PayForm';
 const MainRoute =  createBrowserRouter([
     {
       path: "/",
@@ -73,8 +74,16 @@ const MainRoute =  createBrowserRouter([
         },
         {
           path:'makepay',
-          element:<MakePay/>
+          element:<MakePay/>,
+      
         },
+        {
+         
+          path:'makepay/payform/:id',
+           element:<PayForm></PayForm>,
+           
+
+       },
         {
           path:'payhistory',
           element:<PayHistory/>

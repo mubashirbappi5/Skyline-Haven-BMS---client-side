@@ -98,10 +98,14 @@ const MemberProfile = () => {
                         >
                           Status
                         </th>
-
-                        <th scope="col" className="relative py-3.5 px-4">
-                          <span className="sr-only">Edit</span>
+                        <th
+                          scope="col"
+                          className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400"
+                        >
+                         Action
                         </th>
+
+                       
                       </tr>
                     </thead>
                     <tbody className="bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-900">
@@ -128,6 +132,9 @@ const MemberProfile = () => {
                                 </td>
                                 <td class="px-4 py-4 text-sm whitespace-nowrap">
                                   {agree.Status}
+                                </td>
+                                <td class="px-4 py-4 text-sm whitespace-nowrap">
+                                <Link to={'/dashboard/makepay'}>Pay</Link>
                                 </td>
                               </tr>)
                         ):(<h1>No data</h1>)  
