@@ -1,8 +1,11 @@
 import React from 'react';
 import useAxiosPublic from './../../../../Hooks/useAxiosPublic';
+import useAxiosSecure from '../../../../Hooks/useAxiosSecure';
+import { useNavigate } from 'react-router-dom';
 
 const MakeAnnouncement = () => {
-      const axiospublic = useAxiosPublic()
+      const axiosSecure = useAxiosSecure()
+      const Navigate = useNavigate()
      const handleannounce = (e)=>{
         e.preventDefault()
         const form = e.target 
@@ -13,11 +16,13 @@ const MakeAnnouncement = () => {
              title:title,
              notice:announce
         }
-        axiospublic.post('/notice',announcement)
+        axiosSecure.post('/notice',announcement)
         .then(res=>{
             console.log(res.data)
             if(res.data.insertedId){
                 alert('notice sent')
+                form.reset()
+                Navigate('/')
             }
         })
      }
