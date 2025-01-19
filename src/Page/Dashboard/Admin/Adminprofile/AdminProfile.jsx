@@ -91,7 +91,7 @@ const AdminProfile = () => {
               {report.totalAgreement}
             </div>
             <div className="stat-desc text-gray-500 mt-2">
-              Percentage: ↘︎ {report.totalApartments} ({PercentageofAgreement}%)
+              Percentage: ↘︎ {report.totalApartments} ({PercentageofAgreement.toFixed(2)}%)
             </div>
           </div>
 
@@ -104,7 +104,7 @@ const AdminProfile = () => {
             </div>
             <div className="stat-desc text-gray-500 mt-2">
               Percentage: ↘︎ {report.totalApartments} (
-              {PercentageofavailableApartment}%)
+              {PercentageofavailableApartment.toFixed(2)}%)
             </div>
           </div>
         </div>
