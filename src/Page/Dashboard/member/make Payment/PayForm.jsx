@@ -23,12 +23,11 @@ const PayForm = () => {
          return agreement|| null
       }
     })
-    console.log(data)
+   
     const agreement = Array.isArray(data) ? data[0] : data;
-    console.log(agreement)
+   
 
   
-   console.log(applycoupons)
 
    
    const handleapplycoupon = ()=>{
@@ -70,8 +69,7 @@ const PayForm = () => {
        agreementconfim_id
 
     }
-    console.log(payinfo)
-    console.log(discoutprice,month)
+    
 
     navigate('confimpay', { state:payinfo });
    }

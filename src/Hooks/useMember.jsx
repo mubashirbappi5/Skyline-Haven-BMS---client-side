@@ -11,7 +11,7 @@ const useMember = () => {
         enabled: !loading,
         queryFn :async()=>{
              const res = await axiossecure.get(`/users/member/${user.email}`)
-             console.log(res.data);
+             
              return res.data?.member;
         }
     })

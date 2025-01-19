@@ -24,10 +24,12 @@ import PayForm from '../Page/Dashboard/member/make Payment/PayForm';
 import Confimpay from '../Page/Dashboard/member/make Payment/Confimpay';
 import AdminRoute from './AdminRoute';
 import MemberRoute from './MemberRoute';
+import Error from '../Page/Error';
 const MainRoute =  createBrowserRouter([
     {
       path: "/",
       element: <Root/>,
+      errorElement:<Error/>,
       children:[
         {
         index:true,

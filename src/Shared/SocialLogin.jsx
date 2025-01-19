@@ -15,14 +15,14 @@ const froms = location.state?.from?.pathname || '/';
     e.preventDefault()
       googlelogin()
       .then(res=>{
-        console.log(res.user)
+        
         const userinfo = {
           userName:res.user.displayName,
           userEmail:res.user.email
         }
         axiosPublic.post('/users',userinfo)
         .then(res=>{
-          console.log(res.data)
+          
           
       })
         Swal.fire({
@@ -33,7 +33,7 @@ const froms = location.state?.from?.pathname || '/';
         navigate(froms, { replace: true });
       })
       .catch(error=>{
-        console.log(error)
+       
       })
   }
     return (

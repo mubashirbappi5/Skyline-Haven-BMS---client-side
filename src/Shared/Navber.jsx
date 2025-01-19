@@ -26,29 +26,23 @@ const Navber = () => {
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!"
-    })
-    .then((result) => {
+      confirmButtonText: "Yes, Logout it!",
+    }).then((result) => {
       if (result.isConfirmed) {
         signoutUser()
-    .then(()=>{
-      Swal.fire({
-        title: "Logout!",
-        text: "You are successfully logout.",
-        icon: "success"
-      });
-           
-    })
-    .catch(error=> console.log(error))
-  };
-       
-      
+          .then(() => {
+            Swal.fire({
+              title: "Logout!",
+              text: "You are successfully logout.",
+              icon: "success",
+            });
+          })
+          .catch((error) => console.log(error));
+      }
     });
-   
-   
   };
-const [isAdmin] = useAdmin()
-const [isMember] = useMember()
+  const [isAdmin] = useAdmin();
+  const [isMember] = useMember();
   const links = (
     <>
       <NavLink
@@ -71,22 +65,17 @@ const [isMember] = useMember()
       <nav className="text-black shadow-md fixed w-full z-10 bg-white">
         <div className="mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
-            {/* Logo */}
             <div>
               <img className="w-40" src={logo} alt="Skyline Haven" />
             </div>
 
-            {/* Desktop Links */}
             <div className="hidden md:flex items-center space-x-6">{links}</div>
-
-            {/* Login Button (visible on all screens) */}
 
             <div className="flex">
               {user ? (
                 <>
                   {" "}
                   <div className="relative inline-block">
-                    {/* Dropdown toggle button */}
                     <button
                       onClick={toggleDropdown}
                       className="relative  z-10 block p-2 text-gray-700 bg-white border border-transparent rounded-md  "
@@ -98,7 +87,6 @@ const [isMember] = useMember()
                       />
                     </button>
 
-                    {/* Dropdown menu */}
                     {isOpenpro && (
                       <div
                         onClick={closeDropdown}
@@ -108,12 +96,13 @@ const [isMember] = useMember()
                           {user.displayName}
                         </h1>
                         <Link
-                        to={ isAdmin
-                          ? 'dashboard/adminprofile'
-                          : isMember
-                          ? 'dashboard/memberprofile'
-                          : 'dashboard/userprofile'}
-                        
+                          to={
+                            isAdmin
+                              ? "dashboard/adminprofile"
+                              : isMember
+                              ? "dashboard/memberprofile"
+                              : "dashboard/userprofile"
+                          }
                           className="block px-4 py-3 text-sm text-gray-600 capitalize transition-colors duration-300 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white"
                         >
                           Dashboard
@@ -140,8 +129,6 @@ const [isMember] = useMember()
                         Login
                       </button>
                     </Link>
-
-                    {/* Hamburger Menu for Mobile */}
                   </div>
                 </>
               )}
@@ -160,7 +147,6 @@ const [isMember] = useMember()
           </div>
         </div>
 
-        {/* Mobile Drawer */}
         {isOpen && (
           <div className="md:hidden bg-secondary">
             <div className="flex flex-col space-y-4 px-4 py-6">{links}</div>

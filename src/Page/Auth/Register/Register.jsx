@@ -5,7 +5,8 @@ import { Authcontext } from '../../../Provider/AuthProvider/AuthProvider';
 import useAxiosPublic from '../../../Hooks/useAxiosPublic';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
-const hosting_api = "https://api.imgbb.com/1/upload?expiration=600&key=36b71bb785bb540bd73f7987317c5207"
+const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
+const hosting_api = `https://api.imgbb.com/1/upload?expiration=600&key=${image_hosting_key}`
 const Register = () => {
   const axiosPublic = useAxiosPublic()
   const navigate = useNavigate()
@@ -20,7 +21,7 @@ const Register = () => {
   const onSubmit =async(data) => {
     try{
     const imageFile = { image: data.image[0] }
-    console.log(imageFile)
+    
   const res = await axiosPublic.post(hosting_api,imageFile,{
         
       headers: {
@@ -44,7 +45,7 @@ const Register = () => {
 
   await updateuser(profile);
 
-  console.log(user);
+  
   navigate('/')
 const userinfo = {
   userName:data.name,
@@ -52,7 +53,7 @@ const userinfo = {
 }
   reset();
 const result = await axiosPublic.post('/users',userinfo)
-console.log(result.data)
+
 
   Swal.fire({
             title: "Signup",
@@ -173,7 +174,7 @@ console.log(result.data)
                 type="password"
                 {...register("password", {
                   pattern: {
-                    value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d!@#$%^&*]{8,}$/,
+                    value: /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/,
                     message: "Password must be strong (e.g., contain uppercase, lowercase, numbers)",
                   },
                 })}

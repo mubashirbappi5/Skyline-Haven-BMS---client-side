@@ -11,7 +11,7 @@ import Testimonials from './Components/Testimonials';
 
 const Home = () => {
     const {name}=useContext(Authcontext)
-    console.log(name)
+    
     return (
         <div className='md:w-11/12 mx-auto'>
            
