@@ -21,7 +21,7 @@ const Dashboard = () => {
   
     return (
         <div className='md:grid grid-cols-12 '>
-        <section className='col-span-2'>
+        <section className='col-span-3'>
         <div className="sm:hidden bg-secondary dark:bg-gray-900 p-4 flex items-center justify-between">
         <button
           onClick={toggleDrawer}
@@ -54,7 +54,31 @@ const Dashboard = () => {
           isOpen ? "translate-x-0" : "-translate-x-full"
         } sm:relative sm:translate-x-0 `}
       >
-     
+     <Link to={'/'}>
+     <div className="flex items-center justify-between mb-6">
+    <button
+      onClick={() => setIsOpen(false)}
+      className="flex items-center text-gray-700  dark:bg-gray-800 dark:text-gray-200 px-4 py-2 rounded-lg  hover:bg-gray-300  transition-colors duration-300"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        className="h-5 w-5 mr-2"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth={2}
+          d="M15 19l-7-7 7-7"
+        />
+      </svg>
+      Back
+    </button>
+  </div>
+     </Link>
+
      
         <div className="flex items-center sm:flex-col sm:mt-6 -mx-2">
         
@@ -196,7 +220,7 @@ const Dashboard = () => {
       )}
          
          </section>
-         <section className='col-span-10'>
+         <section className='col-span-9'>
          
                <Outlet/>
          

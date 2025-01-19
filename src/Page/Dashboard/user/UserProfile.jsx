@@ -5,130 +5,100 @@ import { Link } from "react-router-dom";
 const UserProfile = () => {
   const { user } = useAuth();
   return (
-    <div className="md:p-4 h-screen">
-      <Link to={"/"}>
-        <button className=" btn btn-primary ">back</button>
-      </Link>
-      <section className="flex flex-col justify-center items-center text-center">
-        <div className="border-2 rounded-full border-accent p-2">
-          <img className="rounded-full w-20" src={user.photoURL} alt="" />
+    <div>
+    <div className="md:p-6 min-h-screen bg-gradient-to-r from-blue-50 to-purple-100">
+      <div className="bg-gradient-to-r from-[#94f08c] to-green-500 text-white mt-6 md:mt-0 py-6 px-8 rounded-xl shadow-xl">
+        <div className="container mx-auto flex flex-col lg:flex-row items-center justify-between space-y-6 lg:space-y-0">
+          <div className="text-center lg:text-left space-y-4 lg:w-1/2">
+            <h1 className="text-2xl md:text-4xl font-extrabold text-white leading-tight tracking-wide">
+              Welcome Back,{" "}
+              <span className="text-yellow-300">{user.displayName}</span>!
+            </h1>
+            <p className="text-lg sm:text-xl text-gray-200">
+              Manage Your Apartment Details Effortlessly
+            </p>
+          </div>
+          <div>
+            <section className="flex justify-center ">
+              <div className="bg-white rounded-xl shadow-xl p-4 ">
+                <div className="flex items-center justify-center mb-3">
+                  <div className="border-4 border-[#94f08c] rounded-full p-4 shadow-2xl transform transition-transform duration-300 hover:scale-105">
+                    <img
+                      className="rounded-full w-24 h-24 object-cover"
+                      src={user.photoURL}
+                      alt="User"
+                    />
+                  </div>
+                </div>
+                <div className="text-center">
+                  <h2 className="text-2xl font-semibold text-[#94f08c]">
+                    {user.displayName}
+                  </h2>
+                  <h5 className="text-lg text-gray-500">{user.email}</h5>
+                </div>
+              </div>
+            </section>
+          </div>
         </div>
-        <div>
-          <h1>{user.displayName}</h1>
-          <h5>{user.email}</h5>
-        </div>
-      </section>
-      <div className="divider"></div>
+      </div>
+
+      <div className="divider my-8"></div>
+
       <section>
         <section className="container px-4 mx-auto">
           <div className="sm:flex sm:items-center sm:justify-between">
-            <h2 className="text-lg font-medium text-gray-800 dark:text-white">
-              Your Apartment
+            <h2 className="text-2xl font-semibold text-gray-800 dark:text-white">
+              My Agreements
             </h2>
-
             <div className="flex items-center mt-4 gap-x-3">
-              <Link to={'/apartments'}>
-              <button className="flex items-center justify-center w-1/2 px-5 py-2 text-sm tracking-wide text-white transition-colors duration-200 bg-blue-500 rounded-lg sm:w-auto gap-x-2 hover:bg-blue-600 dark:hover:bg-blue-500 dark:bg-blue-600">
-                <span>New Rent</span>
-              </button>
-
+              <Link to={"/apartments"}>
+                <button className="flex items-center justify-center rounded-lg px-5 py-3 text-lg font-medium text-white bg-[#94f08c]  hover:bg-green-600 transition duration-300">
+                  New Rent
+                </button>
               </Link>
-
-             
             </div>
           </div>
 
           <div className="flex flex-col mt-6">
             <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
               <div className="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
-                <div className="overflow-hidden border border-gray-200 dark:border-gray-700 md:rounded-lg">
+                <div className="overflow-hidden border border-gray-200 dark:border-gray-700 rounded-lg shadow-md">
                   <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-                    <thead className="bg-gray-50 dark:bg-gray-800">
+                    <thead className="bg-gradient-to-r from-[#94f08c] to-green-400 text-white">
                       <tr>
-                        <th
-                          scope="col"
-                          className="px-12 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400"
-                        >
+                        <th className="px-12 py-3 text-sm font-normal text-left">
                           Apartment No.
                         </th>
-                        <th
-                          scope="col"
-                          className="px-12 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400"
-                        >
-                          Accept date
+                        <th className="px-4 py-3 text-sm font-normal text-left">
+                          Accept Date
                         </th>
-                        <th
-                          scope="col"
-                          className="px-12 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400"
-                        >
-                        Rent
+                        <th className="px-4 py-3 text-sm font-normal text-left">
+                          Rent
                         </th>
-
-                        <th
-                          scope="col"
-                          className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400"
-                        >
-                         Floor No.
+                        <th className="px-4 py-3 text-sm font-normal text-left">
+                          Floor No.
                         </th>
-
-                        <th
-                          scope="col"
-                          className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400"
-                        >
+                        <th className="px-4 py-3 text-sm font-normal text-left">
                           Block No.
                         </th>
-
-                        <th
-                          scope="col"
-                          className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400"
-                        >
+                        <th className="px-4 py-3 text-sm font-normal text-left">
                           Status
                         </th>
-
-                        <th scope="col" className="relative py-3.5 px-4">
-                          <span className="sr-only">Edit</span>
+                        <th className="px-4 py-3 text-sm font-normal text-left">
+                          Action
                         </th>
                       </tr>
                     </thead>
-                    <tbody className="bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-900">
-                      {/* <tr>
-                        <td className="px-12 py-4 text-sm font-normal text-gray-700 whitespace-nowrap">
-                          200 KB
-                        </td>
-                        <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
-                          Jan 4, 2022
-                        </td>
-                        <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
-                          Jan 4, 2022
-                        </td>
-                        <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
-                          Lana Steiner
-                        </td>
-                        <td class="px-4 py-4 text-sm whitespace-nowrap">
-                          <button className="px-1 py-1 text-gray-500 transition-colors duration-200 rounded-lg dark:text-gray-300 hover:bg-gray-100">
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              fill="none"
-                              viewBox="0 0 24 24"
-                              stroke-width="1.5"
-                              stroke="currentColor"
-                              class="w-6 h-6"
-                            >
-                              <path
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                d="M12 6.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 12.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 18.75a.75.75 0 110-1.5.75.75 0 010 1.5z"
-                              />
-                            </svg>
-                          </button>
-                        </td>
-                      </tr> */}
-
-                   
+                    <tbody className="bg-white divide-y divide-gray-200 dark:divide-gray-700">
+                      
+                        <tr>
+                          <td colSpan="7" className="text-center py-4">
+                            No data available
+                          </td>
+                        </tr>
+                     
                     </tbody>
-                    
                   </table>
-                  <h1 className="text-center my-10">No Data</h1>
                 </div>
               </div>
             </div>
@@ -136,6 +106,7 @@ const UserProfile = () => {
         </section>
       </section>
     </div>
+  </div>
   );
 };
 
