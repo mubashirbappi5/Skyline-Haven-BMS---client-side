@@ -3,7 +3,7 @@ import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import React, { useEffect, useState } from 'react';
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 import useAuth from "../../../../Hooks/useAuth";
-import { CiClock1, CiLock } from "react-icons/ci";
+
 import { FaUserLock } from "react-icons/fa";
 
 const CheckoutForm = ({paydata}) => {
@@ -98,32 +98,8 @@ const CheckoutForm = ({paydata}) => {
 }
 
     return (
-        // <div>
-        //      <form onSubmit={handleSubmit}>
-        //     <CardElement
-        //         options={{
-        //             style: {
-        //                 base: {
-        //                     fontSize: '16px',
-        //                     color: '#424770',
-        //                     '::placeholder': {
-        //                         color: '#aab7c4',
-        //                     },
-        //                 },
-        //                 invalid: {
-        //                     color: '#9e2146',
-        //                 },
-        //             },
-        //         }}
-        //     />
-        //     <button className="btn btn-sm btn-primary my-4" type="submit" disabled={!stripe || !clientSecret}>
-        //         Pay
-        //     </button>
-           
-        
-        // </form>
-        // </div>
-        <div className="bg-white p-6 rounded-lg shadow-lg max-w-lg mx-auto">
+      
+        <div className="bg-white p-6 rounded-lg shadow-lg border-t-2 border-primary max-w-lg mx-auto">
   <h1 className="text-2xl font-extrabold text-gray-800 text-center mb-6">Make Your Payment</h1>
   <p className="text-gray-600 text-center mb-8">
     Enter your payment details below to complete your transaction securely.
