@@ -94,7 +94,7 @@ const CheckoutForm = ({ paydata }) => {
             text: "Your  payment succesful.",
             icon: "success",
           });
-          navigate("dashboard/memberprofile");
+          navigate("/");
         }
       }
     }
