@@ -17,7 +17,11 @@ const Managemember = () => {
 
  const handlemembers = (user)=>{
   console.log(user._id)
-   
+   axiosSecure.patch(`/users/${user.userEmail}`,{ role: 'user' })
+   .then(res=>{
+    console.log(res.data)
+    refetch()
+})
 
 
 

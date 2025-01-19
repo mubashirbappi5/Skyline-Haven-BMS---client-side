@@ -35,8 +35,8 @@ const AgreementReq = () => {
         axiosSecure.delete(`/request/${request._id}`)
         .then(res=>{
             console.log('done')
-         
-            axiosSecure.patch(`/users/${request.userEmail}`)
+        
+            axiosSecure.patch(`/users/${request.userEmail}`,{ role: 'member' })
             .then(res=>{
                 console.log(res.data)
                 refetch()
@@ -54,7 +54,7 @@ const handleReject = (request)=>{
     floorNo:request.floorNo,
     apartmentNo:request.apartmentNo,
     blockName:request.blockName,
-    accept_date:new Date(),
+    Reject_date:new Date(),
     Status:'checked',
     apartment_id:request.apartment_id
 

@@ -6,6 +6,8 @@ import About from './Components/About';
 import Coupons from './Components/coupons';
 import Location from './Components/Location';
 import { Authcontext } from '../../Provider/AuthProvider/AuthProvider';
+import WeProvide from './Components/WeProvide';
+import Testimonials from './Components/Testimonials';
 
 const Home = () => {
     const {name}=useContext(Authcontext)
@@ -18,6 +20,8 @@ const Home = () => {
             <About/>
             <Coupons/>
             <Location/>
+            <WeProvide/>
+            <Testimonials/>
 
         </div>
     );

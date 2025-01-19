@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const BannerImg = ({title,subtitle,img}) => {
     return (
@@ -15,7 +16,7 @@ const BannerImg = ({title,subtitle,img}) => {
       <p className="mb-5"> 
       {subtitle}
       </p>
-      <button className="btn bg-primary border-none text-white">Get Started</button>
+      <Link to={'/apartments'}><button className="btn bg-primary border-none text-white">Get Started</button></Link>
     </div>
   </div>
 </div>

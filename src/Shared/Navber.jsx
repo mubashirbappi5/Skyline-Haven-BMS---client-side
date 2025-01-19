@@ -5,6 +5,8 @@ import logo from "../assets/image/logo.png";
 import { Link, NavLink } from "react-router-dom";
 import { useContext } from "react";
 import { Authcontext } from "../Provider/AuthProvider/AuthProvider";
+import useAdmin from "../Hooks/useAdmin";
+import useMember from "../Hooks/useMember";
 const Navber = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { user, signoutUser } = useContext(Authcontext);
@@ -18,7 +20,8 @@ const Navber = () => {
   const handlelogout = () => {
     signoutUser();
   };
-
+const [isAdmin] = useAdmin()
+const [isMember] = useMember()
   const links = (
     <>
       <NavLink
@@ -78,7 +81,11 @@ const Navber = () => {
                           {user.displayName}
                         </h1>
                         <Link
-                        to={'dashboard'}
+                        to={ isAdmin
+                          ? 'dashboard/adminprofile'
+                          : isMember
+                          ? 'dashboard/memberprofile'
+                          : 'dashboard/userprofile'}
                         
                           className="block px-4 py-3 text-sm text-gray-600 capitalize transition-colors duration-300 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white"
                         >

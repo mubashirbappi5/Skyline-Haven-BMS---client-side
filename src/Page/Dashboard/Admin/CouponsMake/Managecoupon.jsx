@@ -12,11 +12,13 @@ const Managecoupon = () => {
         const couponCode =form.coupon_code.value
         const discountPars = form.discount.value
         const couponDescription = form.description.value
+        const status ="active"
         console.log(couponCode,discountPars,couponDescription)
        const couponinfo = {
         coupon_code: couponCode,
         discountPercentage:discountPars,
-        Description:couponDescription
+        Description:couponDescription,
+        status:status
        }
        axioSecure.post('/coupons',couponinfo)
         .then(res=>{
@@ -30,6 +32,17 @@ const Managecoupon = () => {
 
       
 
+    }
+
+    const handlestatus = (id,isActive)=>{
+      const status = isActive ? 'active' : 'Inactive';
+      console.log('hi',id)
+      axioSecure.patch(`/coupons/${id}`,{status})
+      .then(res=>{
+        alert('update coupon')
+        refetch()
+      })
+      
     }
     return (
 
@@ -56,7 +69,7 @@ const Managecoupon = () => {
             <th className="px-6 py-3 text-sm font-medium text-left">No</th>
             <th className="px-6 py-3 text-sm font-medium text-left">Coupon Code</th>
             <th className="px-6 py-3 text-sm font-medium text-left">Discount (%)</th>
-            <th className="px-6 py-3 text-sm font-medium text-left">Actions</th>
+            <th className="px-6 py-3 text-sm font-medium text-left">Status</th>
           </tr>
         </thead>
         <tbody className="bg-white divide-y divide-gray-200">
@@ -67,8 +80,8 @@ const Managecoupon = () => {
               <td className="px-6 py-4 text-sm text-gray-700">{coupon.discountPercentage}%</td>
               <td className="px-6 py-4 text-sm text-gray-500">
               
-                <button className="text-blue-600 hover:text-blue-800 transition duration-300">Edit</button>
-                <button className="ml-4 text-red-600 hover:text-red-800 transition duration-300">Delete</button>
+              <input  onChange={(e)=>handlestatus(coupon._id, e.target.checked)} type="checkbox" className="toggle toggle-success"  defaultChecked={coupon.status === 'active'}/>
+                
               </td>
             </tr>
           ))}
