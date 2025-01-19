@@ -30,87 +30,183 @@ const Managecoupon = () => {
 
     }
     return (
-        <div>
-           <h1 className='text-center'>Manage coupons</h1>
-            <section>
-   <div className='flex justify-between items-center'>
-    <h1>Total Coupons:{coupons.length}</h1>
-    <button onClick={()=>document.getElementById('my_modal_5').showModal()} className='btn'>Add Coupon</button>
-   </div>
-            <div className="overflow-x-auto">
-  <table className="table">
-    {/* head */}
-    <thead>
-      <tr>
-        <th></th>
-        <th>coupon code</th>
-        <th> Discount percentage</th>
-        <th>Action</th>
-      </tr>
-    </thead>
-    <tbody>
-      {/* row 1 */}
+//         <div>
+//            <h1 className='text-center'>Manage coupons</h1>
+//             <section>
+//    <div className='flex justify-between items-center'>
+//     <h1>Total Coupons:{coupons.length}</h1>
+//     <button onClick={()=>document.getElementById('my_modal_5').showModal()} className='btn'>Add Coupon</button>
+//    </div>
+//             <div className="overflow-x-auto">
+//   <table className="table">
+//     {/* head */}
+//     <thead>
+//       <tr>
+//         <th></th>
+//         <th>coupon code</th>
+//         <th> Discount percentage</th>
+//         <th>Action</th>
+//       </tr>
+//     </thead>
+//     <tbody>
+//       {/* row 1 */}
 
-      {
-        coupons.map((coupon,idx,)=><tr>
-            <th>{idx+1}</th>
-            <td>{coupon.coupon_code}</td>
-            <td>{coupon.discountPercentage}</td>
-            <td></td>
-          </tr>)
-      }
+//       {
+//         coupons.map((coupon,idx,)=><tr>
+//             <th>{idx+1}</th>
+//             <td>{coupon.coupon_code}</td>
+//             <td>{coupon.discountPercentage}</td>
+//             <td></td>
+//           </tr>)
+//       }
       
      
-    </tbody>
-  </table>
-</div>
+//     </tbody>
+//   </table>
+// </div>
 
 
-  {/* Open the modal using document.getElementById('ID').showModal() method */}
+//   {/* Open the modal using document.getElementById('ID').showModal() method */}
 
-<dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle">
-  <div className="modal-box">
-    <h3 className="font-bold text-lg text-center">Add coupon</h3>
-    <form onSubmit={handlecoupon}>
-    <div className="form-control">
-            <label className="label">
-            <span className="label-text">Coupon Code</span>
-          </label>
-            <input name='coupon_code' type="text" placeholder="Type here" className="input input-bordered w-full " />
-            </div>
-    <div className="form-control">
-            <label className="label">
-            <span className="label-text">Discount</span>
-          </label>
-            <input name='discount' type="number" placeholder="discount percentage" className="input input-bordered w-full " />
-            </div>
-            <div className="form-control">
-            <label className="label">
-            <span className="label-text">Description</span>
-          </label>
-          <textarea name='description' className="textarea textarea-bordered" rows={2} placeholder="Type announcement.."></textarea>
-            </div>
-           <div className='form-control mt-4  '>
-            <input type="submit" className='btn ' value="Submit" />
+// <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle">
+//   <div className="modal-box">
+//     <h3 className="font-bold text-lg text-center">Add coupon</h3>
+//     <form onSubmit={handlecoupon}>
+//     <div className="form-control">
+//             <label className="label">
+//             <span className="label-text">Coupon Code</span>
+//           </label>
+//             <input name='coupon_code' type="text" placeholder="Type here" className="input input-bordered w-full " />
+//             </div>
+//     <div className="form-control">
+//             <label className="label">
+//             <span className="label-text">Discount</span>
+//           </label>
+//             <input name='discount' type="number" placeholder="discount percentage" className="input input-bordered w-full " />
+//             </div>
+//             <div className="form-control">
+//             <label className="label">
+//             <span className="label-text">Description</span>
+//           </label>
+//           <textarea name='description' className="textarea textarea-bordered" rows={2} placeholder="Type announcement.."></textarea>
+//             </div>
+//            <div className='form-control mt-4  '>
+//             <input type="submit" className='btn ' value="Submit" />
 
-           </div>
+//            </div>
 
   
-    </form>
-    <div className="modal-action flex justify-center  ">
+//     </form>
+//     <div className="modal-action flex justify-center  ">
         
-        <form method="dialog">
+//         <form method="dialog">
          
-          <button className="btn btn-wide ">Close</button>
+//           <button className="btn btn-wide ">Close</button>
+//         </form>
+//       </div>
+   
+//   </div>
+// </dialog>
+
+
+//             </section>
+//         </div>
+<div className="bg-gray-50 p-8 rounded-lg shadow-lg">
+  <h1 className="text-3xl font-semibold text-center text-[#94f08c] mb-6">Manage Coupons</h1>
+  
+  <section>
+    <div className="flex justify-between items-center mb-6">
+      <h2 className="text-lg font-medium text-gray-800">
+        Total Coupons: <span className="text-[#94f08c]">{coupons.length}</span>
+      </h2>
+      <button
+        onClick={() => document.getElementById('my_modal_5').showModal()}
+        className="btn bg-[#94f08c] text-white hover:bg-green-600 transition duration-300"
+      >
+        Add Coupon
+      </button>
+    </div>
+    
+    <div className="overflow-x-auto bg-white shadow-md rounded-lg">
+      <table className="min-w-full divide-y divide-gray-200">
+        <thead className="bg-[#94f08c] text-white">
+          <tr>
+            <th className="px-6 py-3 text-sm font-medium text-left">No</th>
+            <th className="px-6 py-3 text-sm font-medium text-left">Coupon Code</th>
+            <th className="px-6 py-3 text-sm font-medium text-left">Discount (%)</th>
+            <th className="px-6 py-3 text-sm font-medium text-left">Actions</th>
+          </tr>
+        </thead>
+        <tbody className="bg-white divide-y divide-gray-200">
+          {coupons.map((coupon, idx) => (
+            <tr key={coupon.id}>
+              <td className="px-6 py-4 text-sm text-gray-700">{idx + 1}</td>
+              <td className="px-6 py-4 text-sm text-gray-700">{coupon.coupon_code}</td>
+              <td className="px-6 py-4 text-sm text-gray-700">{coupon.discountPercentage}%</td>
+              <td className="px-6 py-4 text-sm text-gray-500">
+                {/* Add action buttons (e.g., Edit, Delete) */}
+                <button className="text-blue-600 hover:text-blue-800 transition duration-300">Edit</button>
+                <button className="ml-4 text-red-600 hover:text-red-800 transition duration-300">Delete</button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </section>
+  
+  {/* Modal for adding a coupon */}
+  <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle">
+    <div className="modal-box bg-[#f7f7f7] rounded-lg shadow-lg">
+      <h3 className="font-bold text-xl text-center text-[#94f08c] mb-6">Add Coupon</h3>
+      <form onSubmit={handlecoupon}>
+        <div className="form-control mb-4">
+          <label className="label">
+            <span className="label-text">Coupon Code</span>
+          </label>
+          <input
+            name="coupon_code"
+            type="text"
+            placeholder="Type here"
+            className="input input-bordered w-full"
+          />
+        </div>
+        <div className="form-control mb-4">
+          <label className="label">
+            <span className="label-text">Discount (%)</span>
+          </label>
+          <input
+            name="discount"
+            type="number"
+            placeholder="Discount percentage"
+            className="input input-bordered w-full"
+          />
+        </div>
+        <div className="form-control mb-4">
+          <label className="label">
+            <span className="label-text">Description</span>
+          </label>
+          <textarea
+            name="description"
+            className="textarea textarea-bordered"
+            rows={2}
+            placeholder="Type description here..."
+          ></textarea>
+        </div>
+        <div className="form-control mt-4">
+          <input type="submit" className="btn bg-[#94f08c] text-white hover:bg-green-600 transition duration-300" value="Submit" />
+        </div>
+      </form>
+
+      <div className="modal-action flex justify-center mt-6">
+        <form method="dialog">
+          <button className="btn btn-wide text-white bg-gray-500 hover:bg-gray-400">Close</button>
         </form>
       </div>
-   
-  </div>
-</dialog>
+    </div>
+  </dialog>
+</div>
 
-
-            </section>
-        </div>
     );
 };
 

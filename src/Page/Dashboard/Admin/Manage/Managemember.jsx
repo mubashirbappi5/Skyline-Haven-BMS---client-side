@@ -14,6 +14,15 @@ const Managemember = () => {
       return members;
     },
   });
+
+ const handlemembers = (user)=>{
+  console.log(user._id)
+   
+
+
+
+ }
+
   return (
     <div>
       <div className="overflow-x-auto bg-gray-50 rounded-lg  p-6">
@@ -53,7 +62,7 @@ const Managemember = () => {
                   {user.userEmail}
                 </td>
                 <td className=" py-4 text-center">
-                  <button className="btn btn-sm bg-red-500 text-white font-bold py-2 px-2 rounded-full hover:bg-red-600 transition-all">
+                  <button onClick={()=>handlemembers(user)} className="btn btn-sm bg-red-500 text-white font-bold py-2 px-2 rounded-full hover:bg-red-600 transition-all">
                     <MdDeleteForever />
                   </button>
                 </td>
