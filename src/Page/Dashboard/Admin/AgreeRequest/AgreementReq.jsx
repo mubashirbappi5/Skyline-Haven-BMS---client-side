@@ -74,7 +74,7 @@ axiosSecure.post('/accept',rejectedagreement)
 
   return (
     
-    <div className="w-full px-6 py-8 bg-gray-50 rounded-lg shadow-xl">
+    <div className="w-full px-6 py-8 bg-gray-50 rounded-lg ">
   <section className="flex justify-center items-center">
     <h1 className="text-3xl font-semibold text-[#94f08c]">Agreement Requests</h1>
   </section>
