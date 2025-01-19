@@ -39,7 +39,9 @@ const PayForm = () => {
    
    }
    else{
+
     setdiscount(coupon.discountPercentage)
+    
    }
   
    }
@@ -78,8 +80,8 @@ const PayForm = () => {
     return (
         <div>
 
-<section className="max-w-4xl p-6 mx-auto bg-white rounded-md shadow-md dark:bg-gray-800">
-          <h2 className="text-lg font-semibold text-gray-700 capitalize dark:text-white">
+<section className="max-w-4xl my-5 p-6 mx-auto border border-secondary bg-white rounded-md shadow-md dark:bg-gray-800">
+          <h2 className="text-xl text-accent font-semibold  capitalize text-center mb-10 dark:text-white">
             Make Payment
           </h2>
 
@@ -96,7 +98,7 @@ const PayForm = () => {
                   name="name"
                   type="text"
                  value={agreement?.userName}
-                  className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
+                  className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-secondary focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
                 />
               </div>
 
@@ -111,7 +113,7 @@ const PayForm = () => {
                   name="email"
                   type="email"
                   value={agreement?.userEmail}
-                  className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
+                  className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-secondary focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
                 />
               </div>
 
@@ -126,7 +128,7 @@ const PayForm = () => {
                   name="floorNo"
                   type="number"
                   value={agreement?.floorNo}
-                  className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
+                  className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-secondary focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
                 />
               </div>
 
@@ -141,7 +143,7 @@ const PayForm = () => {
                   name="block"
                   type="text"
                   value={agreement?.blockName}
-                  className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
+                  className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-secondary focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
                 />
               </div>
               <div>
@@ -155,7 +157,7 @@ const PayForm = () => {
                   name="apartmentNo"
                   type="number"
                   value={agreement?.apartmentNo}
-                  className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
+                  className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-secondary focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
                 />
               </div>
               <div>
@@ -170,7 +172,7 @@ const PayForm = () => {
                   name="rent"
                   type="number"
                   value={agreement?.rent }
-                  className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
+                  className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-secondary focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
                 />
               </div>
               <div>
@@ -178,7 +180,7 @@ const PayForm = () => {
                 <select
            name='month'
          
-          className="border border-gray-300 rounded-md p-2 w-40 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="border border-gray-300 rounded-md p-2 w-96 focus:outline-none focus:ring-2 focus:border-secondary"
         >
           <option value="" disabled>
            Month
@@ -211,16 +213,16 @@ const PayForm = () => {
                 onChange=  {(e) => setapplycoupons(e.target.value)}
                   onBlur={handleapplycoupon}
                  placeholder='Apply coupon'
-                  className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
+                  className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-secondary focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
                 />
               </div>
             </div>
 
-            <div className="flex justify-end mt-6">
+            <div className="flex justify-center mt-6">
               <input
                 type="submit"
                 value={"Pay"}
-                className="px-8 py-2.5 leading-5 text-white transition-colors duration-300 transform bg-gray-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600"
+                className="px-8 py-2.5 leading-5 text-white transition-colors duration-300 transform bg-secondary rounded-md hover:bg-gray-600 focus:outline-none focus:border-secondary"
               />
             </div>
           </form>

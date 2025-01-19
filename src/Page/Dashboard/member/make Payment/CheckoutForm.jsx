@@ -3,6 +3,8 @@ import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import React, { useEffect, useState } from 'react';
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 import useAuth from "../../../../Hooks/useAuth";
+import { CiClock1, CiLock } from "react-icons/ci";
+import { FaUserLock } from "react-icons/fa";
 
 const CheckoutForm = ({paydata}) => {
     const stripe = useStripe();
@@ -96,31 +98,75 @@ const CheckoutForm = ({paydata}) => {
 }
 
     return (
-        <div>
-             <form onSubmit={handleSubmit}>
-            <CardElement
-                options={{
-                    style: {
-                        base: {
-                            fontSize: '16px',
-                            color: '#424770',
-                            '::placeholder': {
-                                color: '#aab7c4',
-                            },
-                        },
-                        invalid: {
-                            color: '#9e2146',
-                        },
-                    },
-                }}
-            />
-            <button className="btn btn-sm btn-primary my-4" type="submit" disabled={!stripe || !clientSecret}>
-                Pay
-            </button>
+        // <div>
+        //      <form onSubmit={handleSubmit}>
+        //     <CardElement
+        //         options={{
+        //             style: {
+        //                 base: {
+        //                     fontSize: '16px',
+        //                     color: '#424770',
+        //                     '::placeholder': {
+        //                         color: '#aab7c4',
+        //                     },
+        //                 },
+        //                 invalid: {
+        //                     color: '#9e2146',
+        //                 },
+        //             },
+        //         }}
+        //     />
+        //     <button className="btn btn-sm btn-primary my-4" type="submit" disabled={!stripe || !clientSecret}>
+        //         Pay
+        //     </button>
            
         
-        </form>
-        </div>
+        // </form>
+        // </div>
+        <div className="bg-white p-6 rounded-lg shadow-lg max-w-lg mx-auto">
+  <h1 className="text-2xl font-extrabold text-gray-800 text-center mb-6">Make Your Payment</h1>
+  <p className="text-gray-600 text-center mb-8">
+    Enter your payment details below to complete your transaction securely.
+  </p>
+  
+  <form onSubmit={handleSubmit} className="space-y-6">
+    {/* Card Input */}
+    <div className="border border-secondary rounded-md p-4 hover:shadow-lg transition-shadow duration-300">
+      <CardElement
+        options={{
+          style: {
+            base: {
+              fontSize: "16px",
+              color: "#424770",
+              "::placeholder": {
+                color: "#aab7c4",
+              },
+            },
+            invalid: {
+              color: "#9e2146",
+            },
+          },
+        }}
+      />
+    </div>
+
+    {/* Pay Button */}
+    <button
+      className="w-full py-3 text-white bg-[#94f08c] rounded-full font-semibold hover:bg-green-500 transition-all duration-300 disabled:opacity-50"
+      type="submit"
+      disabled={!stripe || !clientSecret}
+    >
+      Pay Now
+    </button>
+  </form>
+
+  {/* Security Note */}
+  <p className="text-center text-sm text-gray-500 mt-6 flex items-center justify-center gap-2">
+  <FaUserLock/>
+     secure and encrypted.
+  </p>
+</div>
+
     );
 };
 
