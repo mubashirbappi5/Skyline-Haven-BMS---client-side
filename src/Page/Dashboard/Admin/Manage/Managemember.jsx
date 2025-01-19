@@ -2,6 +2,7 @@ import React from "react";
 import useAxiosSecure from "./../../../../Hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import { MdDeleteForever } from "react-icons/md";
+import Swal from "sweetalert2";
 
 const Managemember = () => {
   const axiosSecure = useAxiosSecure();
@@ -16,12 +17,27 @@ const Managemember = () => {
   });
 
  const handlemembers = (user)=>{
-  console.log(user._id)
+  Swal.fire({
+    title: "Are you sure?",
+    text: "You Want Remove This Member!",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Yes, Remove it!"
+  }).then((result) => {
+    if (result.isConfirmed) {
    axiosSecure.patch(`/users/${user.userEmail}`,{ role: 'user' })
    .then(res=>{
-    console.log(res.data)
+    Swal.fire({
+      title: "Remove!",
+      text: "This member is romove successfully!.",
+      icon: "success"
+    });
     refetch()
 })
+}
+});
 
 
 

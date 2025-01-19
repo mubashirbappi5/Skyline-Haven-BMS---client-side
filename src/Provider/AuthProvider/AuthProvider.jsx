@@ -11,6 +11,7 @@ const AuthProvider = ({children}) => {
   const  axiosPublic = useAxiosPublic()
     const provider = new GoogleAuthProvider();
     const googlelogin = ()=>{
+      setloading(true)
         return signInWithPopup(auth,provider)
       }
       const signupUser = ( email, password)=>{
@@ -58,11 +59,8 @@ const AuthProvider = ({children}) => {
       
       const signoutUser = ()=>{
     
-        signOut(auth)
-        .then(()=>{
-           
-        })
-        .catch(error=> console.log(error))
+      return  signOut(auth)
+        
     }
 
     const authinfo = {

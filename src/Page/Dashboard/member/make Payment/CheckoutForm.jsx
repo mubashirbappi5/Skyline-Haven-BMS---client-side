@@ -5,6 +5,8 @@ import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 import useAuth from "../../../../Hooks/useAuth";
 
 import { FaUserLock } from "react-icons/fa";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 const CheckoutForm = ({paydata}) => {
     const stripe = useStripe();
@@ -13,7 +15,7 @@ const CheckoutForm = ({paydata}) => {
   const{user}=useAuth()
   const [clientSecret,setclientSecret]=useState('')
   const [error,seterror] = useState('')
-
+ const navigate = useNavigate()
 
   useEffect(()=>{
     if (paydata?.totalPay) {
@@ -87,7 +89,13 @@ const CheckoutForm = ({paydata}) => {
             const res = await axiosscure.post('/payments', payment)
          
             if (res.data?.paymentResult?.insertedId) {
-              alert('payment succesful!')
+              Swal.fire({
+                title: "Payment!",
+                text: "Your  payment succesful.",
+                icon: "success"
+              });
+              navigate('dashboard/memberprofile')
+
             }
         }
     

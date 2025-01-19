@@ -2,6 +2,7 @@ import React from 'react';
 import useAxiosPublic from './../../../../Hooks/useAxiosPublic';
 import useAxiosSecure from '../../../../Hooks/useAxiosSecure';
 import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 const MakeAnnouncement = () => {
       const axiosSecure = useAxiosSecure()
@@ -20,7 +21,11 @@ const MakeAnnouncement = () => {
         .then(res=>{
             console.log(res.data)
             if(res.data.insertedId){
-                alert('notice sent')
+              Swal.fire({
+                title: "Announcement!",
+                text: "Your New Announcement Sent!.",
+                icon: "success"
+              });
                 form.reset()
                 Navigate('/')
             }

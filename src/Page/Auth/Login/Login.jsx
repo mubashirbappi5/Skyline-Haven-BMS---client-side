@@ -7,6 +7,7 @@ import bg2 from "../../../assets/image/bg2.png";
 import { Authcontext } from "../../../Provider/AuthProvider/AuthProvider";
 import Swal from "sweetalert2";
 import { useLocation, useNavigate } from "react-router-dom";
+import Loading from "../../../Shared/Loading";
 
 const Login = () => {
   const [isSignUp, setIsSignUp] = useState(false);
@@ -39,7 +40,7 @@ const froms = location.state?.from?.pathname || '/';
   return (
     <div>
       {
-        loading ? <h1>loading...</h1>:<section className="bg-white min-h-screen dark:bg-gray-900">
+        loading ? <Loading/>:<section className="bg-white min-h-screen dark:bg-gray-900">
         <div className="container  flex  justify-center  px-6  mx-auto">
           <div className="w-full my-4 lg:my-0 max-w-md">
             <div className="flex justify-center mx-auto">

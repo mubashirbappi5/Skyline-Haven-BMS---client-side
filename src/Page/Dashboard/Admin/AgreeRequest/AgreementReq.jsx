@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import useAxiosSecure from "./../../../../Hooks/useAxiosSecure";
 import moment from "moment";
+import Swal from "sweetalert2";
 
 const AgreementReq = () => {
   const axiosSecure = useAxiosSecure();
@@ -34,7 +35,11 @@ const AgreementReq = () => {
        if(res.data.insertedId){
         axiosSecure.delete(`/request/${request._id}`)
         .then(res=>{
-            console.log('done')
+          Swal.fire({
+            title: "Accept!",
+            text: "User Agreement Was Accepted.",
+            icon: "success"
+          });
         
             axiosSecure.patch(`/users/${request.userEmail}`,{ role: 'member' })
             .then(res=>{
@@ -65,6 +70,12 @@ axiosSecure.post('/accept',rejectedagreement)
   if(res.data.insertedId){
    axiosSecure.delete(`/request/${request._id}`)
    .then(res=>{
+    Swal.fire({
+      title: "Reject!",
+      text: "Agreement Reject Successful!.",
+      icon: "success"
+    });
+  
     refetch()
    })
  }
@@ -104,7 +115,8 @@ axiosSecure.post('/accept',rejectedagreement)
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-gray-200 dark:bg-gray-900">
-              {agreementreq.map((request) => (
+             {
+              agreementreq.length > 0 ? (agreementreq.map((request) => (
                 <tr key={request.id}>
                   <td className="px-6 py-4 text-sm text-gray-700 dark:text-gray-300">
                     <div>
@@ -142,7 +154,8 @@ axiosSecure.post('/accept',rejectedagreement)
                     </div>
                   </td>
                 </tr>
-              ))}
+              ))): (<td colSpan={'7'}><h1 className="text-lg font-semibold text-center p-8">No Data</h1></td>)
+             }
             </tbody>
           </table>
         </div>

@@ -5,6 +5,7 @@ import { RiCommunityFill } from 'react-icons/ri';
 import useAuth from './../Hooks/useAuth';
 import { useNavigate } from 'react-router-dom';
 import useAxiosSecure from '../Hooks/useAxiosSecure';
+import Swal from 'sweetalert2';
 const Card = ({apart}) => {
     const {apartmentNo,blockName,floorNo,rent,imageUrl,_id} = apart
     const {user}=useAuth()
@@ -31,7 +32,12 @@ const Card = ({apart}) => {
           .then(res=>{
             console.log(res.data)
             if(res.data.insertedId){
-              alert('your request sent')
+             
+              Swal.fire({
+                title: "Agreement!",
+                text: "Your Agreement request sent.",
+                icon: "success"
+              });
             }
             
           })

@@ -2,6 +2,7 @@ import React from 'react';
 import useAxiosPublic from '../../../../Hooks/useAxiosPublic';
 import useCoupon from '../../../../Hooks/useCoupon';
 import useAxiosSecure from '../../../../Hooks/useAxiosSecure';
+import Swal from 'sweetalert2';
 
 const Managecoupon = () => {
   const axioSecure =useAxiosSecure()
@@ -25,6 +26,11 @@ const Managecoupon = () => {
             console.log(res.data)
             const modal = document.getElementById('my_modal_5')
             modal.close()
+            Swal.fire({
+              title: "Coupon!",
+              text: "Your coupon created successfully!.",
+              icon: "success"
+            });
             refetch()
            
         })
@@ -36,10 +42,14 @@ const Managecoupon = () => {
 
     const handlestatus = (id,isActive)=>{
       const status = isActive ? 'active' : 'Inactive';
-      console.log('hi',id)
+    
       axioSecure.patch(`/coupons/${id}`,{status})
       .then(res=>{
-        alert('update coupon')
+        Swal.fire({
+          title: "Update Coupon!",
+          text: "Your coupon update Successful!.",
+          icon: "success"
+        });
         refetch()
       })
       

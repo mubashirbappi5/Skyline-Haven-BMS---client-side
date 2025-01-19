@@ -7,6 +7,7 @@ import { useContext } from "react";
 import { Authcontext } from "../Provider/AuthProvider/AuthProvider";
 import useAdmin from "../Hooks/useAdmin";
 import useMember from "../Hooks/useMember";
+import Swal from "sweetalert2";
 const Navber = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { user, signoutUser } = useContext(Authcontext);
@@ -18,7 +19,33 @@ const Navber = () => {
   const closeDropdown = () => setIsOpenpro(false);
 
   const handlelogout = () => {
-    signoutUser();
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You want to log out!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!"
+    })
+    .then((result) => {
+      if (result.isConfirmed) {
+        signoutUser()
+    .then(()=>{
+      Swal.fire({
+        title: "Logout!",
+        text: "You are successfully logout.",
+        icon: "success"
+      });
+           
+    })
+    .catch(error=> console.log(error))
+  };
+       
+      
+    });
+   
+   
   };
 const [isAdmin] = useAdmin()
 const [isMember] = useMember()
