@@ -23,29 +23,8 @@ const MakeAnnouncement = () => {
      }
     return (
         <div>
-          {/* <div className='w-7/12 mx-auto'>
-            <form onSubmit={handleannounce}>
-            <div className="form-control">
-            <label className="label">
-            <span className="label-text">Title</span>
-          </label>
-            <input name='title' type="text" placeholder="Type here" className="input input-bordered w-full " />
-            </div>
-            <div className="form-control">
-            <label className="label">
-            <span className="label-text">Description</span>
-          </label>
-          <textarea name='announcement' className="textarea textarea-bordered" rows={5} placeholder="Type announcement.."></textarea>
-            </div>
-           <div className='form-control mt-4'>
-            <input type="submit" className='btn' value="Submit" />
-
-           </div>
-
-            </form>
-        
-          </div> */}
-<header className=" w-10/12 mx-auto my-7 bg-gradient-to-r from-[#94f08c] to-green-500 text-white py-8 px-10 rounded-lg shadow-lg text-center">
+         
+<div className=" w-10/12 mx-auto my-7 bg-gradient-to-r from-[#94f08c] to-green-500 text-white py-8 px-10 rounded-lg shadow-lg text-center">
   <h1 className="text-3xl font-bold leading-tight">
     Make a New Announcement
   </h1>
@@ -53,9 +32,9 @@ const MakeAnnouncement = () => {
     Share important updates with your Apartment community in just a few steps!
   </p>
   <div className="mt-6 w-32 h-1 bg-white mx-auto rounded-full"></div>
-</header>
+</div>
       
-<div className='w-7/12 mx-auto bg-gray-50 p-6 rounded-lg shadow-xl'>
+<div className='w-10/12  md:w-7/12 mx-auto bg-gray-50 p-6 rounded-lg shadow-xl'>
   <form onSubmit={handleannounce} className="space-y-6">
     {/* Title Field */}
     <div className="form-control">

@@ -4,14 +4,14 @@ import { useQuery } from '@tanstack/react-query';
 
 const useCoupon = () => {
     const axiosPublic = useAxiosPublic()
-  const {data:coupons=[]}=useQuery({
+  const {data:coupons=[], refetch}=useQuery({
     queryKey:'coupons',
     queryFn:async()=>{
         const res = await axiosPublic.get('/coupons')
         return res.data
     }
   })
-  return[coupons]
+  return[coupons, refetch]
 };
 
 export default useCoupon;

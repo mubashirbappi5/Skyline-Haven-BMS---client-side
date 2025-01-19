@@ -26,12 +26,10 @@ const Managemember = () => {
   return (
     <div>
       <div className="overflow-x-auto bg-gray-50 rounded-lg  p-6">
-        <div className="mb-4 text-center">
-          <h1 className="text-2xl font-bold text-gray-800">Manage Members</h1>
-          <p className="text-gray-600">
-            Easily manage and organize your apartment members.
-          </p>
-        </div>
+      <section className="flex justify-center items-center">
+    <h1 className="text-3xl font-semibold text-[#94f08c]">Manage Members</h1>
+  </section>
+  <div className="divider mt-4 mb-6"></div>
         <table className="table-auto w-full bg-white rounded-lg ">
           <thead className="bg-gradient-to-r from-[#94f08c] to-green-400 text-white">
             <tr>
