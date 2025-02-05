@@ -25,3 +25,20 @@ Welcome to **Skyline Haven**, a platform designed to provide users with a seamle
 10. **Secure Authentication**: Utilizes strong password validation for user and admin authentication.
 
 
+## **Technologies Used**
+
+### **Frontend:**
+- **React.js**: JavaScript library for building user interfaces.
+- **Tailwind CSS**: Utility-first CSS framework for responsive design.
+- **React Router**: For handling navigation between pages.
+- **Axios**: For making HTTP requests to the back-end.
+- **React Hook Form**: For managing form states and validation.
+- **Firebase**: For user authentication and database management.
+- **Moment.js**: For date manipulation and formatting.
+- **Stripe**: For payment processing.
+
+### **Backend (using Node.js and Express.js):**
+- **MongoDB**: NoSQL database for storing user data, apartment listings, and requests.
+- **Stripe**: For handling payments in the back-end.
+
+
