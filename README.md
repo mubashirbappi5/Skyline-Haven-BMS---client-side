@@ -3,7 +3,7 @@
 Welcome to **Skyline Haven**, a platform designed to provide users with a seamless experience for apartment and rental management. This website allows users to view, request, and manage apartments, and also enables admins to approve or reject rental requests.
 
 
-![Skyline Haven](https://i.ibb.co/HfsvTwc/Fire-Shot-Capture-016-Skyline-Haven-skyline-haven-bms-web-app.png)
+
 
 ## Admin Credentials
 
@@ -49,24 +49,44 @@ Welcome to **Skyline Haven**, a platform designed to provide users with a seamle
 
 
 "@stripe/react-stripe-js": "^3.1.1",
+
+
     "@tanstack/react-query": "^5.64.1",
+
     "axios": "^1.7.9",
+
     "firebase": "^11.1.0",
+
     "localforage": "^1.10.0",
+
     "maplibre-gl": "^5.0.1",
+
     "match-sorter": "^8.0.0",
+
     "moment": "^2.30.1",
+
     "pigeon-maps": "^0.22.1",
+
     "react": "^18.3.1",
+
     "react-dom": "^18.3.1",
+
     "react-hook-form": "^7.54.2",
+
     "react-hot-toast": "^2.5.1",
+
     "react-icons": "^5.4.0",
+
     "react-map-gl": "^7.1.8",
+
     "react-paginate": "^8.2.0",
+
     "react-router-dom": "^7.1.1",
+
     "sort-by": "^1.2.0",
+
     "sweetalert2": "^11.15.10",
+    
     "swiper": "^11.2.1"
 
 
