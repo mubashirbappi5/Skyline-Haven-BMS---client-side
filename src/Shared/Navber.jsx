@@ -8,6 +8,7 @@ import { Authcontext } from "../Provider/AuthProvider/AuthProvider";
 import useAdmin from "../Hooks/useAdmin";
 import useMember from "../Hooks/useMember";
 import Swal from "sweetalert2";
+
 const Navber = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { user, signoutUser } = useContext(Authcontext);
@@ -47,15 +48,35 @@ const Navber = () => {
     <>
       <NavLink
         to={"/"}
-        className="md:hover:text-secondary md:focus:bg-green-100 md:focus:btn md:focus:btn-sm hover:text-white"
+        className="md:hover:text-secondary text-lg md:focus:bg-green-100 md:focus:btn md:focus:btn-sm hover:text-white"
       >
         Home
       </NavLink>
       <NavLink
         to={"/apartments"}
-        className="md:hover:text-secondary md:focus:bg-green-100 md:focus:btn md:focus:btn-sm hover:text-white"
+        className="md:hover:text-secondary text-lg md:focus:bg-green-100 md:focus:btn md:focus:btn-sm hover:text-white"
       >
         Apartment
+      </NavLink>
+      {
+        user?<NavLink
+        to={"/apartments"}
+        className="md:hover:text-secondary text-lg md:focus:bg-green-100 md:focus:btn md:focus:btn-sm hover:text-white"
+      >
+      Dashboard
+      </NavLink>:''
+      }
+      <NavLink
+        to={"/apartments"}
+        className="md:hover:text-secondary text-lg md:focus:bg-green-100 md:focus:btn md:focus:btn-sm hover:text-white"
+      >
+       About Us
+      </NavLink>
+      <NavLink
+        to={"/apartments"}
+        className="md:hover:text-secondary text-lg md:focus:bg-green-100 md:focus:btn md:focus:btn-sm hover:text-white"
+      >
+       Contact Us
       </NavLink>
     </>
   );
@@ -69,7 +90,7 @@ const Navber = () => {
               <img className="w-40" src={logo} alt="Skyline Haven" />
             </div>
 
-            <div className="hidden md:flex items-center space-x-6">{links}</div>
+            <div className="hidden md:flex items-center space-x-10">{links}</div>
 
             <div className="flex">
               {user ? (
