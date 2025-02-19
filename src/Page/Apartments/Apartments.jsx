@@ -93,7 +93,7 @@ const Apartments = () => {
           />
           <button
             onClick={applyFilters}
-            className="bg-blue-500 text-white px-6 py-2 rounded-md hover:bg-blue-600"
+            className="bg-primary text-white px-6 py-2 rounded-md "
           >
             Search
           </button>

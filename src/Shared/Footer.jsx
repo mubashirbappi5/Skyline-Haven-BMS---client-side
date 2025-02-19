@@ -1,28 +1,24 @@
 import React from 'react';
 import logo from '../assets/image/logo.png'
+import { Link } from 'react-router-dom';
 const Footer = () => {
     return (
         <div>
             <div className="footer bg-green-100 text-text p-10">
   <nav>
     <h6 className="footer-title">Services</h6>
-    <a className="link link-hover">Rent</a>
-    <a className="link link-hover">Buy</a>
-    <a className="link link-hover">Visit</a>
+    <Link to={'/apartments'} className="link link-hover">Rent</Link>
+    <Link to={'/dashboard/makeannounce'} className="link link-hover">Announcement</Link>
+    
     
   </nav>
   <nav>
     <h6 className="footer-title">Company</h6>
-    <a className="link link-hover">About us</a>
-    <a className="link link-hover">Contact</a>
-    <a className="link link-hover">Faq</a>
+    <Link to={'/about'} className="link link-hover">About us</Link>
+    <Link to={'/contact'} className="link link-hover">Contact</Link>
+    
   </nav>
-  <nav>
-    <h6 className="footer-title">Legal</h6>
-    <a className="link link-hover">Terms of use</a>
-    <a className="link link-hover">Privacy policy</a>
-    <a className="link link-hover">Cookie policy</a>
-  </nav>
+  
 </div>
 <div className="footer bg-green-200 text-black items-center p-4">
   <aside className="grid-flow-col items-center">
