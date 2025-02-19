@@ -25,6 +25,8 @@ import Confimpay from '../Page/Dashboard/member/make Payment/Confimpay';
 import AdminRoute from './AdminRoute';
 import MemberRoute from './MemberRoute';
 import Error from '../Page/Error';
+import ContactPage from '../Page/ContactPage';
+import AboutPage from '../Page/AboutPage';
 const MainRoute =  createBrowserRouter([
     {
       path: "/",
@@ -42,6 +44,16 @@ const MainRoute =  createBrowserRouter([
         {
         path:'/apartments',
         element:<Apartments/>
+      },
+    
+        {
+        path:'/contact',
+        element:<ContactPage/>
+      },
+    
+        {
+        path:'/about',
+        element:<AboutPage/>
       },
     
     

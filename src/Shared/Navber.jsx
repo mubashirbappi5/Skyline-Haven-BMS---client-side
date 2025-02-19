@@ -59,21 +59,27 @@ const Navber = () => {
         Apartment
       </NavLink>
       {
-        user?<NavLink
-        to={"/apartments"}
+        user?<Link
+        to={
+          isAdmin
+            ? "dashboard/adminprofile"
+            : isMember
+            ? "dashboard/memberprofile"
+            : "dashboard/userprofile"
+        }
         className="md:hover:text-secondary text-lg md:focus:bg-green-100 md:focus:btn md:focus:btn-sm hover:text-white"
       >
-      Dashboard
-      </NavLink>:''
+        Dashboard
+      </Link>:''
       }
       <NavLink
-        to={"/apartments"}
+        to={"/about"}
         className="md:hover:text-secondary text-lg md:focus:bg-green-100 md:focus:btn md:focus:btn-sm hover:text-white"
       >
        About Us
       </NavLink>
       <NavLink
-        to={"/apartments"}
+        to={"/contact"}
         className="md:hover:text-secondary text-lg md:focus:bg-green-100 md:focus:btn md:focus:btn-sm hover:text-white"
       >
        Contact Us
