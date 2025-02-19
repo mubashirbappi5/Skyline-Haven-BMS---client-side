@@ -13,9 +13,11 @@ const Home = () => {
     const {name}=useContext(Authcontext)
     
     return (
+    <div>
+        <Banner/>
         <div className='md:w-11/12 mx-auto'>
            
-            <Banner/>
+            
             <OurStats/>
             <About/>
             <Coupons/>
@@ -23,6 +25,7 @@ const Home = () => {
             <WeProvide/>
             <Testimonials/>
 
+        </div>
         </div>
     );
 };
