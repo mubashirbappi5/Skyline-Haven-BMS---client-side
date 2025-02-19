@@ -10,6 +10,7 @@ import WeProvide from './Components/WeProvide';
 import Testimonials from './Components/Testimonials';
 import Featured from './Components/Featured';
 import FAQ from './Components/FAQ';
+import ContactSection from './Components/ContactSection';
 
 const Home = () => {
     const {name}=useContext(Authcontext)
@@ -25,6 +26,7 @@ const Home = () => {
             <About/>
             <Coupons/>
             <Location/>
+            <ContactSection/>
             <WeProvide/>
             <FAQ/>
             <Testimonials/>
