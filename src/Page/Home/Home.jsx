@@ -8,6 +8,8 @@ import Location from './Components/Location';
 import { Authcontext } from '../../Provider/AuthProvider/AuthProvider';
 import WeProvide from './Components/WeProvide';
 import Testimonials from './Components/Testimonials';
+import Featured from './Components/Featured';
+import FAQ from './Components/FAQ';
 
 const Home = () => {
     const {name}=useContext(Authcontext)
@@ -19,10 +21,12 @@ const Home = () => {
            
             
             <OurStats/>
+            <Featured/>
             <About/>
             <Coupons/>
             <Location/>
             <WeProvide/>
+            <FAQ/>
             <Testimonials/>
 
         </div>
