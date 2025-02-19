@@ -11,12 +11,12 @@ const Featured = () => {
 console.log(LuxuryApartments)
 
   return (
-    <div>
+    <div className="mx-auto">
       <CommonHeader
         title={"Discover Our Exclusive Luxury Apartments"}
         subtitle={"Apartments"}
       ></CommonHeader>
-    <section className="grid grid-cols-3">
+    <section className="grid   lg:grid-cols-3  gap-4 grid-cols-1 ">
     {LuxuryApartments.map((apartment) => (
               <Card key={apartment.id} apart={apartment} />
             ))}
