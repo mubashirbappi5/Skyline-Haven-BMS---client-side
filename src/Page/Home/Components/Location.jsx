@@ -1,51 +1,56 @@
-import React, { useState } from "react";
-import CommonHeader from "../../../Shared/CommonHeader";
+import React from "react";
 import { Map, Marker } from "pigeon-maps";
 import { FaLandmark, FaLocationDot } from "react-icons/fa6";
+import { FaArrowRight } from "react-icons/fa";
 
 const Location = () => {
-  
   return (
-    <div>
-      <CommonHeader
-        title={"Find Us in the Heart of the City"}
-        subtitle={"location"}
-      />
-      <section className="grid  grid-cols-1 md:grid-cols-2 gap-6">
-        <div className="border rounded-lg p-4">
-          <Map height={300} defaultCenter={[24.8998, 91.8719]} defaultZoom={16} zoomSnap={true} className='rounded-lg'>
-            <Marker
-              width={50}
-              anchor={[24.8998, 91.8719]}
-           
-             
-            />
-          
-                
-                   
-                <div
-                    className="absolute bg-secondary text-white text-sm py-1 px-3 rounded shadow-md"
-                    style={{
-                      top: "35%",
-                      left: "50%",
-                      transform: "translate(-50%, -100%)",
-                    }}
-                  >
-                   Skyline Haven, Sylhet 3320
-                  </div>
-                 
-          </Map>
+    <section className="w-full relative h-[700px] bg-gray-100 overflow-hidden mt-20">
+        {/* Full-width Map */}
+        <div className="absolute inset-0 z-0">
+            <Map height="100%" defaultCenter={[24.8998, 91.8719]} defaultZoom={15} zoomSnap={false} mouseEvents={false}>
+                <Marker width={50} anchor={[24.8998, 91.8719]} color="#39d42c" />
+            </Map>
+            <div className="absolute inset-0 bg-gradient-to-r from-background via-background/80 to-transparent z-10 hidden lg:block"></div>
+            <div className="absolute inset-0 bg-gradient-to-t from-background via-background/80 to-transparent z-10 lg:hidden"></div>
         </div>
-        <div className="space-y-4  md:px-2 px-4">
-           <h1 className="text-xl font-semibold">Location</h1>
-           <p>Skyline Haven is located at a prime address in the Sylhet city, offering seamless access to essential services, public transport, and vibrant lifestyle opportunities. Whether it's work, school, shopping, or leisure, everything is just a step away.</p> 
-           <h2 className="flex  items-center"><FaLocationDot />Address: 123 Skyline Avenue, Mirboxtula, Sylhet city</h2>
-           <h2 className="flex items-center"><FaLandmark /> Landmarks:Nearby SWMC</h2>
-           <a href="https://www.google.com/maps/dir//24.8997746,91.8719169/@24.8995007,91.8719378,19.04z?entry=ttu&g_ep=EgoyMDI1MDEwOC4wIKXMDSoASAFQAw%3D%3D" target="_blank" className="btn bg-[#94f08c] text-white hover:bg-green-600 transition duration-300">See Map</a>
 
+        {/* Floating Glass Card */}
+        <div className="container mx-auto px-4 md:px-8 h-full relative z-20 flex items-end lg:items-center pb-12 lg:pb-0">
+            <div className="w-full lg:w-1/3 bg-white/70 backdrop-blur-2xl p-10 md:p-12 rounded-[2.5rem] shadow-2xl border border-white/50">
+                <span className="text-primary font-bold tracking-widest uppercase mb-4 block">Neighborhood</span>
+                <h1 className="text-4xl font-black text-text mb-6">Prime Location</h1>
+                <p className="text-gray-600 text-lg leading-relaxed mb-8">
+                    Situated in the heart of Sylhet city, Skyline Haven offers seamless access to essential services, fine dining, and vibrant lifestyle opportunities.
+                </p> 
+                
+                <div className="space-y-6 mb-10">
+                    <div className="flex items-start gap-5">
+                        <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary flex-shrink-0">
+                            <FaLocationDot size={20}/>
+                        </div>
+                        <div>
+                            <h4 className="font-bold text-gray-800 text-lg">Address</h4>
+                            <p className="text-gray-600">123 Skyline Avenue, Mirboxtula, Sylhet</p>
+                        </div>
+                    </div>
+                    <div className="flex items-start gap-5">
+                        <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary flex-shrink-0">
+                            <FaLandmark size={20}/>
+                        </div>
+                        <div>
+                            <h4 className="font-bold text-gray-800 text-lg">Landmarks</h4>
+                            <p className="text-gray-600">Adjacent to SWMC</p>
+                        </div>
+                    </div>
+                </div>
+
+                <a href="https://www.google.com/maps/dir//24.8997746,91.8719169" target="_blank" rel="noreferrer" className="w-full flex items-center justify-center gap-3 px-8 py-4 bg-text text-white font-bold rounded-2xl shadow-xl hover:bg-primary transition-all duration-300 transform hover:-translate-y-1">
+                    Get Directions <FaArrowRight />
+                </a>
+            </div>
         </div>
-      </section>
-    </div>
+    </section>
   );
 };
 

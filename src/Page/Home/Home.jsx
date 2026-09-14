@@ -16,23 +16,22 @@ const Home = () => {
     const {name}=useContext(Authcontext)
     
     return (
-    <div>
+    <div className="bg-background min-h-screen overflow-x-hidden font-inter selection:bg-primary selection:text-white">
         <Banner/>
-        <div className='md:w-11/12 mx-auto'>
-           
-            
+        <div className="relative z-20">
             <OurStats/>
-            <Featured/>
+        </div>
+        <div className='flex flex-col space-y-40 mb-40'>
             <About/>
-            <Coupons/>
-            <Location/>
-            <ContactSection/>
+            <Featured/>
             <WeProvide/>
+            <Coupons/>
             <FAQ/>
             <Testimonials/>
-
+            <Location/>
+            <ContactSection/>
         </div>
-        </div>
+    </div>
     );
 };
 

@@ -1,3 +1,29 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  html, body {
+    @apply bg-background text-text font-inter antialiased;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-bold tracking-tight;
+  }
+}
+
+@layer utilities {
+  .glassmorphism {
+    @apply bg-white bg-opacity-70 backdrop-blur-md border border-white/20 shadow-lg;
+  }
+}
+
+/* Custom Swiper Pagination Styles */
+.swiper-pagination-bullet {
+  @apply bg-white opacity-60 w-3 h-3 transition-all duration-300 !important;
+}
+.swiper-pagination-bullet-active {
+  @apply bg-primary opacity-100 w-8 rounded-full !important;
+}

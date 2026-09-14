@@ -12,11 +12,9 @@ import Swal from "sweetalert2";
 const Navber = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { user, signoutUser } = useContext(Authcontext);
-
   const [isOpenpro, setIsOpenpro] = useState(false);
 
   const toggleDropdown = () => setIsOpenpro(!isOpenpro);
-
   const closeDropdown = () => setIsOpenpro(false);
 
   const handlelogout = () => {
@@ -25,16 +23,16 @@ const Navber = () => {
       text: "You want to log out!",
       icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: "#3085d6",
+      confirmButtonColor: "#39d42c",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, Logout it!",
+      confirmButtonText: "Yes, Logout!",
     }).then((result) => {
       if (result.isConfirmed) {
         signoutUser()
           .then(() => {
             Swal.fire({
               title: "Logout!",
-              text: "You are successfully logout.",
+              text: "You are successfully logged out.",
               icon: "success",
             });
           })
@@ -42,141 +40,133 @@ const Navber = () => {
       }
     });
   };
+
   const [isAdmin] = useAdmin();
   const [isMember] = useMember();
+  
+  const linkStyles = "text-text font-bold tracking-wide hover:text-primary transition-colors duration-300 relative group";
+  const getActiveClass = ({isActive}) => isActive ? "text-primary" : linkStyles;
+
   const links = (
     <>
-      <NavLink
-        to={"/"}
-        className="md:hover:text-secondary text-lg md:focus:bg-green-100 md:focus:btn md:focus:btn-sm hover:text-white"
-      >
+      <NavLink to={"/"} className={getActiveClass}>
         Home
+        <span className="absolute -bottom-2 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
       </NavLink>
-      <NavLink
-        to={"/apartments"}
-        className="md:hover:text-secondary text-lg md:focus:bg-green-100 md:focus:btn md:focus:btn-sm hover:text-white"
-      >
-        Apartment
+      <NavLink to={"/apartments"} className={getActiveClass}>
+        Apartments
+        <span className="absolute -bottom-2 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
       </NavLink>
-      {
-        user?<Link
-        to={
-          isAdmin
-            ? "dashboard/adminprofile"
-            : isMember
-            ? "dashboard/memberprofile"
-            : "dashboard/userprofile"
-        }
-        className="md:hover:text-secondary text-lg md:focus:bg-green-100 md:focus:btn md:focus:btn-sm hover:text-white"
-      >
-        Dashboard
-      </Link>:''
-      }
-      <NavLink
-        to={"/about"}
-        className="md:hover:text-secondary text-lg md:focus:bg-green-100 md:focus:btn md:focus:btn-sm hover:text-white"
-      >
-       About Us
+      {user && (
+        <NavLink
+          to={isAdmin ? "dashboard/adminprofile" : isMember ? "dashboard/memberprofile" : "dashboard/userprofile"}
+          className={getActiveClass}
+        >
+          Dashboard
+          <span className="absolute -bottom-2 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
+        </NavLink>
+      )}
+      <NavLink to={"/about"} className={getActiveClass}>
+        About Us
+        <span className="absolute -bottom-2 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
       </NavLink>
-      <NavLink
-        to={"/contact"}
-        className="md:hover:text-secondary text-lg md:focus:bg-green-100 md:focus:btn md:focus:btn-sm hover:text-white"
-      >
-       Contact Us
+      <NavLink to={"/contact"} className={getActiveClass}>
+        Contact Us
+        <span className="absolute -bottom-2 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
       </NavLink>
     </>
   );
 
   return (
-    <div>
-      <nav className="text-black shadow-md fixed w-full z-10 bg-white">
-        <div className="mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
+    <div className="w-full relative z-50">
+      <nav className="fixed w-full z-50 bg-white/80 backdrop-blur-xl border-b border-white/50 shadow-sm transition-all duration-300">
+        <div className="container mx-auto px-4 md:px-8">
+          <div className="flex justify-between items-center h-24">
+            {/* Logo */}
             <div>
-              <img className="w-40" src={logo} alt="Skyline Haven" />
+              <Link to="/">
+                <img className="w-48 transform hover:scale-105 transition-transform duration-300" src={logo} alt="Skyline Haven" />
+              </Link>
             </div>
 
+            {/* Desktop Links */}
             <div className="hidden md:flex items-center space-x-10">{links}</div>
 
-            <div className="flex">
+            {/* Actions */}
+            <div className="flex items-center gap-4">
               {user ? (
-                <>
-                  {" "}
-                  <div className="relative inline-block">
-                    <button
-                      onClick={toggleDropdown}
-                      className="relative  z-10 block p-2 text-gray-700 bg-white border border-transparent rounded-md  "
-                    >
-                      <img
-                        className="object-cover w-12 h-12 rounded-full ring ring-accent dark:ring-gray-600"
-                        src={user?.photoURL}
-                        alt=""
-                      />
-                    </button>
+                <div className="relative inline-block">
+                  <button
+                    onClick={toggleDropdown}
+                    className="relative z-10 block rounded-full focus:outline-none focus:ring-4 focus:ring-primary/20 transition-all shadow-md hover:shadow-lg"
+                  >
+                    <img
+                      className="object-cover w-14 h-14 rounded-full border-2 border-primary"
+                      src={user?.photoURL}
+                      alt={user?.displayName}
+                    />
+                  </button>
 
-                    {isOpenpro && (
-                      <div
-                        onClick={closeDropdown}
-                        className="absolute right-0 z-20 w-48 py-2 mt-2 origin-top-right bg-white rounded-md shadow-xl dark:bg-gray-800"
-                      >
-                        <h1 className="block px-4 py-3 text-sm text-gray-600 bg-secondary capitalize  dark:text-gray-300  dark:hover:bg-gray-700 ">
+                  {isOpenpro && (
+                    <div className="absolute right-0 z-20 w-56 py-2 mt-4 origin-top-right bg-white rounded-2xl shadow-2xl border border-gray-100">
+                      <div className="px-6 py-4 bg-gray-50/50 rounded-t-2xl border-b border-gray-100">
+                        <h1 className="text-sm font-bold text-text capitalize truncate">
                           {user.displayName}
                         </h1>
-                        <Link
-                          to={
-                            isAdmin
-                              ? "dashboard/adminprofile"
-                              : isMember
-                              ? "dashboard/memberprofile"
-                              : "dashboard/userprofile"
-                          }
-                          className="block px-4 py-3 text-sm text-gray-600 capitalize transition-colors duration-300 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white"
-                        >
-                          Dashboard
-                        </Link>
-
-                        <hr className="border-gray-200 dark:border-gray-700" />
-
-                        <button
-                          onClick={handlelogout}
-                          className="block w-full text-left px-4 py-3 text-sm text-gray-600 capitalize transition-colors duration-300 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white"
-                        >
-                          Sign Out
-                        </button>
+                        <p className="text-xs text-gray-500 truncate">{user.email}</p>
                       </div>
-                    )}
-                  </div>
-                </>
-              ) : (
-                <>
-                  {" "}
-                  <div className="flex items-center gap-4">
-                    <Link to={"/login"}>
-                      <button className="btn bg-primary text-white px-4 py-2 rounded hover:bg-green-600">
-                        Login
+                      
+                      <Link
+                        to={isAdmin ? "dashboard/adminprofile" : isMember ? "dashboard/memberprofile" : "dashboard/userprofile"}
+                        onClick={closeDropdown}
+                        className="block px-6 py-3 text-sm font-semibold text-gray-700 hover:bg-primary/5 hover:text-primary transition-colors"
+                      >
+                        Dashboard
+                      </Link>
+
+                      <button
+                        onClick={() => { closeDropdown(); handlelogout(); }}
+                        className="block w-full text-left px-6 py-3 text-sm font-bold text-red-600 hover:bg-red-50 transition-colors rounded-b-2xl"
+                      >
+                        Sign Out
                       </button>
-                    </Link>
-                  </div>
-                </>
+                    </div>
+                  )}
+                </div>
+              ) : (
+                <div className="hidden md:flex items-center gap-4">
+                  <Link to={"/login"}>
+                    <button className="px-8 py-3 bg-text text-white font-bold rounded-full hover:bg-primary hover:shadow-xl hover:shadow-primary/30 transition-all duration-300 transform hover:-translate-y-1">
+                      Login
+                    </button>
+                  </Link>
+                </div>
               )}
 
+              {/* Mobile Toggle */}
               <button
-                className="md:hidden flex items-center focus:outline-none"
+                className="md:hidden flex items-center justify-center p-2 rounded-xl bg-gray-50 text-text hover:bg-primary/10 hover:text-primary transition-colors"
                 onClick={() => setIsOpen(!isOpen)}
               >
-                {isOpen ? (
-                  <ImCancelCircle className="font-bold text-2xl" />
-                ) : (
-                  <HiBars3CenterLeft className="font-bold text-2xl" />
-                )}
+                {isOpen ? <ImCancelCircle className="text-2xl" /> : <HiBars3CenterLeft className="text-2xl" />}
               </button>
             </div>
           </div>
         </div>
 
+        {/* Mobile Menu */}
         {isOpen && (
-          <div className="md:hidden bg-secondary">
-            <div className="flex flex-col space-y-4 px-4 py-6">{links}</div>
+          <div className="md:hidden bg-white/95 backdrop-blur-3xl border-t border-gray-100 absolute w-full shadow-2xl">
+            <div className="flex flex-col space-y-6 px-6 py-8">
+              {links}
+              {!user && (
+                  <Link to={"/login"} className="pt-4 border-t border-gray-100">
+                      <button className="w-full px-8 py-4 bg-primary text-white font-bold rounded-xl shadow-lg">
+                          Login
+                      </button>
+                  </Link>
+              )}
+            </div>
           </div>
         )}
       </nav>

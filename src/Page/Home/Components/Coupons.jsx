@@ -1,56 +1,51 @@
-import React from "react";
-import CommonHeader from "../../../Shared/CommonHeader";
-import useCoupon from "./../../../Hooks/useCoupon";
-import { Link } from "react-router-dom";
+import React from 'react';
+import useAxiosPublic from '../../../Hooks/useAxiosPublic';
+import { useQuery } from '@tanstack/react-query';
+import { Link } from 'react-router-dom';
 
 const Coupons = () => {
-  const [coupons] = useCoupon();
- 
-const activeCoupon = coupons.filter(coupon=> coupon.status==='active')
-  return (
-    <div>
-      <CommonHeader
-        title={"Exclusive Offers Just for You!"}
-        subtitle={"coupons"}
-      ></CommonHeader>
-      <section>
-        <div className="grid grid-cols-1  md:grid-cols-2 lg:grid-cols-3 gap-6 p-5 bg-gradient-to-br from-green-100 via-gray-50 to-green-50">
-          {
-            activeCoupon.map(coupon=>
-               
-          <div className="relative bg-white shadow-2xl rounded-lg mx-auto   w-80  overflow-hidden border border-gray-200 hover:scale-105 transition-transform duration-300 ease-in-out">
-          <div className="absolute top-10 -left-4 bg-gradient-to-r from-primary to-green-500 text-white px-6 py-1 text-sm font-bold rotate-[-45deg] -translate-y-6 translate-x-6 shadow-md">
-           {coupon.discountPercentage}% OFF
-          </div>
-          <div className="p-8 text-center">
-            <h2 className="text-2xl font-extrabold text-gray-800 mb-4">
-              Exclusive Coupon!
-            </h2>
-            <p className="text-gray-500 text-base mb-6">
-             {coupon.Description}
-            </p>
-            <div className="bg-gradient-to-r from-green-50 to-green-100 border border-dashed border-green-300 text-primary font-bold py-3 px-6 rounded-lg text-xl tracking-wider mb-8 shadow-inner">
-             {coupon.coupon_code}
+    const axiosPublic = useAxiosPublic();
+    const { data: coupons = [], isLoading } = useQuery({
+        queryKey: ['coupons'],
+        queryFn: async () => {
+            const res = await axiosPublic.get('/coupons');
+            return res.data;
+        }
+    });
+
+    if (isLoading) return null; // Don't show loading on this sleek layout
+
+    return (
+        <section className="w-full bg-white relative">
+            <div className="container mx-auto px-4 md:px-8">
+                <div className="bg-gradient-to-r from-text to-gray-800 rounded-[3rem] p-10 md:p-16 shadow-2xl relative overflow-hidden flex flex-col lg:flex-row items-center justify-between gap-12">
+                    {/* Decorative Elements */}
+                    <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/20 rounded-full blur-[80px] translate-x-1/3 -translate-y-1/2"></div>
+                    <div className="absolute bottom-0 left-0 w-[300px] h-[300px] bg-accent/20 rounded-full blur-[60px] -translate-x-1/2 translate-y-1/2"></div>
+
+                    <div className="relative z-10 text-center lg:text-left space-y-6 max-w-2xl">
+                        <span className="text-primary font-bold tracking-widest uppercase bg-primary/10 px-4 py-2 rounded-full inline-block">Exclusive Offers</span>
+                        <h2 className="text-4xl md:text-5xl font-black text-white leading-tight">
+                            Unlock Special Discounts on Your Next Lease
+                        </h2>
+                        <p className="text-gray-300 text-lg">
+                            Apply our limited-time promotional codes during checkout to enjoy premium living at an unbeatable value.
+                        </p>
+                    </div>
+
+                    <div className="relative z-10 w-full lg:w-auto flex flex-col sm:flex-row gap-6">
+                        {coupons.slice(0, 2).map((coupon, idx) => (
+                            <div key={coupon._id || idx} className="bg-white/10 backdrop-blur-md border border-white/20 p-6 rounded-3xl flex flex-col items-center justify-center min-w-[200px] hover:bg-white/20 transition-all duration-300 cursor-pointer group">
+                                <span className="text-accent text-3xl font-black mb-2">{coupon.discountPercentage}% OFF</span>
+                                <span className="text-white font-mono text-xl tracking-widest border border-dashed border-gray-400 px-4 py-2 rounded-lg group-hover:border-white transition-colors">{coupon.coupon_code}</span>
+                                <span className="text-gray-400 text-sm mt-3">{coupon.Description}</span>
+                            </div>
+                        ))}
+                    </div>
+                </div>
             </div>
-           <Link to={'/apartments'}>
-           <button className="bg-primary text-white w-full py-3 rounded-lg font-semibold text-lg shadow-md hover:bg-green-600 transition-colors duration-300 ease-in-out">
-              Redeem Now
-            </button>
-           </Link>
-          </div>
-          <div className="bg-gray-100 text-gray-400 text-xs p-4 border-t border-gray-200">
-            * Terms & conditions apply.
-          </div>
-        </div>
-            )
-          }
-          
-         
-          
-        </div>
-      </section>
-    </div>
-  );
+        </section>
+    );
 };
 
 export default Coupons;
