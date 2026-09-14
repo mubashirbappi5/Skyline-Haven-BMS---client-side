@@ -5,8 +5,11 @@ import { Authcontext } from '../../../Provider/AuthProvider/AuthProvider';
 import useAxiosPublic from '../../../Hooks/useAxiosPublic';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import { FaUser, FaEnvelope, FaLock, FaCloudUploadAlt } from 'react-icons/fa';
+
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
 const hosting_api = `https://api.imgbb.com/1/upload?expiration=600&key=${image_hosting_key}`
+
 const Register = () => {
   const axiosPublic = useAxiosPublic()
   const navigate = useNavigate()
@@ -18,187 +21,128 @@ const Register = () => {
     formState: { errors },
   } = useForm();
 
-  const onSubmit =async(data) => {
+  const onSubmit = async(data) => {
     try{
-    const imageFile = { image: data.image[0] }
-    
-  const res = await axiosPublic.post(hosting_api,imageFile,{
+        const imageFile = { image: data.image[0] }
         
-      headers: {
-           'content-type': 'multipart/form-data'
-      }}
-  )
-  if (!res.data.success) {
-    throw new Error('Image upload failed. Please try again.');
-  }
-  const imageUrl = res.data.data.display_url;
+        const res = await axiosPublic.post(hosting_api,imageFile,{
+            headers: {
+                'content-type': 'multipart/form-data'
+            }
+        })
+        if (!res.data.success) {
+            throw new Error('Image upload failed. Please try again.');
+        }
+        const imageUrl = res.data.data.display_url;
 
+        const userReg = await signupUser(data.email, data.password);
+        const user =  userReg.user;
 
-  const userReg = await signupUser(data.email, data.password);
-  const user =  userReg.user;
+        const profile = {
+            displayName: data.name,
+            photoURL: imageUrl,
+        };
 
- 
-  const profile = {
-    displayName: data.name,
-    photoURL: imageUrl,
-  };
+        await updateuser(profile);
 
-  await updateuser(profile);
+        navigate('/')
+        const userinfo = {
+            userName:data.name,
+            userEmail:data.email
+        }
+        reset();
+        const result = await axiosPublic.post('/users',userinfo)
 
-  
-  navigate('/')
-const userinfo = {
-  userName:data.name,
-  userEmail:data.email
-}
-  reset();
-const result = await axiosPublic.post('/users',userinfo)
-
-
-  Swal.fire({
+        Swal.fire({
             title: "Signup",
             text: "Welcome our world!.",
             icon: "success",
-          });
-    
-   
-    
-  }
-  catch (error) {
-    console.error(error.message);
-  }
-}
-  ;
+        });
+    }
+    catch (error) {
+        console.error(error.message);
+    }
+  };
 
   return (
-    <div>
-      <section className="bg-white dark:bg-gray-900">
-        <div className="container flex items-center justify-center min-h-screen px-6 mx-auto">
-          <form onSubmit={handleSubmit(onSubmit)} className="w-full max-w-md">
-         
+    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 relative z-10">
+        
+        <div className="space-y-1">
+            <label className="text-[10px] font-bold text-gray-400 uppercase tracking-widest pl-1">Username</label>
             <div className="relative flex items-center">
-              <span className="absolute">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="w-6 h-6 mx-3 text-gray-300 dark:text-gray-500"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-                  />
-                </svg>
-              </span>
-              <input
-                type="text"
-                {...register("name", { required: "Username is required" })}
-                className="block w-full py-3 text-gray-700 bg-white border rounded-lg px-11 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
-                placeholder="Username"
-              />
-              {errors.name && <p className="text-red-500 text-sm">{errors.name.message}</p>}
-            </div>
-
-          
-            <label
-              htmlFor="dropzone-file"
-              className="flex items-center px-3 py-3 mx-auto mt-6 text-center bg-white border-2 border-dashed rounded-lg cursor-pointer dark:border-gray-600 dark:bg-gray-900"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="w-6 h-6 text-gray-300 dark:text-gray-500"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth="2"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"
+                <span className="absolute left-4 text-gray-400">
+                    <FaUser />
+                </span>
+                <input
+                    type="text"
+                    {...register("name", { required: "Username is required" })}
+                    className="w-full py-3 pl-11 pr-4 bg-gray-50 border border-gray-100 rounded-xl text-text focus:bg-white focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all shadow-sm text-sm"
+                    placeholder="John Doe"
                 />
-              </svg>
-              <h2 className="mx-3 text-gray-400">Profile Photo</h2>
-              <input id="dropzone-file" type="file" {...register("image",{required:true})} className="hidden" />
-            </label>
-
-          
-            <div className="relative flex items-center mt-6">
-              <span className="absolute">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="w-6 h-6 mx-3 text-gray-300 dark:text-gray-500"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-                  />
-                </svg>
-              </span>
-              <input
-                type="email"
-                {...register("email", { required: "Email is required" })}
-                className="block w-full py-3 text-gray-700 bg-white border rounded-lg px-11 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
-                placeholder="Email address"
-              />
-              {errors.email && <p className="text-red-500 text-sm">{errors.email.message}</p>}
             </div>
-
-         
-            <div className="relative flex items-center mt-4">
-              <span className="absolute">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="w-6 h-6 mx-3 text-gray-300 dark:text-gray-500"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
-                  />
-                </svg>
-              </span>
-              <input
-                type="password"
-                {...register("password", {
-                  pattern: {
-                    value: /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/,
-                    message: "Password must be strong (e.g., contain uppercase, lowercase, numbers)",
-                  },
-                })}
-                className="block w-full px-10 py-3 text-gray-700 bg-white border rounded-lg dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
-                placeholder="Password"
-              />
-              {errors.password && <p className="text-red-500 text-sm">{errors.password.message}</p>}
-            </div>
-
-           
-            <div className="mt-6">
-              <input
-                type="submit"
-                value="Sign Up"
-                className="w-full px-6 py-3 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded-lg hover:bg-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50"
-              />
-              <div className="mt-6 text-center">
-                <SocialLogin />
-              </div>
-            </div>
-          </form>
+            {errors.name && <p className="text-red-500 text-xs pl-1 mt-1">{errors.name.message}</p>}
         </div>
-      </section>
-    </div>
+
+        <div className="space-y-1">
+            <label className="text-[10px] font-bold text-gray-400 uppercase tracking-widest pl-1">Email Address</label>
+            <div className="relative flex items-center">
+                <span className="absolute left-4 text-gray-400">
+                    <FaEnvelope />
+                </span>
+                <input
+                    type="email"
+                    {...register("email", { required: "Email is required" })}
+                    className="w-full py-3 pl-11 pr-4 bg-gray-50 border border-gray-100 rounded-xl text-text focus:bg-white focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all shadow-sm text-sm"
+                    placeholder="john@example.com"
+                />
+            </div>
+            {errors.email && <p className="text-red-500 text-xs pl-1 mt-1">{errors.email.message}</p>}
+        </div>
+
+        <div className="space-y-1">
+            <label className="text-[10px] font-bold text-gray-400 uppercase tracking-widest pl-1">Password</label>
+            <div className="relative flex items-center">
+                <span className="absolute left-4 text-gray-400">
+                    <FaLock />
+                </span>
+                <input
+                    type="password"
+                    {...register("password", {
+                        pattern: {
+                            value: /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/,
+                            message: "Password must be strong (e.g., contain uppercase, lowercase, numbers)",
+                        },
+                    })}
+                    className="w-full py-3 pl-11 pr-4 bg-gray-50 border border-gray-100 rounded-xl text-text focus:bg-white focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all shadow-sm text-sm"
+                    placeholder="••••••••"
+                />
+            </div>
+            {errors.password && <p className="text-red-500 text-xs pl-1 mt-1">{errors.password.message}</p>}
+        </div>
+
+        <div className="space-y-1 pt-1">
+            <label className="text-[10px] font-bold text-gray-400 uppercase tracking-widest pl-1 block mb-1">Profile Photo</label>
+            <label
+                htmlFor="dropzone-file"
+                className="flex flex-col items-center justify-center w-full h-24 bg-gray-50 border-2 border-dashed border-gray-200 rounded-xl cursor-pointer hover:bg-white hover:border-primary transition-colors group"
+            >
+                <div className="flex flex-col items-center justify-center pt-5 pb-6">
+                    <FaCloudUploadAlt className="w-6 h-6 text-gray-400 group-hover:text-primary mb-1 transition-colors" />
+                    <p className="text-xs text-gray-500 group-hover:text-primary transition-colors"><span className="font-semibold">Click to upload</span> or drag and drop</p>
+                </div>
+                <input id="dropzone-file" type="file" {...register("image",{required:true})} className="hidden" />
+            </label>
+        </div>
+
+        <button
+            type="submit"
+            className="w-full py-3 mt-4 text-sm font-black tracking-widest uppercase rounded-xl bg-text text-white hover:bg-primary shadow-xl hover:shadow-primary/30 transform hover:-translate-y-1 transition-all duration-300"
+        >
+            Create Account
+        </button>
+        
+        <SocialLogin />
+    </form>
   );
 };
 
