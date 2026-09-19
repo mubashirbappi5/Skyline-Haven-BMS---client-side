@@ -3,10 +3,14 @@ import useAxiosPublic from "../../../../Hooks/useAxiosPublic";
 import useCoupon from "../../../../Hooks/useCoupon";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 import Swal from "sweetalert2";
+import { RiCoupon3Line, RiAddCircleFill } from "react-icons/ri";
+import { MdOutlineDiscount, MdDescription } from "react-icons/md";
+import { BsQrCode } from "react-icons/bs";
 
 const Managecoupon = () => {
   const axioSecure = useAxiosSecure();
   const [coupons, refetch] = useCoupon();
+  
   const handlecoupon = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -22,13 +26,13 @@ const Managecoupon = () => {
       status: status,
     };
     axioSecure.post("/coupons", couponinfo).then((res) => {
-   
       const modal = document.getElementById("my_modal_5");
       modal.close();
       Swal.fire({
-        title: "Coupon!",
-        text: "Your coupon created successfully!.",
+        title: "Coupon Created!",
+        text: "Your new discount coupon was created successfully.",
         icon: "success",
+        confirmButtonColor: "#22c55e",
       });
       refetch();
     });
@@ -40,133 +44,203 @@ const Managecoupon = () => {
 
     axioSecure.patch(`/coupons/${id}`, { status }).then((res) => {
       Swal.fire({
-        title: "Update Coupon!",
-        text: "Your coupon update Successful!.",
+        title: "Status Updated!",
+        text: `Coupon status changed to ${status}.`,
         icon: "success",
+        timer: 1500,
+        showConfirmButton: false
       });
       refetch();
     });
   };
+
   return (
-    <div className="bg-gray-50 p-8 rounded-lg ">
-      <h1 className="text-3xl font-semibold text-center text-[#94f08c] mb-6">
-        Manage Coupons
-      </h1>
-      <div className="divider mt-4 mb-6"></div>
-      <section>
-        <div className="flex justify-between items-center mb-6">
-          <h2 className="text-lg font-medium text-gray-800">
-            Total Coupons:{" "}
-            <span className="text-[#94f08c]">{coupons.length}</span>
-          </h2>
-          <button
-            onClick={() => document.getElementById("my_modal_5").showModal()}
-            className="btn bg-[#94f08c] text-white hover:bg-green-600 transition duration-300"
-          >
-            Add Coupon
-          </button>
-        </div>
-
-        <div className="overflow-x-auto bg-white shadow-md rounded-lg">
-          <table className="min-w-full divide-y divide-gray-200">
-            <thead className="bg-[#94f08c] text-white">
-              <tr>
-                <th className="px-6 py-3 text-sm font-medium text-left">No</th>
-                <th className="px-6 py-3 text-sm font-medium text-left">
-                  Coupon Code
-                </th>
-                <th className="px-6 py-3 text-sm font-medium text-left">
-                  Discount (%)
-                </th>
-                <th className="px-6 py-3 text-sm font-medium text-left">
-                  Status
-                </th>
-              </tr>
-            </thead>
-            <tbody className="bg-white divide-y divide-gray-200">
-              {coupons.map((coupon, idx) => (
-                <tr key={coupon.id}>
-                  <td className="px-6 py-4 text-sm text-gray-700">{idx + 1}</td>
-                  <td className="px-6 py-4 text-sm text-gray-700">
-                    {coupon.coupon_code}
-                  </td>
-                  <td className="px-6 py-4 text-sm text-gray-700">
-                    {coupon.discountPercentage}%
-                  </td>
-                  <td className="px-6 py-4 text-sm text-gray-500">
-                    <input
-                      onChange={(e) =>
-                        handlestatus(coupon._id, e.target.checked)
-                      }
-                      type="checkbox"
-                      className="toggle toggle-success"
-                      defaultChecked={coupon.status === "active"}
-                    />
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </section>
-
-      <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle">
-        <div className="modal-box bg-[#f7f7f7] rounded-lg shadow-lg">
-          <h3 className="font-bold text-xl text-center text-[#94f08c] mb-6">
-            Add Coupon
-          </h3>
-          <form onSubmit={handlecoupon}>
-            <div className="form-control mb-4">
-              <label className="label">
-                <span className="label-text">Coupon Code</span>
-              </label>
-              <input
-                name="coupon_code"
-                type="text"
-                placeholder="Type here"
-                className="input input-bordered w-full"
-              />
+    <div className="min-h-screen bg-gray-50/50 p-4 md:p-8">
+      <div className="max-w-6xl mx-auto space-y-8">
+        
+        {/* Header Section */}
+        <div className="bg-gradient-to-r from-emerald-500 to-teal-600 rounded-3xl p-8 text-white shadow-xl flex flex-col md:flex-row items-center justify-between gap-6 relative overflow-hidden">
+          <div className="absolute top-0 right-0 -mt-10 -mr-10 opacity-20">
+             <RiCoupon3Line className="text-[12rem]" />
+          </div>
+          
+          <div className="relative z-10 flex items-center gap-4">
+             <div className="p-4 bg-white/20 rounded-2xl backdrop-blur-sm border border-white/30 hidden md:block">
+                 <RiCoupon3Line className="text-4xl text-white" />
+             </div>
+             <div>
+               <h1 className="text-3xl font-extrabold tracking-tight">
+                 Manage Coupons
+               </h1>
+               <p className="mt-2 text-emerald-100 text-lg">
+                 Create and manage discount codes for your properties.
+               </p>
+             </div>
+          </div>
+          
+          <div className="relative z-10 flex flex-wrap items-center gap-4 justify-center">
+            <div className="flex flex-col items-center bg-white/20 px-6 py-3 rounded-2xl backdrop-blur-sm border border-white/30">
+              <span className="text-xs font-semibold uppercase tracking-wider text-emerald-100">Total</span>
+              <span className="text-3xl font-bold">{coupons.length}</span>
             </div>
-            <div className="form-control mb-4">
-              <label className="label">
-                <span className="label-text">Discount (%)</span>
-              </label>
-              <input
-                name="discount"
-                type="number"
-                placeholder="Discount percentage"
-                className="input input-bordered w-full"
-              />
-            </div>
-            <div className="form-control mb-4">
-              <label className="label">
-                <span className="label-text">Description</span>
-              </label>
-              <textarea
-                name="description"
-                className="textarea textarea-bordered"
-                rows={2}
-                placeholder="Type description here..."
-              ></textarea>
-            </div>
-            <div className="form-control mt-4">
-              <input
-                type="submit"
-                className="btn bg-[#94f08c] text-white hover:bg-green-600 transition duration-300"
-                value="Submit"
-              />
-            </div>
-          </form>
-
-          <div className="modal-action flex justify-center mt-6">
-            <form method="dialog">
-              <button className="btn btn-wide text-white bg-gray-500 hover:bg-gray-400">
-                Close
-              </button>
-            </form>
+            <button
+              onClick={() => document.getElementById("my_modal_5").showModal()}
+              className="flex items-center gap-2 bg-white text-emerald-600 hover:bg-emerald-50 px-6 py-4 rounded-2xl font-bold transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1 group"
+            >
+              <RiAddCircleFill className="text-2xl group-hover:rotate-90 transition-transform duration-300" />
+              <span>Create Coupon</span>
+            </button>
           </div>
         </div>
-      </dialog>
+
+        {/* Table Section */}
+        <div className="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden">
+          <div className="overflow-x-auto">
+            <table className="w-full text-left border-collapse">
+              <thead>
+                <tr className="bg-gray-50/80 border-b border-gray-100">
+                  <th className="py-5 px-6 text-xs font-bold text-gray-500 uppercase tracking-wider">#</th>
+                  <th className="py-5 px-6 text-xs font-bold text-gray-500 uppercase tracking-wider">Coupon Code</th>
+                  <th className="py-5 px-6 text-xs font-bold text-gray-500 uppercase tracking-wider">Discount</th>
+                  <th className="py-5 px-6 text-xs font-bold text-gray-500 uppercase tracking-wider text-center">Status</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-gray-50">
+                {coupons.map((coupon, idx) => (
+                  <tr key={coupon._id || idx} className="hover:bg-emerald-50/30 transition-colors duration-200">
+                    <td className="py-4 px-6 text-sm text-gray-500 font-medium">
+                      {idx + 1 < 10 ? `0${idx + 1}` : idx + 1}
+                    </td>
+                    <td className="py-4 px-6">
+                      <div className="flex items-center gap-3">
+                         <div className="p-2 bg-blue-50 text-blue-500 rounded-lg">
+                           <BsQrCode className="text-lg" />
+                         </div>
+                         <span className="font-mono text-lg font-bold text-gray-800 tracking-wider">
+                           {coupon.coupon_code}
+                         </span>
+                      </div>
+                    </td>
+                    <td className="py-4 px-6">
+                      <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-orange-100 text-orange-700 font-bold text-sm">
+                        <MdOutlineDiscount />
+                        {coupon.discountPercentage}% OFF
+                      </div>
+                    </td>
+                    <td className="py-4 px-6 text-center">
+                       <label className="inline-flex relative items-center cursor-pointer" title={coupon.status === "active" ? "Deactivate Coupon" : "Activate Coupon"}>
+                         <input
+                           onChange={(e) => handlestatus(coupon._id, e.target.checked)}
+                           type="checkbox"
+                           className="sr-only peer"
+                           defaultChecked={coupon.status === "active"}
+                         />
+                         <div className="w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-emerald-300 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-emerald-500"></div>
+                       </label>
+                    </td>
+                  </tr>
+                ))}
+                {coupons.length === 0 && (
+                  <tr>
+                    <td colSpan="4" className="py-16 text-center">
+                      <div className="flex flex-col items-center justify-center space-y-3">
+                        <div className="w-20 h-20 bg-gray-50 rounded-full flex items-center justify-center">
+                           <RiCoupon3Line className="text-5xl text-gray-300" />
+                        </div>
+                        <h3 className="text-lg font-bold text-gray-800">No Coupons Available</h3>
+                        <p className="text-sm text-gray-500 max-w-sm">
+                          You haven't created any discount coupons yet. Click the 'Create Coupon' button to get started.
+                        </p>
+                      </div>
+                    </td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        {/* Create Coupon Modal */}
+        <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle">
+          <div className="modal-box bg-white rounded-3xl shadow-2xl p-0 overflow-hidden">
+            <div className="bg-gradient-to-r from-emerald-500 to-teal-600 p-6 text-white text-center">
+              <h3 className="font-extrabold text-2xl flex items-center justify-center gap-2">
+                 <RiCoupon3Line />
+                 Create New Coupon
+              </h3>
+              <p className="text-emerald-100 text-sm mt-1">Fill in the details to generate a discount code.</p>
+            </div>
+            
+            <form onSubmit={handlecoupon} className="p-8 space-y-6">
+              <div className="space-y-2">
+                <label className="text-sm font-bold text-gray-700 uppercase tracking-wide flex items-center gap-2">
+                   <BsQrCode className="text-emerald-500" /> Coupon Code
+                </label>
+                <input
+                  required
+                  name="coupon_code"
+                  type="text"
+                  placeholder="e.g. SUMMER2024"
+                  className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 focus:bg-white focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500 transition-all font-mono uppercase"
+                />
+              </div>
+
+              <div className="space-y-2">
+                <label className="text-sm font-bold text-gray-700 uppercase tracking-wide flex items-center gap-2">
+                   <MdOutlineDiscount className="text-emerald-500" /> Discount Percentage
+                </label>
+                <div className="relative">
+                  <input
+                    required
+                    name="discount"
+                    type="number"
+                    min="1"
+                    max="100"
+                    placeholder="e.g. 15"
+                    className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 focus:bg-white focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500 transition-all"
+                  />
+                  <div className="absolute inset-y-0 right-0 flex items-center pr-4 pointer-events-none text-gray-400 font-bold">
+                    %
+                  </div>
+                </div>
+              </div>
+
+              <div className="space-y-2">
+                <label className="text-sm font-bold text-gray-700 uppercase tracking-wide flex items-center gap-2">
+                   <MdDescription className="text-emerald-500" /> Description
+                </label>
+                <textarea
+                  required
+                  name="description"
+                  rows={2}
+                  placeholder="What is this coupon for?"
+                  className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 focus:bg-white focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500 transition-all resize-none"
+                ></textarea>
+              </div>
+
+              <div className="pt-4 flex gap-4">
+                <form method="dialog" className="w-1/3">
+                  <button type="button" onClick={() => document.getElementById('my_modal_5').close()} className="w-full py-3 rounded-xl font-bold text-gray-600 bg-gray-100 hover:bg-gray-200 transition-colors">
+                    Cancel
+                  </button>
+                </form>
+                <button
+                  type="submit"
+                  className="w-2/3 py-3 rounded-xl font-bold text-white bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 shadow-md hover:shadow-lg transition-all"
+                >
+                  Create Coupon
+                </button>
+              </div>
+            </form>
+          </div>
+          
+          {/* Backdrop for click outside to close */}
+          <form method="dialog" className="modal-backdrop">
+            <button>close</button>
+          </form>
+        </dialog>
+
+      </div>
     </div>
   );
 };
