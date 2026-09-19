@@ -24,6 +24,7 @@ import PayForm from '../Page/Dashboard/member/make Payment/PayForm';
 import Confimpay from '../Page/Dashboard/member/make Payment/Confimpay';
 import AdminRoute from './AdminRoute';
 import MemberRoute from './MemberRoute';
+import AddApartment from '../Page/Dashboard/Admin/AddApartment/AddApartment';
 import Error from '../Page/Error';
 import ContactPage from '../Page/ContactPage';
 import AboutPage from '../Page/AboutPage';
@@ -67,6 +68,10 @@ const MainRoute =  createBrowserRouter([
         {
          path:'adminprofile',
           element:<AdminRoute><PrivateRoute><AdminProfile/></PrivateRoute></AdminRoute>
+        },
+        {
+          path:'addApartment',
+          element:<AdminRoute><PrivateRoute><AddApartment/></PrivateRoute></AdminRoute>
         },
         {
           path:'managemember',

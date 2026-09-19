@@ -96,6 +96,9 @@ const Dashboard = () => {
                                 <NavLink to="adminprofile" className={navLinkClass}>
                                     <MdDashboard size={20} className="mr-3" /> Admin Dashboard
                                 </NavLink>
+                                <NavLink to="addApartment" className={navLinkClass}>
+                                    <MdDashboard size={20} className="mr-3" /> Add Apartment
+                                </NavLink>
                                 <NavLink to="managemember" className={navLinkClass}>
                                     <FaUserAlt size={20} className="mr-3" /> Manage Members
                                 </NavLink>

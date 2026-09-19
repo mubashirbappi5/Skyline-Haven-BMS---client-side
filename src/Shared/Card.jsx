@@ -7,7 +7,7 @@ import useAxiosSecure from "../Hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 
 const Card = ({ apart, isLarge = false }) => {
-  const { apartmentNo, blockName, floorNo, rent, imageUrl, _id } = apart;
+  const { apartmentNo, blockName, floorNo, rent, imageUrl, id } = apart;
   const { user } = useAuth();
   const navigate = useNavigate();
   const axiossecure = useAxiosSecure();
@@ -23,13 +23,13 @@ const Card = ({ apart, isLarge = false }) => {
       apartmentNo: apartmentNo,
       blockName: blockName,
       rent: rent,
-      apartment_id: _id,
+      apartment_id: id,
       Agreement_req_date: new Date(),
       Status: "pending",
     };
     
     axiossecure.post("/request", agreementData).then((res) => {
-      if (res.data.insertedId) {
+      if (res.data.id || res.data.insertedId) {
         Swal.fire({
           title: "Agreement!",
           text: "Your Agreement request sent.",
@@ -63,7 +63,7 @@ const Card = ({ apart, isLarge = false }) => {
                               <span className="flex items-center gap-2"><FaBuilding/> Floor {floorNo}</span>
                           </div>
                       </div>
-                      <button onClick={() => handleagreement(_id)} className="px-8 py-4 bg-primary text-white font-bold uppercase rounded-xl hover:bg-secondary transition-colors shadow-lg">
+                      <button onClick={() => handleagreement(id)} className="px-8 py-4 bg-primary text-white font-bold uppercase rounded-xl hover:bg-secondary transition-colors shadow-lg">
                           Request Agreement
                       </button>
                   </div>
@@ -91,7 +91,7 @@ const Card = ({ apart, isLarge = false }) => {
           </div>
 
           <button
-            onClick={() => handleagreement(_id)}
+            onClick={() => handleagreement(id)}
             className="w-full py-4 mt-auto font-bold text-white uppercase tracking-wider transition-all duration-300 transform bg-text rounded-xl hover:bg-primary shadow-xl hover:shadow-primary/30 focus:outline-none active:scale-95"
           >
             Agreement Request
