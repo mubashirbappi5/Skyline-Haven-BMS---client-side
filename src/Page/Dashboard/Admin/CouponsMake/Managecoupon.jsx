@@ -161,33 +161,38 @@ const Managecoupon = () => {
         </div>
 
         {/* Create Coupon Modal */}
-        <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle">
-          <div className="modal-box bg-white rounded-3xl shadow-2xl p-0 overflow-hidden">
-            <div className="bg-gradient-to-r from-emerald-500 to-teal-600 p-6 text-white text-center">
-              <h3 className="font-extrabold text-2xl flex items-center justify-center gap-2">
-                 <RiCoupon3Line />
+        <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle backdrop-blur-sm">
+          <div className="modal-box bg-white rounded-[2.5rem] shadow-[0_20px_60px_rgba(16,185,129,0.3)] p-0 overflow-visible relative border border-emerald-100">
+            {/* Decorative Top Icon */}
+            <div className="absolute -top-8 left-1/2 -translate-x-1/2 w-16 h-16 bg-gradient-to-tr from-emerald-500 to-teal-600 rounded-full flex items-center justify-center text-white text-3xl shadow-lg border-4 border-white z-20">
+              <RiCoupon3Line />
+            </div>
+
+            <div className="bg-gradient-to-br from-emerald-50 to-teal-50 pt-12 pb-6 px-6 text-center relative overflow-hidden rounded-t-[2.5rem]">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-200 rounded-full blur-3xl opacity-40 -mr-10 -mt-10"></div>
+              <h3 className="font-black text-3xl text-gray-800 relative z-10">
                  Create New Coupon
               </h3>
-              <p className="text-emerald-100 text-sm mt-1">Fill in the details to generate a discount code.</p>
+              <p className="text-gray-500 text-sm mt-2 relative z-10 font-medium">Generate a new discount code for your residents.</p>
             </div>
             
-            <form onSubmit={handlecoupon} className="p-8 space-y-6">
+            <form onSubmit={handlecoupon} className="p-8 space-y-6 relative z-10 bg-white">
               <div className="space-y-2">
-                <label className="text-sm font-bold text-gray-700 uppercase tracking-wide flex items-center gap-2">
-                   <BsQrCode className="text-emerald-500" /> Coupon Code
+                <label className="text-sm font-bold text-gray-700 uppercase tracking-wider flex items-center gap-2">
+                   <BsQrCode className="text-emerald-500 text-lg" /> Coupon Code
                 </label>
                 <input
                   required
                   name="coupon_code"
                   type="text"
                   placeholder="e.g. SUMMER2024"
-                  className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 focus:bg-white focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500 transition-all font-mono uppercase"
+                  className="w-full px-5 py-4 rounded-2xl border-2 border-gray-100 bg-gray-50/50 hover:bg-white focus:bg-white focus:ring-4 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all font-mono uppercase text-lg font-bold text-gray-800 placeholder:font-sans placeholder:font-normal placeholder:text-base"
                 />
               </div>
 
               <div className="space-y-2">
-                <label className="text-sm font-bold text-gray-700 uppercase tracking-wide flex items-center gap-2">
-                   <MdOutlineDiscount className="text-emerald-500" /> Discount Percentage
+                <label className="text-sm font-bold text-gray-700 uppercase tracking-wider flex items-center gap-2">
+                   <MdOutlineDiscount className="text-emerald-500 text-lg" /> Discount Percentage
                 </label>
                 <div className="relative">
                   <input
@@ -197,38 +202,38 @@ const Managecoupon = () => {
                     min="1"
                     max="100"
                     placeholder="e.g. 15"
-                    className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 focus:bg-white focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500 transition-all"
+                    className="w-full px-5 py-4 rounded-2xl border-2 border-gray-100 bg-gray-50/50 hover:bg-white focus:bg-white focus:ring-4 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all text-lg font-bold text-gray-800 placeholder:font-normal placeholder:text-base"
                   />
-                  <div className="absolute inset-y-0 right-0 flex items-center pr-4 pointer-events-none text-gray-400 font-bold">
+                  <div className="absolute inset-y-0 right-0 flex items-center pr-5 pointer-events-none text-emerald-500 font-black text-xl">
                     %
                   </div>
                 </div>
               </div>
 
               <div className="space-y-2">
-                <label className="text-sm font-bold text-gray-700 uppercase tracking-wide flex items-center gap-2">
-                   <MdDescription className="text-emerald-500" /> Description
+                <label className="text-sm font-bold text-gray-700 uppercase tracking-wider flex items-center gap-2">
+                   <MdDescription className="text-emerald-500 text-lg" /> Description
                 </label>
                 <textarea
                   required
                   name="description"
                   rows={2}
                   placeholder="What is this coupon for?"
-                  className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 focus:bg-white focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500 transition-all resize-none"
+                  className="w-full px-5 py-4 rounded-2xl border-2 border-gray-100 bg-gray-50/50 hover:bg-white focus:bg-white focus:ring-4 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all resize-none font-medium text-gray-700"
                 ></textarea>
               </div>
 
-              <div className="pt-4 flex gap-4">
+              <div className="pt-6 flex gap-4">
                 <form method="dialog" className="w-1/3">
-                  <button type="button" onClick={() => document.getElementById('my_modal_5').close()} className="w-full py-3 rounded-xl font-bold text-gray-600 bg-gray-100 hover:bg-gray-200 transition-colors">
+                  <button type="button" onClick={() => document.getElementById('my_modal_5').close()} className="w-full py-4 rounded-2xl font-bold text-gray-600 bg-gray-100 hover:bg-gray-200 hover:shadow-inner transition-all">
                     Cancel
                   </button>
                 </form>
                 <button
                   type="submit"
-                  className="w-2/3 py-3 rounded-xl font-bold text-white bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 shadow-md hover:shadow-lg transition-all"
+                  className="w-2/3 py-4 rounded-2xl font-bold text-white text-lg bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 shadow-lg shadow-emerald-500/30 hover:shadow-xl hover:-translate-y-0.5 transition-all"
                 >
-                  Create Coupon
+                  Generate Coupon
                 </button>
               </div>
             </form>
