@@ -27,3 +27,68 @@
 .swiper-pagination-bullet-active {
   @apply bg-primary opacity-100 w-8 rounded-full !important;
 }
+
+/* SweetAlert2 Global Premium Theme Overrides */
+.swal2-popup {
+  border-radius: 2rem !important;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1) !important;
+  border: 1px solid #f3f4f6 !important;
+  padding-bottom: 2rem !important;
+  padding-top: 2rem !important;
+}
+.swal2-title {
+  font-weight: 900 !important;
+  font-size: 2rem !important;
+  color: #1f2937 !important;
+  letter-spacing: -0.025em !important;
+}
+.swal2-html-container {
+  color: #6b7280 !important;
+  font-weight: 500 !important;
+  font-size: 1.125rem !important;
+  margin-top: 0.75rem !important;
+}
+.swal2-actions {
+  margin-top: 2rem !important;
+  gap: 1rem !important;
+}
+.swal2-confirm {
+  background: linear-gradient(to right, #10b981, #0d9488) !important; /* emerald-500 to teal-600 */
+  border-radius: 1rem !important;
+  padding: 1rem 2.5rem !important;
+  font-weight: 800 !important;
+  color: white !important;
+  box-shadow: 0 10px 15px -3px rgba(16, 185, 129, 0.3) !important;
+  transition: all 0.3s ease !important;
+  border: none !important;
+}
+.swal2-confirm:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 20px 25px -5px rgba(16, 185, 129, 0.4) !important;
+}
+.swal2-cancel {
+  background: #f3f4f6 !important; /* gray-100 */
+  color: #4b5563 !important; /* gray-600 */
+  border-radius: 1rem !important;
+  padding: 1rem 2.5rem !important;
+  font-weight: 800 !important;
+  transition: all 0.3s ease !important;
+  border: none !important;
+}
+.swal2-cancel:hover {
+  background: #e5e7eb !important; /* gray-200 */
+}
+.swal2-icon.swal2-warning {
+  border-color: #fbbf24 !important;
+  color: #f59e0b !important;
+}
+.swal2-icon.swal2-success {
+  border-color: #10b981 !important;
+  color: #10b981 !important;
+}
+.swal2-icon.swal2-success [class^='swal2-success-line'] {
+  background-color: #10b981 !important;
+}
+.swal2-icon.swal2-success .swal2-success-ring {
+  border-color: rgba(16, 185, 129, 0.3) !important;
+}
