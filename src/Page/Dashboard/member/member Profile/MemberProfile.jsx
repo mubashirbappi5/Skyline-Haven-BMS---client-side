@@ -4,6 +4,10 @@ import useAuth from "./../../../../Hooks/useAuth";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "./../../../../Hooks/useAxiosSecure";
 import moment from "moment";
+import { FaUserCircle, FaBuilding, FaRegCalendarAlt, FaCheckCircle, FaMoneyCheckAlt } from "react-icons/md";
+import { IoDiamondOutline } from "react-icons/io5";
+import { HiOutlineHome } from "react-icons/hi2";
+import { BsBuilding, BsFileEarmarkText } from "react-icons/bs";
 
 const MemberProfile = () => {
   const { user } = useAuth();
@@ -17,134 +21,144 @@ const MemberProfile = () => {
   });
 
   return (
-    <div>
-      <div className="md:p-6 min-h-screen bg-gradient-to-r from-blue-50 to-purple-100">
-        <div className="bg-gradient-to-r from-[#94f08c] to-green-500 text-white mt-6 md:mt-0 py-6 px-8 rounded-xl shadow-xl">
-          <div className="container mx-auto flex flex-col lg:flex-row items-center justify-between space-y-6 lg:space-y-0">
-            <div className="text-center lg:text-left space-y-4 lg:w-1/2">
-              <h1 className="text-2xl md:text-4xl font-extrabold text-white leading-tight tracking-wide">
-                Welcome Back,{" "}
-                <span className="text-yellow-300">{user.displayName}</span>!
-              </h1>
-              <p className="text-lg sm:text-xl text-gray-200">
-                Manage Your Apartment Details Effortlessly
-              </p>
-            </div>
-            <div>
-              <section className="flex justify-center ">
-                <div className="bg-white rounded-xl shadow-xl p-4 ">
-                  <div className="flex items-center justify-center mb-3">
-                    <div className="border-4 border-[#94f08c] rounded-full p-4 shadow-2xl transform transition-transform duration-300 hover:scale-105">
-                      <img
-                        className="rounded-full w-24 h-24 object-cover"
-                        src={user.photoURL}
-                        alt="User"
-                      />
-                    </div>
-                  </div>
-                  <div className="text-center">
-                    <h2 className="text-2xl font-semibold text-[#94f08c]">
-                      {user.displayName}
-                    </h2>
-                    <h5 className="text-lg text-gray-500">{user.email}</h5>
-                  </div>
+    <div className="min-h-screen bg-gray-50/50 p-4 md:p-8">
+      <div className="max-w-7xl mx-auto space-y-8">
+        
+        {/* Header Section */}
+        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-blue-500 via-indigo-600 to-violet-700 p-8 md:p-12 shadow-2xl text-white">
+          <div className="absolute top-0 right-0 -mt-16 -mr-16 opacity-20">
+            <svg width="400" height="400" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+              <path fill="#FFFFFF" d="M45.7,-76.4C58.8,-69.3,68.7,-55.5,77.5,-41.2C86.3,-26.9,94,-12.1,92.5,2.1C91,16.2,80.4,29.7,70.5,41.7C60.6,53.8,51.3,64.5,39.4,72.4C27.5,80.3,13.8,85.5,-0.6,86.6C-15,87.7,-30,84.7,-43.3,77.3C-56.5,70,-68.1,58.3,-75.7,44.7C-83.3,31.1,-86.9,15.6,-85.7,0.7C-84.5,-14.2,-78.6,-28.4,-70.5,-41.1C-62.5,-53.8,-52.3,-65,-40,-72.1C-27.7,-79.1,-13.9,-82,1.3,-83.9C16.4,-85.8,32.7,-83.5,45.7,-76.4Z" transform="translate(100 100)" />
+            </svg>
+          </div>
+          
+          <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-8">
+            
+            <div className="flex flex-col md:flex-row items-center gap-8">
+              <div className="relative group">
+                <div className="absolute -inset-1 bg-white opacity-30 rounded-full blur transition duration-500 group-hover:opacity-60"></div>
+                <img
+                  className="relative w-32 h-32 md:w-40 md:h-40 object-cover rounded-full border-4 border-white shadow-xl"
+                  src={user?.photoURL || "https://i.ibb.co/1q2x7vX/avatar.png"}
+                  alt="Member Avatar"
+                />
+              </div>
+              <div className="text-center md:text-left">
+                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/20 text-blue-50 text-sm font-bold tracking-wide border border-white/30 backdrop-blur-sm mb-3">
+                   <IoDiamondOutline /> Premium Member
                 </div>
-              </section>
+                <h1 className="text-4xl md:text-5xl font-extrabold mb-2 text-white drop-shadow-md">
+                  Welcome, {user?.displayName}
+                </h1>
+                <p className="text-blue-100 flex items-center justify-center md:justify-start gap-2 text-lg">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                    <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
+                    <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
+                  </svg>
+                  {user?.email}
+                </p>
+              </div>
             </div>
+            
+            <div className="hidden lg:flex gap-4">
+              <div className="bg-white/10 backdrop-blur-md border border-white/20 p-5 rounded-2xl text-center">
+                 <p className="text-blue-100 text-sm font-medium uppercase tracking-wider mb-1">Agreements</p>
+                 <p className="text-4xl font-black text-white">{myAgreement.length}</p>
+              </div>
+            </div>
+
           </div>
         </div>
 
-        <div className="divider my-8"></div>
-
-        <section>
-          <section className="container px-4 mx-auto">
-            <div className="sm:flex sm:items-center sm:justify-between">
-              <h2 className="text-2xl font-semibold text-gray-800 dark:text-white">
-                My Agreements
-              </h2>
-              <div className="flex items-center mt-4 gap-x-3">
-                <Link to={"/apartments"}>
-                  <button className="flex items-center justify-center rounded-lg px-5 py-3 text-lg font-medium text-white bg-[#94f08c]  hover:bg-green-600 transition duration-300">
-                    New Rent
-                  </button>
-                </Link>
-              </div>
+        {/* Agreements Section */}
+        <div className="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden mt-8">
+          
+          <div className="p-6 md:p-8 border-b border-gray-100 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div className="flex items-center gap-3">
+               <div className="p-3 bg-blue-50 text-blue-500 rounded-xl">
+                 <BsFileEarmarkText className="text-2xl" />
+               </div>
+               <div>
+                 <h2 className="text-2xl font-bold text-gray-800">My Agreements</h2>
+                 <p className="text-gray-500 text-sm">Review your active apartment leases</p>
+               </div>
             </div>
+            <Link to="/apartments">
+              <button className="flex items-center gap-2 bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white px-6 py-3 rounded-xl font-bold transition-all duration-300 shadow-md hover:shadow-lg hover:-translate-y-0.5">
+                <HiOutlineHome className="text-xl" />
+                Find New Rent
+              </button>
+            </Link>
+          </div>
 
-            <div className="flex flex-col mt-6">
-              <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-                <div className="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
-                  <div className="overflow-hidden border border-gray-200 dark:border-gray-700 rounded-lg shadow-md">
-                    <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-                      <thead className="bg-gradient-to-r from-[#94f08c] to-green-400 text-white">
-                        <tr>
-                          <th className="px-12 py-3 text-sm font-normal text-left">
-                            Apartment No.
-                          </th>
-                          <th className="px-4 py-3 text-sm font-normal text-left">
-                            Accept Date
-                          </th>
-                          <th className="px-4 py-3 text-sm font-normal text-left">
-                            Rent
-                          </th>
-                          <th className="px-4 py-3 text-sm font-normal text-left">
-                            Floor No.
-                          </th>
-                          <th className="px-4 py-3 text-sm font-normal text-left">
-                            Block No.
-                          </th>
-                          <th className="px-4 py-3 text-sm font-normal text-left">
-                            Status
-                          </th>
-                          <th className="px-4 py-3 text-sm font-normal text-left">
-                            Action
-                          </th>
-                        </tr>
-                      </thead>
-                      <tbody className="bg-white divide-y divide-gray-200 dark:divide-gray-700">
-                        {myAgreement && myAgreement.length > 0 ? (
-                          myAgreement.map((agree, idx) => (
-                            <tr className="hover:bg-blue-100 transition-colors duration-300">
-                              <td className="px-12 py-4 text-sm font-normal text-gray-700">
-                                {agree.apartmentNo}
-                              </td>
-                              <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300">
-                                {moment(agree.accept_date)
-                                  .subtract(10, "days")
-                                  .calendar()}
-                              </td>
-                              <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300">
-                                {agree.rent}
-                              </td>
-                              <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300">
-                                {agree.floorNo}
-                              </td>
-                              <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300">
-                                {agree.blockName}
-                              </td>
-                              <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300">
-                                {agree.Status}
-                              </td>
-                              <td className="px-4 py-4 text-sm text-blue-500 hover:text-blue-700 cursor-pointer">
-                                <Link to={"/dashboard/makepay"} className="btn btn-sm bg-secondary">Pay</Link>
-                              </td>
-                            </tr>
-                          ))
-                        ) : (
-                          <tr>
-                            <td colSpan="7" className="text-center py-4">
-                              No data available
-                            </td>
-                          </tr>
-                        )}
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
-        </section>
+          <div className="overflow-x-auto">
+            <table className="w-full text-left border-collapse">
+              <thead>
+                <tr className="bg-gray-50/80 border-b border-gray-100">
+                  <th className="py-5 px-6 text-xs font-bold text-gray-500 uppercase tracking-wider">Apartment Details</th>
+                  <th className="py-5 px-6 text-xs font-bold text-gray-500 uppercase tracking-wider">Accept Date</th>
+                  <th className="py-5 px-6 text-xs font-bold text-gray-500 uppercase tracking-wider">Rent</th>
+                  <th className="py-5 px-6 text-xs font-bold text-gray-500 uppercase tracking-wider">Status</th>
+                  <th className="py-5 px-6 text-center text-xs font-bold text-gray-500 uppercase tracking-wider">Action</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-gray-50">
+                {myAgreement && myAgreement.length > 0 ? (
+                  myAgreement.map((agree, idx) => (
+                    <tr key={agree._id || idx} className="hover:bg-blue-50/30 transition-colors duration-200 group">
+                      <td className="py-4 px-6">
+                         <div className="flex items-center gap-3">
+                           <div className="p-2 bg-indigo-50 text-indigo-500 rounded-lg group-hover:bg-indigo-500 group-hover:text-white transition-colors duration-300">
+                             <BsBuilding className="text-lg" />
+                           </div>
+                           <div>
+                             <p className="text-sm font-bold text-gray-800">Apt: {agree.apartmentNo}</p>
+                             <p className="text-xs text-gray-500">Block {agree.blockName} • Floor {agree.floorNo}</p>
+                           </div>
+                         </div>
+                      </td>
+                      <td className="py-4 px-6 text-sm text-gray-600 font-medium">
+                        {moment(agree.accept_date).subtract(10, "days").calendar()}
+                      </td>
+                      <td className="py-4 px-6">
+                        <span className="text-lg font-bold text-gray-800">${agree.rent}</span>
+                        <span className="text-xs text-gray-500 block">/month</span>
+                      </td>
+                      <td className="py-4 px-6">
+                        <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-emerald-100 text-emerald-800 border border-emerald-200">
+                          {agree.Status || "Active"}
+                        </span>
+                      </td>
+                      <td className="py-4 px-6 text-center">
+                        <Link to="/dashboard/makepay" className="inline-flex items-center justify-center gap-2 px-5 py-2 rounded-xl bg-blue-50 text-blue-600 hover:bg-blue-500 hover:text-white font-bold transition-all duration-300 focus:ring-2 focus:ring-blue-200 group-hover:shadow-md">
+                          Pay Now
+                        </Link>
+                      </td>
+                    </tr>
+                  ))
+                ) : (
+                  <tr>
+                    <td colSpan="5" className="py-16 text-center">
+                      <div className="flex flex-col items-center justify-center space-y-3">
+                        <div className="w-20 h-20 bg-gray-50 rounded-full flex items-center justify-center">
+                           <BsFileEarmarkText className="text-5xl text-gray-300" />
+                        </div>
+                        <h3 className="text-lg font-bold text-gray-800">No Agreements Found</h3>
+                        <p className="text-sm text-gray-500 max-w-sm">
+                          You don't have any active apartment agreements yet. Browse available apartments to get started.
+                        </p>
+                        <Link to="/apartments" className="mt-4 inline-flex items-center justify-center rounded-xl px-6 py-2.5 text-sm font-bold text-blue-600 bg-blue-50 hover:bg-blue-100 transition duration-300">
+                          Browse Apartments
+                        </Link>
+                      </div>
+                    </td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
+          </div>
+        </div>
+
       </div>
     </div>
   );
