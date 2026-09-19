@@ -9,8 +9,8 @@ import { FaUser, FaEnvelope, FaLock, FaCloudUploadAlt } from 'react-icons/fa';
 
 // Use Cloudinary as the alternative to ImgBB
 // User can set their own Cloudinary credentials in .env or it falls back to a public demo preset for testing
-const cloudName = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME || 'demo';
-const uploadPreset = import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET || 'docs_upload_example_us_preset';
+const cloudName = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME || 'dp8n0jghj';
+const uploadPreset = import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET || 'skyline';
 const cloudinaryUrl = `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`;
 
 const Register = () => {
