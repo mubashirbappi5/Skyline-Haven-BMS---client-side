@@ -4,7 +4,7 @@ import useAuth from "./../../../../Hooks/useAuth";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "./../../../../Hooks/useAxiosSecure";
 import moment from "moment";
-import { FaUserCircle, FaBuilding, FaRegCalendarAlt, FaCheckCircle, FaMoneyCheckAlt } from "react-icons/md";
+import { FaUserCircle, FaBuilding, FaRegCalendarAlt, FaCheckCircle, FaMoneyCheckAlt } from "react-icons/fa";
 import { IoDiamondOutline } from "react-icons/io5";
 import { HiOutlineHome } from "react-icons/hi2";
 import { BsBuilding, BsFileEarmarkText } from "react-icons/bs";
