@@ -58,7 +58,7 @@ const Register = () => {
 
         await updateuser(profile);
 
-        navigate('/')
+        navigate('/dashboard')
         const userinfo = {
             userName:data.name,
             userEmail:data.email,

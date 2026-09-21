@@ -10,7 +10,7 @@ const SocialLogin = () => {
 
   const navigate = useNavigate()
   const location = useLocation()
-  const froms = location.state?.from?.pathname || '/';
+  const froms = location.state?.from?.pathname || '/dashboard';
 
   const handlegoogle = (e)=>{
     e.preventDefault()

@@ -14,7 +14,7 @@ const Login = () => {
   const { signinUser, loading, setloading } = useContext(Authcontext);
   const navigate = useNavigate();
   const location = useLocation();
-  const froms = location.state?.from?.pathname || "/";
+  const froms = location.state?.from?.pathname || "/dashboard";
 
   const handlelogin = (e) => {
     e.preventDefault();
