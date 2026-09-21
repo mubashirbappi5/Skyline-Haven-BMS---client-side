@@ -17,32 +17,44 @@ const AgreementReq = () => {
   });
 
   const handleacceptreq = (request) => {
-    const acceptedagreement = {
-      rent: request.rent,
-      userName: request.userName,
-      userEmail: request.userEmail,
-      floorNo: request.floorNo,
-      apartmentNo: request.apartmentNo,
-      blockName: request.blockName,
-      accept_date: new Date(),
-      Status: "checked",
-      apartment_id: request.apartment_id,
-    };
-    axiosSecure.post("/accept", acceptedagreement).then((res) => {
-      if (res.data.insertedId) {
-        axiosSecure.delete(`/request/${request._id}`).then((res) => {
-          Swal.fire({
-            title: "Accepted!",
-            text: "User Agreement was accepted successfully.",
-            icon: "success",
-            confirmButtonColor: "#22c55e",
-          });
+    Swal.fire({
+      title: "Are you sure?",
+      text: "Do you want to accept this agreement request?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#22c55e",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, accept it!"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        const acceptedagreement = {
+          rent: request.rent,
+          userName: request.userName,
+          userEmail: request.userEmail,
+          floorNo: request.floorNo,
+          apartmentNo: request.apartmentNo,
+          blockName: request.blockName,
+          accept_date: new Date(),
+          Status: "checked",
+          apartment_id: request.apartment_id,
+        };
+        axiosSecure.post("/accept", acceptedagreement).then((res) => {
+          if (res.data.insertedId) {
+            axiosSecure.delete(`/request/${request._id}`).then((res) => {
+              Swal.fire({
+                title: "Accepted!",
+                text: "User Agreement was accepted successfully.",
+                icon: "success",
+                confirmButtonColor: "#22c55e",
+              });
 
-          axiosSecure
-            .patch(`/users/${request.userEmail}`, { role: "member" })
-            .then((res) => {
-              refetch();
+              axiosSecure
+                .patch(`/users/${request.userEmail}`, { role: "member" })
+                .then((res) => {
+                  refetch();
+                });
             });
+          }
         });
       }
     });

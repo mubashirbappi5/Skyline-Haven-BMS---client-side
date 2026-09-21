@@ -7,7 +7,7 @@ import useAxiosSecure from "../Hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 
 const Card = ({ apart, isLarge = false }) => {
-  const { apartmentNo, blockName, floorNo, rent, imageUrl, id } = apart;
+  const { apartmentNo, blockName, floorNo, rent, imageUrl, id, status } = apart;
   const { user } = useAuth();
   const navigate = useNavigate();
   const axiossecure = useAxiosSecure();
@@ -69,8 +69,15 @@ const Card = ({ apart, isLarge = false }) => {
                               <span className="flex items-center gap-2"><FaBuilding/> Floor {floorNo}</span>
                           </div>
                       </div>
-                      <button onClick={handleOpenModal} className="px-8 py-4 bg-primary text-white font-bold uppercase rounded-xl hover:bg-secondary transition-colors shadow-lg">
-                          Request Agreement
+                      <button 
+                        onClick={handleOpenModal} 
+                        disabled={status !== 'available'}
+                        className={`px-8 py-4 font-bold uppercase rounded-xl transition-colors shadow-lg ${
+                          status === 'available'
+                            ? 'bg-primary text-white hover:bg-secondary'
+                            : 'bg-gray-500 text-gray-200 cursor-not-allowed'
+                        }`}>
+                          {status === 'available' ? 'Request Agreement' : (status === 'pending' ? 'Pending Request' : 'Already Booked')}
                       </button>
                   </div>
               </div>
@@ -98,9 +105,14 @@ const Card = ({ apart, isLarge = false }) => {
 
           <button
             onClick={handleOpenModal}
-            className="w-full py-4 mt-auto font-bold text-white uppercase tracking-wider transition-all duration-300 transform bg-text rounded-xl hover:bg-primary shadow-xl hover:shadow-primary/30 focus:outline-none active:scale-95"
+            disabled={status !== 'available'}
+            className={`w-full py-4 mt-auto font-bold text-white uppercase tracking-wider transition-all duration-300 transform rounded-xl focus:outline-none ${
+              status === 'available' 
+                ? 'bg-text hover:bg-primary shadow-xl hover:shadow-primary/30 active:scale-95' 
+                : 'bg-gray-400 cursor-not-allowed'
+            }`}
           >
-            Agreement Request
+            {status === 'available' ? 'Agreement Request' : (status === 'pending' ? 'Pending Request' : 'Already Booked')}
           </button>
         </div>
       </div>

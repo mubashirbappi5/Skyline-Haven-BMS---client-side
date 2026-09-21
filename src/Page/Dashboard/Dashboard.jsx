@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import useAuth from './../../Hooks/useAuth';
 import { NavLink, Link, Outlet } from 'react-router-dom';
 import logo from '../.././assets/image/logo.png'
-import { FaUserAlt, FaUserCircle, FaBars, FaTimes } from 'react-icons/fa';
+import { FaUserAlt, FaUserCircle, FaBars, FaTimes, FaBuilding } from 'react-icons/fa';
 import { GrAnnounce } from 'react-icons/gr';
 import { RiHistoryFill, RiNewspaperLine, RiArrowLeftLine } from 'react-icons/ri';
 import { BiSolidCoupon } from 'react-icons/bi';
@@ -107,6 +107,9 @@ const Dashboard = () => {
                                 </NavLink>
                                 <NavLink to="agreeRequest" className={navLinkClass}>
                                     <RiNewspaperLine size={20} className="mr-3" /> Agreement Requests
+                                </NavLink>
+                                <NavLink to="manageApartments" className={navLinkClass}>
+                                    <FaBuilding size={20} className="mr-3" /> Manage Apartments
                                 </NavLink>
                                 <NavLink to="manageCoupon" className={navLinkClass}>
                                     <BiSolidCoupon size={20} className="mr-3" /> Manage Coupons

@@ -13,6 +13,7 @@ import Managemember from '../Page/Dashboard/Admin/Manage/Managemember';
 import AdminProfile from '../Page/Dashboard/Admin/Adminprofile/AdminProfile';
 import MakeAnnouncement from '../Page/Dashboard/Admin/Make Anoucment/MakeAnnouncement';
 import AgreementReq from '../Page/Dashboard/Admin/AgreeRequest/AgreementReq';
+import ManageApartments from '../Page/Dashboard/Admin/ManageApartments/ManageApartments';
 import Managecoupon from '../Page/Dashboard/Admin/CouponsMake/Managecoupon';
 import MemberProfile from '../Page/Dashboard/member/member Profile/MemberProfile';
 import MakePay from '../Page/Dashboard/member/make Payment/MakePay';
@@ -84,6 +85,10 @@ const MainRoute =  createBrowserRouter([
         {
           path:'agreeRequest',
           element:<AdminRoute><PrivateRoute><AgreementReq/></PrivateRoute></AdminRoute>
+        },
+        {
+          path:'manageApartments',
+          element:<AdminRoute><PrivateRoute><ManageApartments/></PrivateRoute></AdminRoute>
         },
         {
           path:'manageCoupon',
