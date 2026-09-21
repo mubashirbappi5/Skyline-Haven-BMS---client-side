@@ -4,17 +4,20 @@ import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 import moment from "moment";
 import { useQuery } from "@tanstack/react-query";
 import { FaHistory, FaCalendarAlt, FaHashtag, FaMoneyBillWave, FaFileInvoiceDollar } from "react-icons/fa";
+import Loading from "../../../../Shared/Loading";
 
 const PayHistory = () => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
-  const { data: payhistory = [] } = useQuery({
+  const { data: payhistory = [], isLoading } = useQuery({
     queryKey: ["payhistory", user.email],
     queryFn: async () => {
       const res = await axiosSecure.get(`/payments/${user?.email}`);
       return res.data;
     },
   });
+
+  if (isLoading) return <Loading />;
 
   return (
     <div className="min-h-screen bg-gray-50/50 p-4 md:p-8">

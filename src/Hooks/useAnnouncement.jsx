@@ -4,14 +4,14 @@ import { useQuery } from '@tanstack/react-query';
 
 const useAnnouncement = () => {
   const axiosPublic = useAxiosPublic()
-  const {data:notice=[]}=useQuery({
-    queryKey:'notice',
-    queryFn:async()=>{
-        const res = await axiosPublic.get('/notice')
-        return res.data
+  const { data: notice = [], isLoading, refetch } = useQuery({
+    queryKey: ['notice'],
+    queryFn: async () => {
+        const res = await axiosPublic.get('/notice');
+        return res.data;
     }
-  })
-  return[notice]
+  });
+  return [notice, isLoading, refetch];
 };
 
 export default useAnnouncement;

@@ -4,9 +4,12 @@ import NoticeCard from '../../../Shared/NoticeCard';
 import { motion } from 'framer-motion';
 import { HiSpeakerphone } from 'react-icons/hi';
 import { MdCampaign, MdNotificationsActive } from 'react-icons/md';
+import Loading from '../../../Shared/Loading';
 
 const UserAnnouncemet = () => {
-    const [notice] = useAnnouncement();
+    const [notice, isLoading] = useAnnouncement();
+    
+    if (isLoading) return <Loading />;
     
     return (
         <div className="min-h-screen bg-gray-50/50 p-4 md:p-8 font-sans">

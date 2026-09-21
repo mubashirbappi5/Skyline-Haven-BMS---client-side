@@ -5,17 +5,20 @@ import useAuth from "../../../../Hooks/useAuth";
 import { Link, Outlet } from "react-router-dom";
 import { FaBuilding, FaMoneyCheckAlt, FaCheckCircle } from "react-icons/fa";
 import { MdOutlinePayments } from "react-icons/md";
+import Loading from "../../../../Shared/Loading";
 
 const MakePay = () => {
     const { user } = useAuth();
     const axiosSecure = useAxiosSecure();
-    const { data: myAgreements = [] } = useQuery({
+    const { data: myAgreements = [], isLoading } = useQuery({
       queryKey: ['myrequest'],
       queryFn: async () => {
         const res = await axiosSecure.get(`/accept/${user.email}`);
         return res.data;
       }
     });
+
+  if (isLoading) return <Loading />;
 
   return (
     <div className="min-h-screen bg-gray-50/50 p-4 md:p-8">

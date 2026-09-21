@@ -6,6 +6,7 @@ import { useQuery } from '@tanstack/react-query';
 import useCoupon from '../../../../Hooks/useCoupon';
 import { FaUser, FaEnvelope, FaBuilding, FaLayerGroup, FaHashtag, FaMoneyBillWave, FaCalendarAlt, FaTag } from 'react-icons/fa';
 import { MdOutlinePayments } from 'react-icons/md';
+import Loading from '../../../../Shared/Loading';
 
 const PayForm = () => {
     const { id } = useParams();
@@ -16,7 +17,7 @@ const PayForm = () => {
     const navigate = useNavigate();
     const { user } = useAuth();
     
-    const { data } = useQuery({
+    const { data, isLoading } = useQuery({
       queryKey: ['myrequest', id],
       queryFn: async () => {
          const res = await axiosSecure.get(`/accept/${user.email}`);
@@ -65,6 +66,7 @@ const PayForm = () => {
       navigate('confimpay', { state: payinfo });
     };
 
+    if (isLoading) return <Loading />;
     if (!agreement) return null; // Simple guard
 
     return (

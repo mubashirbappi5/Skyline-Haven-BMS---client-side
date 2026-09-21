@@ -8,17 +8,20 @@ import { FaUserCircle, FaBuilding, FaRegCalendarAlt, FaCheckCircle, FaMoneyCheck
 import { IoDiamondOutline } from "react-icons/io5";
 import { HiOutlineHome } from "react-icons/hi2";
 import { BsBuilding, BsFileEarmarkText } from "react-icons/bs";
+import Loading from "../../../../Shared/Loading";
 
 const MemberProfile = () => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
-  const { data: myAgreement = [] } = useQuery({
-    queryKey: "myrequest",
+  const { data: myAgreement = [], isLoading } = useQuery({
+    queryKey: ["myrequest"],
     queryFn: async () => {
       const res = await axiosSecure.get(`/accept/${user.email}`);
       return res.data;
     },
   });
+
+  if (isLoading) return <Loading />;
 
   return (
     <div className="min-h-screen bg-gray-50/50 p-4 md:p-8">
