@@ -8,6 +8,9 @@ import { Authcontext } from "../Provider/AuthProvider/AuthProvider";
 import useAdmin from "../Hooks/useAdmin";
 import useMember from "../Hooks/useMember";
 import Swal from "sweetalert2";
+import { useQuery } from "@tanstack/react-query";
+import useAxiosSecure from "../Hooks/useAxiosSecure";
+import { FaBell } from "react-icons/fa";
 
 const Navber = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -43,6 +46,19 @@ const Navber = () => {
 
   const [isAdmin] = useAdmin();
   const [isMember] = useMember();
+  
+  const axiosSecure = useAxiosSecure();
+  const { data: notifications = [] } = useQuery({
+    queryKey: ["paymentNotifications", user?.email],
+    enabled: !!user?.email && isMember,
+    queryFn: async () => {
+      const res = await axiosSecure.get(`/accept/${user.email}`);
+      return res.data;
+    },
+  });
+
+  const [isNotifOpen, setIsNotifOpen] = useState(false);
+  const toggleNotif = () => setIsNotifOpen(!isNotifOpen);
   
   const linkStyles = "text-text font-bold tracking-wide hover:text-primary transition-colors duration-300 relative group";
   const getActiveClass = ({isActive}) => isActive ? "text-primary" : linkStyles;
@@ -95,17 +111,66 @@ const Navber = () => {
             {/* Actions */}
             <div className="flex items-center gap-4">
               {user ? (
-                <div className="relative inline-block">
-                  <button
-                    onClick={toggleDropdown}
-                    className="relative z-10 block rounded-full focus:outline-none focus:ring-4 focus:ring-primary/20 transition-all shadow-md hover:shadow-lg"
-                  >
-                    <img
-                      className="object-cover w-14 h-14 rounded-full border-2 border-primary"
-                      src={user?.photoURL}
-                      alt={user?.displayName}
-                    />
-                  </button>
+                <div className="flex items-center gap-4">
+                  {/* Notification Bell */}
+                  {isMember && (
+                    <div className="relative">
+                      <button 
+                        onClick={toggleNotif}
+                        className="p-2 rounded-full hover:bg-gray-100 transition-colors relative focus:outline-none"
+                      >
+                        <FaBell className="text-2xl text-gray-600" />
+                        {notifications.length > 0 && (
+                          <span className="absolute top-0 right-0 inline-flex items-center justify-center w-5 h-5 text-xs font-bold text-white bg-red-500 rounded-full border-2 border-white">
+                            {notifications.length}
+                          </span>
+                        )}
+                      </button>
+                      
+                      {isNotifOpen && (
+                        <div className="absolute right-0 z-50 w-72 py-2 mt-4 origin-top-right bg-white rounded-2xl shadow-2xl border border-gray-100 max-h-96 overflow-y-auto">
+                          <div className="px-4 py-3 border-b border-gray-100 flex justify-between items-center">
+                            <h3 className="font-bold text-gray-800">Notifications</h3>
+                            {notifications.length > 0 && (
+                              <span className="text-xs font-semibold bg-red-100 text-red-600 px-2 py-1 rounded-full">
+                                {notifications.length} New
+                              </span>
+                            )}
+                          </div>
+                          {notifications.length > 0 ? (
+                            notifications.map(notif => (
+                              <Link 
+                                key={notif._id}
+                                to="/dashboard/makepay"
+                                onClick={() => setIsNotifOpen(false)}
+                                className="block px-4 py-3 hover:bg-gray-50 transition-colors border-b border-gray-50 last:border-0"
+                              >
+                                <p className="text-sm text-gray-700">
+                                  Your request for <span className="font-bold">Apt {notif.apartmentNo}</span> was accepted. Please proceed to payment.
+                                </p>
+                              </Link>
+                            ))
+                          ) : (
+                            <div className="px-4 py-6 text-center text-sm text-gray-500">
+                              No new notifications
+                            </div>
+                          )}
+                        </div>
+                      )}
+                    </div>
+                  )}
+
+                  <div className="relative inline-block">
+                    <button
+                      onClick={toggleDropdown}
+                      className="relative z-10 block rounded-full focus:outline-none focus:ring-4 focus:ring-primary/20 transition-all shadow-md hover:shadow-lg"
+                    >
+                      <img
+                        className="object-cover w-14 h-14 rounded-full border-2 border-primary"
+                        src={user?.photoURL}
+                        alt={user?.displayName}
+                      />
+                    </button>
 
                   {isOpenpro && (
                     <div className="absolute right-0 z-20 w-56 py-2 mt-4 origin-top-right bg-white rounded-2xl shadow-2xl border border-gray-100">
@@ -133,6 +198,7 @@ const Navber = () => {
                     </div>
                   )}
                 </div>
+              </div>
               ) : (
                 <div className="hidden md:flex items-center gap-4">
                   <Link to={"/login"}>

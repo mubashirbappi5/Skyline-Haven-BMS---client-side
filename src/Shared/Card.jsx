@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { FaBuilding } from "react-icons/fa";
 import { RiCommunityFill } from "react-icons/ri";
 import useAuth from "./../Hooks/useAuth";
@@ -11,11 +11,16 @@ const Card = ({ apart, isLarge = false }) => {
   const { user } = useAuth();
   const navigate = useNavigate();
   const axiossecure = useAxiosSecure();
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const handleagreement = (id) => {
+  const handleOpenModal = () => {
     if (!user) {
       return navigate("/login");
     }
+    setIsModalOpen(true);
+  };
+
+  const handleagreement = (id) => {
     const agreementData = {
       userName: user?.displayName,
       userEmail: user?.email,
@@ -30,6 +35,7 @@ const Card = ({ apart, isLarge = false }) => {
     
     axiossecure.post("/request", agreementData).then((res) => {
       if (res.data.id || res.data.insertedId) {
+        setIsModalOpen(false);
         Swal.fire({
           title: "Agreement!",
           text: "Your Agreement request sent.",
@@ -63,7 +69,7 @@ const Card = ({ apart, isLarge = false }) => {
                               <span className="flex items-center gap-2"><FaBuilding/> Floor {floorNo}</span>
                           </div>
                       </div>
-                      <button onClick={() => handleagreement(id)} className="px-8 py-4 bg-primary text-white font-bold uppercase rounded-xl hover:bg-secondary transition-colors shadow-lg">
+                      <button onClick={handleOpenModal} className="px-8 py-4 bg-primary text-white font-bold uppercase rounded-xl hover:bg-secondary transition-colors shadow-lg">
                           Request Agreement
                       </button>
                   </div>
@@ -91,13 +97,84 @@ const Card = ({ apart, isLarge = false }) => {
           </div>
 
           <button
-            onClick={() => handleagreement(id)}
+            onClick={handleOpenModal}
             className="w-full py-4 mt-auto font-bold text-white uppercase tracking-wider transition-all duration-300 transform bg-text rounded-xl hover:bg-primary shadow-xl hover:shadow-primary/30 focus:outline-none active:scale-95"
           >
             Agreement Request
           </button>
         </div>
       </div>
+
+      {/* Agreement Modal */}
+      {isModalOpen && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 backdrop-blur-sm px-4">
+          <div className="bg-white w-full max-w-lg rounded-3xl overflow-hidden shadow-2xl transform transition-all">
+            <div className="bg-gradient-to-r from-primary to-secondary p-6 text-white">
+              <h2 className="text-2xl font-bold tracking-wide">Apartment Agreement</h2>
+              <p className="text-white/80 mt-1">Review the details and accept the terms to proceed.</p>
+            </div>
+            
+            <div className="p-6 space-y-4 max-h-[60vh] overflow-y-auto">
+              {/* User Details */}
+              <div className="bg-gray-50 p-4 rounded-xl border border-gray-100">
+                <h3 className="text-sm font-semibold text-gray-500 uppercase mb-2">Your Information</h3>
+                <p className="font-bold text-gray-800">{user?.displayName}</p>
+                <p className="text-sm text-gray-600">{user?.email}</p>
+              </div>
+
+              {/* Apartment Details */}
+              <div className="bg-gray-50 p-4 rounded-xl border border-gray-100 grid grid-cols-2 gap-4">
+                <div className="col-span-2">
+                  <h3 className="text-sm font-semibold text-gray-500 uppercase mb-1">Apartment Details</h3>
+                </div>
+                <div>
+                  <p className="text-xs text-gray-500">Apt No</p>
+                  <p className="font-bold text-gray-800">{apartmentNo}</p>
+                </div>
+                <div>
+                  <p className="text-xs text-gray-500">Block</p>
+                  <p className="font-bold text-gray-800">{blockName}</p>
+                </div>
+                <div>
+                  <p className="text-xs text-gray-500">Floor</p>
+                  <p className="font-bold text-gray-800">{floorNo}</p>
+                </div>
+                <div>
+                  <p className="text-xs text-gray-500">Monthly Rent</p>
+                  <p className="font-bold text-primary text-lg">${rent}</p>
+                </div>
+              </div>
+
+              {/* Rules and Regulations */}
+              <div className="bg-orange-50/50 p-4 rounded-xl border border-orange-100">
+                <h3 className="text-sm font-semibold text-orange-600 uppercase mb-2">Rules & Regulations</h3>
+                <ul className="list-disc list-inside text-sm text-gray-700 space-y-1">
+                  <li>Rent must be paid within the first 5 days of the month.</li>
+                  <li>Maintain noise levels after 10 PM.</li>
+                  <li>No unauthorized modifications to the apartment.</li>
+                  <li>Pets require prior management approval.</li>
+                  <li>By accepting, you agree to these terms.</li>
+                </ul>
+              </div>
+            </div>
+
+            <div className="p-6 bg-gray-50 border-t border-gray-100 flex justify-end gap-3">
+              <button 
+                onClick={() => setIsModalOpen(false)}
+                className="px-6 py-2.5 rounded-xl font-semibold text-gray-600 hover:bg-gray-200 transition-colors"
+              >
+                Cancel
+              </button>
+              <button 
+                onClick={() => handleagreement(id)}
+                className="px-6 py-2.5 rounded-xl font-bold text-white bg-primary hover:bg-primary/90 transition-colors shadow-lg shadow-primary/30"
+              >
+                Accept & Request
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
