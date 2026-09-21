@@ -7,7 +7,7 @@ import useAxiosSecure from "../Hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 
 const Card = ({ apart, isLarge = false }) => {
-  const { apartmentNo, blockName, floorNo, rent, imageUrl, id, status } = apart;
+  const { apartmentNo, blockName, floorNo, rent, imageUrl, id, status, paymentStatus } = apart;
   const { user } = useAuth();
   const navigate = useNavigate();
   const axiossecure = useAxiosSecure();
@@ -55,6 +55,14 @@ const Card = ({ apart, isLarge = false }) => {
           <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-4 py-2 rounded-full z-20 shadow-lg border border-primary/20">
             <span className="text-primary font-bold tracking-wider uppercase text-sm">Apt {apartmentNo}</span>
           </div>
+
+          {(status === 'booked' || paymentStatus === 'paid') && (
+            <div className={`absolute top-4 left-4 backdrop-blur-sm px-4 py-2 rounded-full z-20 shadow-lg border ${paymentStatus === 'paid' ? 'bg-green-500/90 border-green-600' : 'bg-red-500/90 border-red-600'}`}>
+              <span className="text-white font-bold tracking-wider uppercase text-sm">
+                {paymentStatus === 'paid' ? 'Sold' : 'Already Booked'}
+              </span>
+            </div>
+          )}
           
           {/* If it's large, overlay the content on the image */}
           {isLarge && (
