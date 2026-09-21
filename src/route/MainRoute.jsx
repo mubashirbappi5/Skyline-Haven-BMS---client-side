@@ -14,7 +14,6 @@ import AdminProfile from '../Page/Dashboard/Admin/Adminprofile/AdminProfile';
 import MakeAnnouncement from '../Page/Dashboard/Admin/Make Anoucment/MakeAnnouncement';
 import AgreementReq from '../Page/Dashboard/Admin/AgreeRequest/AgreementReq';
 import ManageApartments from '../Page/Dashboard/Admin/ManageApartments/ManageApartments';
-import Managecoupon from '../Page/Dashboard/Admin/CouponsMake/Managecoupon';
 import MemberProfile from '../Page/Dashboard/member/member Profile/MemberProfile';
 import MakePay from '../Page/Dashboard/member/make Payment/MakePay';
 import PayHistory from '../Page/Dashboard/member/Pay History/PayHistory';
@@ -29,6 +28,8 @@ import AddApartment from '../Page/Dashboard/Admin/AddApartment/AddApartment';
 import Error from '../Page/Error';
 import ContactPage from '../Page/ContactPage';
 import AboutPage from '../Page/AboutPage';
+import AdminMaintenance from '../Page/Dashboard/Admin/Maintenance/AdminMaintenance';
+import MemberMaintenance from '../Page/Dashboard/member/Maintenance/MemberMaintenance';
 const MainRoute =  createBrowserRouter([
     {
       path: "/",
@@ -91,8 +92,8 @@ const MainRoute =  createBrowserRouter([
           element:<AdminRoute><PrivateRoute><ManageApartments/></PrivateRoute></AdminRoute>
         },
         {
-          path:'manageCoupon',
-          element:<AdminRoute><PrivateRoute><Managecoupon/></PrivateRoute></AdminRoute>
+          path:'adminMaintenance',
+          element:<AdminRoute><PrivateRoute><AdminMaintenance/></PrivateRoute></AdminRoute>
         },
         {
           path:'memberprofile',
@@ -117,6 +118,10 @@ const MainRoute =  createBrowserRouter([
         {
           path:'payhistory',
           element:<MemberRoute><PrivateRoute><PayHistory/></PrivateRoute></MemberRoute>
+        },
+        {
+          path:'memberMaintenance',
+          element:<MemberRoute><PrivateRoute><MemberMaintenance/></PrivateRoute></MemberRoute>
         },
         {
           path:'mamberAnnounce',

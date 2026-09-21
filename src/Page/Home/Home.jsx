@@ -3,7 +3,6 @@ import Banner from './Components/Banner';
 import BannerImg from '../../Shared/BannerImg';
 import OurStats from './Components/OurStats';
 import About from './Components/About';
-import Coupons from './Components/Coupons';
 import Location from './Components/Location';
 import { Authcontext } from '../../Provider/AuthProvider/AuthProvider';
 import WeProvide from './Components/WeProvide';
@@ -25,7 +24,6 @@ const Home = () => {
             <About/>
             <Featured/>
             <WeProvide/>
-            <Coupons/>
             <FAQ/>
             <Testimonials/>
             <Location/>

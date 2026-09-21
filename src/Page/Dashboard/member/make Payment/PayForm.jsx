@@ -3,16 +3,12 @@ import { useNavigate, useParams } from 'react-router-dom';
 import useAuth from '../../../../Hooks/useAuth';
 import useAxiosSecure from '../../../../Hooks/useAxiosSecure';
 import { useQuery } from '@tanstack/react-query';
-import useCoupon from '../../../../Hooks/useCoupon';
-import { FaUser, FaEnvelope, FaBuilding, FaLayerGroup, FaHashtag, FaMoneyBillWave, FaCalendarAlt, FaTag } from 'react-icons/fa';
+import { FaUser, FaEnvelope, FaBuilding, FaLayerGroup, FaHashtag, FaMoneyBillWave, FaCalendarAlt } from 'react-icons/fa';
 import { MdOutlinePayments } from 'react-icons/md';
 import Loading from '../../../../Shared/Loading';
 
 const PayForm = () => {
     const { id } = useParams();
-    const [coupons] = useCoupon();
-    const [discout, setdiscount] = useState(0);
-    const [applycoupons, setapplycoupons] = useState('');
     const axiosSecure = useAxiosSecure();
     const navigate = useNavigate();
     const { user } = useAuth();
@@ -29,14 +25,6 @@ const PayForm = () => {
    
     const agreement = Array.isArray(data) ? data[0] : data;
 
-    const handleapplycoupon = () => {
-      const coupon = coupons.find(coupon => coupon.coupon_code === applycoupons);
-      if (!coupon) {
-        setdiscount(0);
-      } else {
-        setdiscount(coupon.discountPercentage);
-      }
-    };
 
     const handlepay = (e) => {
       e.preventDefault();
@@ -45,10 +33,7 @@ const PayForm = () => {
       const floorNo = form.floorNo.value;
       const Rent = agreement?.rent;
       const month = form.month.value;
-      const discoutprice = discout;
-      const blockName = form.block.value;
-      const email = form.email.value;
-      const totalPay = Rent - (Rent * parseInt(discoutprice) / 100);
+      const totalPay = Rent;
       const agreementconfim_id = id;
       
       const payinfo = {
@@ -56,7 +41,6 @@ const PayForm = () => {
           floorNo,
           Rent,
           month,
-          discoutprice,
           blockName,
           email,
           totalPay,
@@ -202,43 +186,16 @@ const PayForm = () => {
                   </select>
                 </div>
 
-                {/* Coupon */}
-                <div className="space-y-2">
-                  <label className="text-sm font-bold text-gray-700 flex items-center gap-2">
-                    <FaTag className="text-emerald-500" /> Apply Coupon
-                  </label>
-                  <div className="flex gap-2">
-                    <input
-                      name="coupon"
-                      type="text"
-                      onChange={(e) => setapplycoupons(e.target.value)}
-                      placeholder='Enter coupon code'
-                      className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-white focus:ring-2 focus:ring-emerald-500/50 outline-none transition-all uppercase"
-                    />
-                    <button 
-                      type="button" 
-                      onClick={handleapplycoupon}
-                      className="px-6 py-3 bg-gray-800 hover:bg-gray-700 text-white font-bold rounded-xl transition-colors whitespace-nowrap"
-                    >
-                      Apply
-                    </button>
-                  </div>
-                  {discout > 0 && (
-                     <p className="text-emerald-600 text-sm font-bold mt-1">✓ {discout}% discount applied!</p>
-                  )}
-                </div>
-
               </div>
 
               {/* Total Calculation summary */}
               <div className="bg-emerald-50 rounded-2xl p-6 mt-8 border border-emerald-100 flex flex-col md:flex-row justify-between items-center gap-4">
                  <div>
                    <h3 className="text-lg font-bold text-gray-800">Payment Summary</h3>
-                   {discout > 0 && <p className="text-sm text-emerald-600">Includes {discout}% off coupon</p>}
                  </div>
                  <div className="text-right">
                    <p className="text-sm text-gray-500 font-medium mb-1">Total to Pay</p>
-                   <p className="text-4xl font-black text-emerald-600">${agreement?.rent - (agreement?.rent * discout / 100)}</p>
+                   <p className="text-4xl font-black text-emerald-600">${agreement?.rent}</p>
                  </div>
               </div>
 

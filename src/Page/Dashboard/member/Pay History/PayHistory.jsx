@@ -83,15 +83,15 @@ const PayHistory = () => {
                          {idx + 1}
                       </td>
                       <td className="py-4 px-6 text-sm text-gray-600 font-medium">
-                        {moment(history.date).subtract(10, "days").calendar()}
+                        {moment(history.createdAt).calendar()}
                       </td>
                       <td className="py-4 px-6">
                         <span className="inline-flex items-center px-3 py-1 rounded-md text-xs font-mono bg-gray-100 text-gray-700 border border-gray-200">
-                           {history.transactionId}
+                           {history._id}
                         </span>
                       </td>
                       <td className="py-4 px-6">
-                        <span className="text-lg font-bold text-emerald-600">${history.price}</span>
+                        <span className="text-lg font-bold text-emerald-600">${history.amount}</span>
                       </td>
                     </tr>
                   ))

@@ -24,7 +24,7 @@ const CheckoutForm = ({ paydata }) => {
         email: user.email,
         transactionId: dummyTransactionId,
         date: new Date(),
-        price: paydata.totalPay,
+        amount: paydata.totalPay, // Prisma Payment schema expects `amount`
         confim_id: paydata.agreementconfim_id,
       };
 

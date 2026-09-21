@@ -6,6 +6,7 @@ import { FaUserAlt, FaUserCircle, FaBars, FaTimes, FaBuilding } from 'react-icon
 import { GrAnnounce } from 'react-icons/gr';
 import { RiHistoryFill, RiNewspaperLine, RiArrowLeftLine } from 'react-icons/ri';
 import { BiSolidCoupon } from 'react-icons/bi';
+import { FaWrench } from 'react-icons/fa';
 import { MdPayment, MdDashboard } from 'react-icons/md';
 import { HiSpeakerphone } from 'react-icons/hi';
 import useAdmin from '../../Hooks/useAdmin';
@@ -111,8 +112,8 @@ const Dashboard = () => {
                                 <NavLink to="manageApartments" className={navLinkClass}>
                                     <FaBuilding size={20} className="mr-3" /> Manage Apartments
                                 </NavLink>
-                                <NavLink to="manageCoupon" className={navLinkClass}>
-                                    <BiSolidCoupon size={20} className="mr-3" /> Manage Coupons
+                                <NavLink to="adminMaintenance" className={navLinkClass}>
+                                    <FaWrench size={20} className="mr-3" /> Maintenance
                                 </NavLink>
                             </div>
                         ) : isMember ? (
@@ -128,6 +129,9 @@ const Dashboard = () => {
                                 </NavLink>
                                 <NavLink to="mamberAnnounce" className={navLinkClass}>
                                     <HiSpeakerphone size={20} className="mr-3" /> Announcements
+                                </NavLink>
+                                <NavLink to="memberMaintenance" className={navLinkClass}>
+                                    <FaWrench size={20} className="mr-3" /> Maintenance
                                 </NavLink>
                             </div>
                         ) : (
