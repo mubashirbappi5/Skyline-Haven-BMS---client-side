@@ -85,7 +85,7 @@ const Card = ({ apart, isLarge = false }) => {
                             ? 'bg-primary text-white hover:bg-secondary'
                             : 'bg-gray-500 text-gray-200 cursor-not-allowed'
                         }`}>
-                          {status === 'available' ? 'Request Agreement' : (status === 'pending' ? 'Pending Request' : 'Already Booked')}
+                          {status === 'available' ? 'Request Agreement' : 'Request Agreement'}
                       </button>
                   </div>
               </div>
@@ -120,7 +120,7 @@ const Card = ({ apart, isLarge = false }) => {
                 : 'bg-gray-400 cursor-not-allowed'
             }`}
           >
-            {status === 'available' ? 'Agreement Request' : (status === 'pending' ? 'Pending Request' : 'Already Booked')}
+            {status === 'available' ? 'Agreement Request' : 'Agreement Request'}
           </button>
         </div>
       </div>
