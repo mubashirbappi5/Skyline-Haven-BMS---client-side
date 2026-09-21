@@ -7,13 +7,17 @@ import { FaUsers, FaUserTie, FaBuilding, FaFileContract, FaCheckCircle } from "r
 const AdminProfile = () => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
-  const { data: report = [] } = useQuery({
-    queryKey: "report",
+  const { data: report = [], isLoading } = useQuery({
+    queryKey: ["report"],
     queryFn: async () => {
       const res = await axiosSecure.get("/adminreport");
       return res.data;
     },
   });
+
+  if (isLoading) {
+    return <div className="flex justify-center mt-20"><span className="loading loading-spinner loading-lg text-green-500"></span></div>;
+  }
 
   const availableApartmets = report.totalApartments - (report.totalAgreement || 0);
   const PercentageofAgreement = report.totalApartments ? 

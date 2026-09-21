@@ -4,11 +4,12 @@ import { useQuery } from "@tanstack/react-query";
 import { MdDeleteForever, MdOutlineAdminPanelSettings } from "react-icons/md";
 import { FaUserCircle } from "react-icons/fa";
 import Swal from "sweetalert2";
+import Loading from "../../../../Shared/Loading";
 
 const Managemember = () => {
   const axiosSecure = useAxiosSecure();
-  const { data: users = [], refetch } = useQuery({
-    queryKey: "users",
+  const { data: users = [], refetch, isLoading } = useQuery({
+    queryKey: ["users"],
     queryFn: async () => {
       const res = await axiosSecure.get("/users");
       const alluser = res.data;
@@ -16,6 +17,10 @@ const Managemember = () => {
       return members;
     },
   });
+
+  if (isLoading) {
+    return <Loading />;
+  }
 
   const handlemembers = (user) => {
     Swal.fire({

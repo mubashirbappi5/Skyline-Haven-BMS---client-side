@@ -5,16 +5,21 @@ import moment from "moment";
 import Swal from "sweetalert2";
 import { MdOutlineDomainVerification, MdCheckCircle, MdCancel } from "react-icons/md";
 import { FaUserCircle, FaBuilding, FaRegCalendarAlt } from "react-icons/fa";
+import Loading from "../../../../Shared/Loading";
 
 const AgreementReq = () => {
   const axiosSecure = useAxiosSecure();
-  const { data: agreementreq = [], refetch } = useQuery({
+  const { data: agreementreq = [], refetch, isLoading } = useQuery({
     queryKey: ["agreementreq"],
     queryFn: async () => {
       const res = await axiosSecure.get("/request");
       return res.data;
     },
   });
+
+  if (isLoading) {
+    return <Loading />;
+  }
 
   const handleacceptreq = (request) => {
     Swal.fire({
