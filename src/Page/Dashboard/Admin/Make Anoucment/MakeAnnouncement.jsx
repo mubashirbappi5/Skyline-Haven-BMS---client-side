@@ -21,16 +21,28 @@ const MakeAnnouncement = () => {
       notice: announce,
     };
     
-    axiosSecure.post("/notice", announcement).then((res) => {
-      if (res.data.insertedId) {
-        Swal.fire({
-          title: "Announcement Sent!",
-          text: "Your new announcement has been published successfully.",
-          icon: "success",
-          confirmButtonColor: "#22c55e"
+    Swal.fire({
+      title: "Publish Announcement?",
+      text: "This will be visible to all members.",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#22c55e",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, publish it!"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosSecure.post("/notice", announcement).then((res) => {
+          if (res.data.insertedId || res.data.id) {
+            Swal.fire({
+              title: "Announcement Sent!",
+              text: "Your new announcement has been published successfully.",
+              icon: "success",
+              confirmButtonColor: "#22c55e"
+            });
+            form.reset();
+            Navigate("/");
+          }
         });
-        form.reset();
-        Navigate("/");
       }
     });
   };

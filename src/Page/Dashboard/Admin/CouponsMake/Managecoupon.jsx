@@ -25,18 +25,35 @@ const Managecoupon = () => {
       Description: couponDescription,
       status: status,
     };
-    axioSecure.post("/coupons", couponinfo).then((res) => {
-      const modal = document.getElementById("my_modal_5");
-      modal.close();
-      Swal.fire({
-        title: "Coupon Created!",
-        text: "Your new discount coupon was created successfully.",
-        icon: "success",
-        confirmButtonColor: "#22c55e",
-      });
-      refetch();
+
+    const modal = document.getElementById("my_modal_5");
+    modal.close();
+
+    Swal.fire({
+      title: "Create Coupon?",
+      text: "You are about to generate a new discount coupon.",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#22c55e",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, create it!"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axioSecure.post("/coupons", couponinfo).then((res) => {
+          Swal.fire({
+            title: "Coupon Created!",
+            text: "Your new discount coupon was created successfully.",
+            icon: "success",
+            confirmButtonColor: "#22c55e",
+          });
+          refetch();
+          form.reset();
+        });
+      } else {
+        // If canceled, show modal again so they don't lose the form
+        modal.showModal();
+      }
     });
-    form.reset();
   };
 
   const handlestatus = (id, isActive) => {

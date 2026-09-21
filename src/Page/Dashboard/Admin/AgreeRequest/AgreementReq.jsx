@@ -39,7 +39,7 @@ const AgreementReq = () => {
           apartment_id: request.apartment_id,
         };
         axiosSecure.post("/accept", acceptedagreement).then((res) => {
-          if (res.data.insertedId) {
+          if (res.data.insertedId || res.data.id) {
             axiosSecure.delete(`/request/${request._id}`).then((res) => {
               Swal.fire({
                 title: "Accepted!",
@@ -61,29 +61,41 @@ const AgreementReq = () => {
   };
 
   const handleReject = (request) => {
-    const rejectedagreement = {
-      rent: request.rent,
-      userName: request.userName,
-      userEmail: request.userEmail,
-      floorNo: request.floorNo,
-      apartmentNo: request.apartmentNo,
-      blockName: request.blockName,
-      Reject_date: new Date(),
-      Status: "checked",
-      apartment_id: request.apartment_id,
-    };
+    Swal.fire({
+      title: "Are you sure?",
+      text: "Do you want to reject this agreement request?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#ef4444",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, reject it!"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        const rejectedagreement = {
+          rent: request.rent,
+          userName: request.userName,
+          userEmail: request.userEmail,
+          floorNo: request.floorNo,
+          apartmentNo: request.apartmentNo,
+          blockName: request.blockName,
+          Reject_date: new Date(),
+          Status: "checked",
+          apartment_id: request.apartment_id,
+        };
 
-    axiosSecure.post("/accept", rejectedagreement).then((res) => {
-      if (res.data.insertedId) {
-        axiosSecure.delete(`/request/${request._id}`).then((res) => {
-          Swal.fire({
-            title: "Rejected!",
-            text: "Agreement was rejected.",
-            icon: "success",
-            confirmButtonColor: "#ef4444",
-          });
+        axiosSecure.post("/accept", rejectedagreement).then((res) => {
+          if (res.data.insertedId || res.data.id) {
+            axiosSecure.delete(`/request/${request._id}`).then((res) => {
+              Swal.fire({
+                title: "Rejected!",
+                text: "Agreement was rejected.",
+                icon: "success",
+                confirmButtonColor: "#ef4444",
+              });
 
-          refetch();
+              refetch();
+            });
+          }
         });
       }
     });

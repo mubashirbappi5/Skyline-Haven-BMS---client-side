@@ -4,6 +4,7 @@ import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import { MdAddBusiness, MdOutlineImage } from 'react-icons/md';
 import useAxiosSecure from '../../../../Hooks/useAxiosSecure';
+import Swal from 'sweetalert2';
 
 const image_hosting_key = import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET;
 const cloud_name = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME;
@@ -16,56 +17,68 @@ const AddApartment = () => {
     const [loading, setLoading] = useState(false);
 
     const onSubmit = async (data) => {
-        setLoading(true);
-        try {
-            let imageUrl = '';
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You are about to add a new apartment.",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, add it!'
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                setLoading(true);
+                try {
+                    let imageUrl = '';
 
-            // Handle image upload to Cloudinary
-            if (data.image && data.image[0]) {
-                const formData = new FormData();
-                formData.append('file', data.image[0]);
-                formData.append('upload_preset', image_hosting_key);
+                    // Handle image upload to Cloudinary
+                    if (data.image && data.image[0]) {
+                        const formData = new FormData();
+                        formData.append('file', data.image[0]);
+                        formData.append('upload_preset', image_hosting_key);
 
-                const res = await fetch(image_hosting_api, {
-                    method: 'POST',
-                    body: formData
-                });
-                
-                const cloudData = await res.json();
-                if (cloudData.secure_url) {
-                    imageUrl = cloudData.secure_url;
-                } else {
-                    toast.error('Failed to upload image');
+                        const res = await fetch(image_hosting_api, {
+                            method: 'POST',
+                            body: formData
+                        });
+                        
+                        const cloudData = await res.json();
+                        if (cloudData.secure_url) {
+                            imageUrl = cloudData.secure_url;
+                        } else {
+                            toast.error('Failed to upload image');
+                            setLoading(false);
+                            return;
+                        }
+                    } else {
+                        toast.error('Image is required');
+                        setLoading(false);
+                        return;
+                    }
+
+                    // Add apartment to database
+                    const apartmentInfo = {
+                        apartmentNo: data.apartmentNo,
+                        blockName: data.blockName,
+                        floorNo: parseInt(data.floorNo),
+                        rent: parseFloat(data.rent),
+                        imageUrl: imageUrl
+                    };
+
+                    const response = await axiosSecure.post('/apartments', apartmentInfo);
+
+                    if (response.data?.id || response.data?.insertedId) {
+                        toast.success(`Apartment ${data.apartmentNo} added successfully!`);
+                        reset();
+                    }
+                } catch (error) {
+                    console.error(error);
+                    toast.error(error.response?.data?.message || 'Failed to add apartment');
+                } finally {
                     setLoading(false);
-                    return;
                 }
-            } else {
-                toast.error('Image is required');
-                setLoading(false);
-                return;
             }
-
-            // Add apartment to database
-            const apartmentInfo = {
-                apartmentNo: data.apartmentNo,
-                blockName: data.blockName,
-                floorNo: parseInt(data.floorNo),
-                rent: parseFloat(data.rent),
-                imageUrl: imageUrl
-            };
-
-            const response = await axiosSecure.post('/apartments', apartmentInfo);
-
-            if (response.data?.id) {
-                toast.success(`Apartment ${data.apartmentNo} added successfully!`);
-                reset();
-            }
-        } catch (error) {
-            console.error(error);
-            toast.error(error.response?.data?.message || 'Failed to add apartment');
-        } finally {
-            setLoading(false);
-        }
+        });
     };
 
     return (
